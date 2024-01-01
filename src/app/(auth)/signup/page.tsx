@@ -29,7 +29,7 @@ const SignUp = () => {
   };
   const {
     control,
-    formState: { errors,isValid },
+    formState: { errors, isValid },
     handleSubmit,
     getValues,
   } = useForm({
@@ -40,7 +40,7 @@ const SignUp = () => {
       password: "",
     },
   });
-  const onSubmit = (data:any) => {
+  const onSubmit = (data: any) => {
     // Form gönderme işlemleri
     console.log("Form submitted:", data);
   };
@@ -57,23 +57,32 @@ const SignUp = () => {
       <Text fontWeight="700" fontSize="30px">
         Create your account
       </Text>
-      <Text>Register your account to save your settings.</Text>
-      <FormControl
-        width="35%"
-        mt="20px"
-        mb="20px"
-        isInvalid={!!errors?.username || !!errors?.email || !!errors?.password}
-      >
+      <Text>Register your account to save your settings</Text>
+      <FormControl width="35%" isInvalid={!!errors?.username} mb={errors?.username ? 0 : 6}>
         <FormLabel>Username</FormLabel>
         <Controller
           name="username"
           control={control}
           rules={{
             required: "Username is required!",
+            minLength: {
+                value: 3,
+                message: "Username must be at least 3 characters long",
+              },
+              maxLength: {
+                value: 20,
+                message: "Username cannot exceed 20 characters",
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9_]+$/,
+                message: "Username can only contain letters, numbers, and underscores",
+              },
           }}
           render={({ field }) => <Input {...field} bg="white" />}
         />
-        <FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
+        <FormErrorMessage fontSize="14px">{errors?.username?.message}</FormErrorMessage>
+      </FormControl>
+      <FormControl width="35%" isInvalid={!!errors?.email} mb={errors?.email ? 0 : 6}>
         <FormLabel>Email address</FormLabel>
         <Controller
           name="email"
@@ -81,13 +90,15 @@ const SignUp = () => {
           rules={{
             required: "Email is required!",
             pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
           }}
           render={({ field }) => <Input {...field} bg="white" />}
         />
-        <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
+        <FormErrorMessage fontSize="14px">{errors?.email?.message}</FormErrorMessage>
+      </FormControl>
+      <FormControl width="35%" isInvalid={!!errors?.password} mb={errors?.password ? 0 : 6}>
         <FormLabel>Password</FormLabel>
         <InputGroup>
           <Controller
@@ -95,6 +106,14 @@ const SignUp = () => {
             control={control}
             rules={{
               required: "Password is required!",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters long",
+              },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/,
+                message: "Password must include at least one lowercase letter, one uppercase letter, and one digit",
+              },
             }}
             render={({ field }) => (
               <Input
@@ -117,23 +136,27 @@ const SignUp = () => {
             />
           </InputRightElement>
         </InputGroup>
-        <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
+        <FormErrorMessage fontSize="14px">{errors?.password?.message}</FormErrorMessage>
       </FormControl>
-      <Checkbox width="35%" isChecked={agreeTerms}
-        onChange={handleToggleAgreeTerms}>
+
+      <Checkbox
+        mb="20px"
+        width="35%"
+        isChecked={agreeTerms}
+        onChange={handleToggleAgreeTerms}
+      >
         I agree with{" "}
         <Link href={"/"} style={{ color: "blue", textDecoration: "underline" }}>
           terms and conditions
         </Link>
       </Checkbox>
       <Button
-        mt="20px"
         width="35%"
         colorScheme="blue"
         variant="solid"
         color="white"
         onClick={handleSubmit(onSubmit)}
-        isDisabled={!isValid || !agreeTerms} 
+        isDisabled={!isValid || !agreeTerms}
       >
         Sign Up
       </Button>
