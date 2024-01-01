@@ -128,8 +128,8 @@ const SignUp = () => {
             <IconButton
               variant="gray"
               borderWidth="1px 1px 1px 0px"
-              borderColor="gray.300"
               backgroundColor="white"
+              borderLeftRadius="0"
               aria-label={showPassword ? "Hide Password" : "Show Password"}
               icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
               onClick={handleTogglePassword}
