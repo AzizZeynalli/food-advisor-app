@@ -1,8 +1,12 @@
 'use client'
-import { Link } from '@chakra-ui/next-js'
+
+import { Box, Button, HStack, VStack,Image } from "@chakra-ui/react"
+import Link from "next/link"
+
+//import { Link } from '@chakra-ui/next-js'
 
 export default function Home() {
   return (
-    <div>ABB project food advisor</div>
+    <div>salam</div>
   )
 }
