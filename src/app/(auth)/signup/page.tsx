@@ -41,7 +41,6 @@ const SignUp = () => {
     },
   });
   const onSubmit = (data: any) => {
-    // Form gönderme işlemleri
     console.log("Form submitted:", data);
   };
   return (
@@ -52,6 +51,7 @@ const SignUp = () => {
       alignItems="center"
       gap="0"
       bg="#D8F9F7"
+      
     >
       <Image src="../images/login.svg" />
       <Text fontWeight="700" fontSize="30px">
@@ -83,7 +83,7 @@ const SignUp = () => {
         <FormErrorMessage fontSize="14px">{errors?.username?.message}</FormErrorMessage>
       </FormControl>
       <FormControl width="35%" isInvalid={!!errors?.email} mb={errors?.email ? 0 : 6}>
-        <FormLabel>Email address</FormLabel>
+        <FormLabel >Email address</FormLabel>
         <Controller
           name="email"
           control={control}
