@@ -17,15 +17,6 @@ export default function Home() {
             <Text fontWeight='800' fontSize='30px'>SIMPLE RECIPES MADE FOR   <span style={{ color: '#276749' }}>real, actual, everyday life.</span></Text>
           </Box>
         </Box>
-        <Box>
-          <Text>Communicate with our dietitians by Chat</Text>
-          <Text>Get unlimited access to a team of dietitians to reach your goal faster.</Text>
-          <VStack>
-              <Box>
-                
-              </Box>
-          </VStack>
-        </Box>
       </Box>
     </Layout>
   )
