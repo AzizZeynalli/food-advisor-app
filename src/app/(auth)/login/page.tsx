@@ -1,0 +1,135 @@
+"use client";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import {
+  VStack,
+  Image,
+  Box,
+  Text,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  InputRightElement,
+  IconButton,
+  InputGroup,
+  Button,
+} from "@chakra-ui/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+
+const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter()
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const {
+    control,
+    formState: { errors, isValid },
+    handleSubmit,
+    getValues,
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+  });
+  const onSubmit = (data: any) => {
+    console.log("Form submitted:", data);
+  };
+  return (
+    <VStack padding="50px" gap="0">
+      <Image src="../images/fooderra_logocrop.png" cursor="pointer" width="20%" mb="50px" onClick={()=>{router.push("/")}}/>
+
+      <VStack width="35%">
+        <FormControl
+          width="100%"
+          isInvalid={!!errors?.email}
+          mb={errors?.email ? 0 : 6}
+        >
+          <FormLabel>Email address</FormLabel>
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: "Email is required!",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field }) => <Input {...field} bg="white" />}
+          />
+          <FormErrorMessage fontSize="14px">
+            {errors?.email?.message}
+          </FormErrorMessage>
+        </FormControl>
+        <FormControl
+          isInvalid={!!errors?.password}
+          mb={errors?.password ? 0 : 6}
+        >
+          <FormLabel>Password</FormLabel>
+          <InputGroup>
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: "Password is required!",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/,
+                  message:
+                    "Password must include at least one lowercase letter, one uppercase letter, and one digit",
+                },
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  bg="white"
+                />
+              )}
+            />
+
+            <InputRightElement>
+              <IconButton
+                variant="gray"
+                borderWidth="1px 1px 1px 0px"
+                backgroundColor="white"
+                borderLeftRadius="0"
+                aria-label={showPassword ? "Hide Password" : "Show Password"}
+                icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                onClick={handleTogglePassword}
+              />
+            </InputRightElement>
+          </InputGroup>
+          <FormErrorMessage fontSize="14px">
+            {errors?.password?.message}
+          </FormErrorMessage>
+        </FormControl>
+        <Text alignSelf="flex-end" color="blue">
+          <Link href="/">Forgot password?</Link>
+        </Text>
+        <Button
+          mt="20px"
+          width="100%"
+          colorScheme="blue"
+          variant="solid"
+          color="white"
+          onClick={handleSubmit(onSubmit)}
+          isDisabled={!isValid}
+        >
+          Login
+        </Button>
+      </VStack>
+    </VStack>
+  );
+};
+export default LoginPage;
