@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function Footer() { 
     return (
        <HStack bg='gray' w='100%' justifyContent='space-around' p='28px 0'>
-            <Box textAlign='center'>
-                <Link href={"/"} passHref ><Image src="../images/logo.svg" alt="Logo"/></Link>
+            <VStack textAlign='center'>
+                <Link href={"/"} passHref ><Image src="../images/fooderra_logocrop.png" alt="Logo" maxW='220px'/></Link>
                 <HStack p='16px 0' gap='12px'>
                     <Button bg='gray'><Image src="../images/apple.png" gap='12px'/></Button>
                     <Button bg='gray'><Image src="../images/google.png" /></Button>
                 </HStack>
                 <Text color='white' fontWeight='400' fontSize='16px'>© 2023 foodvisor.io</Text>
-            </Box>
+            </VStack>
             <HStack justifyContent='space-around' w='50%' color='white' fontWeight='400' fontSize='16px'>
                 <VStack>
                     <Text fontSize='20px' fontWeight='600'>About Foodvisor</Text>
