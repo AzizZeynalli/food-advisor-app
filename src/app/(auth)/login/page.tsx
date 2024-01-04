@@ -41,6 +41,7 @@ const LoginPage = () => {
   });
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
+    router.push("/")
   };
   return (
     <VStack
@@ -117,11 +118,10 @@ const LoginPage = () => {
             />
 
             <InputRightElement>
-              <IconButton
+            <IconButton
                 variant="gray"
-                borderWidth="1px 1px 1px 0px"
-                backgroundColor="white"
-                borderLeftRadius="0"
+                backgroundColor="transparent"
+                outline="none"
                 aria-label={showPassword ? "Hide Password" : "Show Password"}
                 icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                 onClick={handleTogglePassword}

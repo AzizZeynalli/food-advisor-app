@@ -64,6 +64,7 @@ const SignUp = () => {
   });
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
+    router.push("/login")
   };
   
   return (
@@ -174,9 +175,8 @@ const SignUp = () => {
             <InputRightElement>
               <IconButton
                 variant="gray"
-                borderWidth="1px 1px 1px 0px"
-                backgroundColor="white"
-                borderLeftRadius="0"
+                backgroundColor="transparent"
+                outline="none"
                 aria-label={showPassword ? "Hide Password" : "Show Password"}
                 icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                 onClick={handleTogglePassword}
@@ -194,10 +194,7 @@ const SignUp = () => {
           isChecked={agreeTerms}
          
           onChange={() => {
-          
-            if (!agreeTerms) {
-              setIsTermsModalOpen(true); // Checkbox işaretlenmediyse modalı aç
-            }
+            setAgreeTerms(!agreeTerms);
           }}
         >
           I agree with{" "}
@@ -207,7 +204,9 @@ const SignUp = () => {
               textDecoration: "underline",
               cursor: "pointer",
             }}
-            onClick={() => setIsTermsModalOpen(true)}
+            onClick={() => {
+              setIsTermsModalOpen(true);
+            }}
           >
             terms and conditions
           </span>
