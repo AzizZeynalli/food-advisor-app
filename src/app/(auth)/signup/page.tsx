@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
   HStack,
+  ModalFooter,
 } from "@chakra-ui/react";
 import {
   Box,
@@ -37,15 +38,15 @@ const SignUp = () => {
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
-  const handleToggleAgreeTerms = () => {
-    setAgreeTerms(!agreeTerms);
-  };
+ 
+  
   const handleAccept = () => {
     setAgreeTerms(true);
     setIsTermsModalOpen(false);
   };
 
   const handleReject = () => {
+    setAgreeTerms(false)
     setIsTermsModalOpen(false);
   };
   const {
@@ -64,7 +65,9 @@ const SignUp = () => {
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
   };
+  
   return (
+    
     <VStack
       minWidth="400px"
       height="100vh"
@@ -75,7 +78,7 @@ const SignUp = () => {
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize="25%"
+      bgSize="20%"
     >
       <Image
         width="20%"
@@ -189,9 +192,9 @@ const SignUp = () => {
           width="100%"
           mb="20px"
           isChecked={agreeTerms}
-          //onChange={handleToggleAgreeTerms}
+         
           onChange={() => {
-            //handleToggleAgreeTerms();
+          
             if (!agreeTerms) {
               setIsTermsModalOpen(true); // Checkbox işaretlenmediyse modalı aç
             }
@@ -213,12 +216,13 @@ const SignUp = () => {
           isOpen={isTermsModalOpen}
           onClose={() => setIsTermsModalOpen(false)}
           size="2xl"
+          
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Terms and Conditions</ModalHeader>
+            <ModalHeader textAlign="center" >Terms and Conditions</ModalHeader>
             <ModalCloseButton />
-            <ModalBody>
+            <ModalBody style={{ overflowY: 'auto', maxHeight: '60vh' }}>
               <Text>
                 FOODERRA strives to provide information on the "Fooderra"
                 Application that is as accurate as possible. However, FOODERRA
@@ -252,16 +256,20 @@ const SignUp = () => {
                 loss of business or loss of opportunity) following the visit to
                 or use of the "Fooderra" Application.
               </Text>
-              <HStack justifyContent="space-between" mt="10px">
-              <Button colorScheme="blue" variant="solid" color="white" onClick={handleReject}>
+              
+              
+              
+            </ModalBody>
+            <ModalFooter>
+            <HStack justifyContent="space-between" width="100%" >
+              <Button colorScheme="gray" variant="solid" color="black" onClick={handleReject}>
                 Reject
               </Button>
-              <Button colorScheme="blue" variant="solid" color="white" onClick={handleAccept}>
+              <Button colorScheme="gray" variant="solid" color="black" onClick={handleAccept}>
                 Accept
               </Button>
               </HStack>
-              
-            </ModalBody>
+            </ModalFooter>
           </ModalContent>
         </Modal>
         <Button

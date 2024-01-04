@@ -51,7 +51,7 @@ const LoginPage = () => {
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize="25%"
+      bgSize="20%"
     >
       <Image
         src="../images/Logo.svg"

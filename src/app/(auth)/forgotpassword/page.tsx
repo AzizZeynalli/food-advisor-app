@@ -36,10 +36,16 @@ const ForgotPassword = () => {
     console.log("Form submitted:", data);
   };
   return (
-    <VStack padding="50px" gap="0" bg="#EEF8FD" height="100vh" bgImage="/images/guakka.svg"
-    bgRepeat="no-repeat"
-    bgPosition="left 5% top 70%"
-    bgSize="25%">
+    <VStack
+      padding="50px"
+      gap="0"
+      bg="#EEF8FD"
+      height="100vh"
+      bgImage="/images/guakka.svg"
+      bgRepeat="no-repeat"
+      bgPosition="left 5% top 70%"
+      bgSize="20%"
+    >
       <Image
         src="../images/Logo.svg"
         cursor="pointer"
@@ -51,7 +57,9 @@ const ForgotPassword = () => {
       />
 
       <VStack width="35%" minWidth="465px" alignItems="flex-start">
-        <Text fontSize="30px" fontWeight="600">Forgot your password?</Text>
+        <Text fontSize="30px" fontWeight="600">
+          Forgot your password?
+        </Text>
         <Text mb="20px">Please enter the email you use to sign in</Text>
         <FormControl
           width="100%"
@@ -75,7 +83,7 @@ const ForgotPassword = () => {
             {errors?.email?.message}
           </FormErrorMessage>
         </FormControl>
-        
+
         <Button
           mb="20px"
           mt="20px"
@@ -88,13 +96,18 @@ const ForgotPassword = () => {
         >
           Reset password
         </Button>
-        
-        <Button  width="100%"
+
+        <Button
+          width="100%"
           colorScheme="blue"
           variant="solid"
-          color="white" onClick={() => {
-              router.push("/login");
-            }}>Back to Login</Button>
+          color="white"
+          onClick={() => {
+            router.push("/login");
+          }}
+        >
+          Back to Login
+        </Button>
       </VStack>
     </VStack>
   );
