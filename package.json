@@ -19,11 +19,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
-<<<<<<< HEAD
     "react-icons": "^4.12.0"
-=======
-    "react-router-dom": "^6.21.1"
->>>>>>> b54c7511f89c6e7c7259a19c934e584170452fbb
   },
   "devDependencies": {
     "@types/node": "^20",

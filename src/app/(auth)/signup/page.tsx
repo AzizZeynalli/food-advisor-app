@@ -1,6 +1,16 @@
 "use client";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  HStack,
+} from "@chakra-ui/react";
+import {
+  Box,
   VStack,
   Image,
   Text,
@@ -22,12 +32,21 @@ import { Controller, useForm } from "react-hook-form";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
-  const router = useRouter()
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  const router = useRouter();
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
   const handleToggleAgreeTerms = () => {
     setAgreeTerms(!agreeTerms);
+  };
+  const handleAccept = () => {
+    setAgreeTerms(true);
+    setIsTermsModalOpen(false);
+  };
+
+  const handleReject = () => {
+    setIsTermsModalOpen(false);
   };
   const {
     control,
@@ -52,11 +71,20 @@ const SignUp = () => {
       justifyContent="center"
       alignItems="center"
       gap="0"
-      bg="#C9E0EB"
+      bg="#EEF8FD"
+      bgImage="/images/guakka.svg"
+      bgRepeat="no-repeat"
+      bgPosition="left 70%"
+      bgSize="30%"
     >
-      <Image width="20%" src="../images/fooderra_logocrop.png"  onClick={() => {
+      <Image
+        width="20%"
+        src="../images/Logo.svg"
+        mb="20px"
+        onClick={() => {
           router.push("/");
-        }}/>
+        }}
+      />
       <VStack width="35%">
         <Text fontWeight="700" fontSize="30px">
           Create your account
@@ -161,18 +189,84 @@ const SignUp = () => {
           width="100%"
           mb="20px"
           isChecked={agreeTerms}
-          onChange={handleToggleAgreeTerms}
+          //onChange={handleToggleAgreeTerms}
+          onChange={() => {
+            //handleToggleAgreeTerms();
+            if (!agreeTerms) {
+              setIsTermsModalOpen(true); // Checkbox işaretlenmediyse modalı aç
+            }
+          }}
         >
           I agree with{" "}
-          <Link
-            href={"/terms-and-conditions"}
-            style={{ color: "blue", textDecoration: "underline" }}
+          <span
+            style={{
+              color: "blue",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            onClick={() => setIsTermsModalOpen(true)}
           >
             terms and conditions
-          </Link>
+          </span>
         </Checkbox>
+        <Modal
+          isOpen={isTermsModalOpen}
+          onClose={() => setIsTermsModalOpen(false)}
+          size="2xl"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Terms and Conditions</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {/* İlgili metinleri ekleyin */}
+              <Text>
+                FOODERRA strives to provide information on the "Fooderra"
+                Application that is as accurate as possible. However, FOODERRA
+                shall not be held liable for any omissions, inaccuracies or
+                deficiencies in the information provided, whether caused by
+                itself or by third party partners who provide it with such
+                information. FOODERRA, as publisher of the "Fooderra"
+                Application, is only bound by an obligation of means: its
+                liability can only be engaged if it is shown that it has not
+                implemented the means necessary for the execution of the
+                contract. The User agrees to use the "Fooderra" Application
+                under his own responsibility and at his own risk. The
+                information communicated via the "Fooderra" Application by
+                FOODERRA is for information purposes only. The User is informed
+                that he is free to follow or not follow the advice provided
+                through the "Fooderra" Application and that he may not, under
+                any circumstances, seek the responsibility of FOODERRA in the
+                event that the implementation of these recommendations does not
+                lead to the expected result. FOODERRA cannot be held liable in
+                the event of force majeure. Are considered as force majeure,
+                events beyond the control of the parties, which they could not
+                reasonably be required to foresee and which they could not
+                reasonably avoid or overcome insofar as their occurrence makes
+                the performance of the obligations totally impossible. Use of
+                the "Fooderra" Application is at the User's sole risk. Under no
+                circumstances shall FOODERRA be held liable for any direct or
+                indirect damage, including but not limited to, infection by
+                viruses, loss of data or programs, loss of use of computer
+                equipment (including but not limited to software, hard drives,
+                or any system), financial losses (such as but not limited to
+                loss of business or loss of opportunity) following the visit to
+                or use of the "Fooderra" Application.
+              </Text>
+              <HStack justifyContent="space-between" mt="10px">
+              <Button colorScheme="blue" variant="solid" color="white" onClick={handleReject}>
+                Reject
+              </Button>
+              <Button colorScheme="blue" variant="solid" color="white" onClick={handleAccept}>
+                Accept
+              </Button>
+              </HStack>
+              
+            </ModalBody>
+          </ModalContent>
+        </Modal>
         <Button
-        mb="20px"
+          mb="20px"
           width="100%"
           colorScheme="blue"
           variant="solid"
@@ -182,8 +276,17 @@ const SignUp = () => {
         >
           Sign Up
         </Button>
-        <Text>Already have an account? <span style={{color:"blue", cursor:"pointer"}} onClick={()=>{router.push("/login")}}>Login</span></Text>
-        
+        <Text>
+          Already have an account?{" "}
+          <span
+            style={{ color: "blue", cursor: "pointer" }}
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            Login
+          </span>
+        </Text>
       </VStack>
     </VStack>
   );

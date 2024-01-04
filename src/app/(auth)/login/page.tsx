@@ -43,9 +43,18 @@ const LoginPage = () => {
     console.log("Form submitted:", data);
   };
   return (
-    <VStack padding="50px" gap="0" bg="#C9E0EB" height="100vh">
+    <VStack
+      padding="50px"
+      gap="0"
+      bg="#EEF8FD"
+      height="100vh"
+      bgImage="/images/guakka.svg"
+      bgRepeat="no-repeat"
+      bgPosition="left center"
+      bgSize="30%"
+    >
       <Image
-        src="../images/fooderra_logocrop.png"
+        src="../images/Logo.svg"
         cursor="pointer"
         width="20%"
         mb="50px"
@@ -136,7 +145,7 @@ const LoginPage = () => {
           onClick={handleSubmit(onSubmit)}
           isDisabled={!isValid}
         >
-          {isloading ? <Spinner/> : "Login"}
+          {isloading ? <Spinner /> : "Login"}
         </Button>
         <Text>
           Don`t have an account?{" "}
