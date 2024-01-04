@@ -36,9 +36,12 @@ const ForgotPassword = () => {
     console.log("Form submitted:", data);
   };
   return (
-    <VStack padding="50px" gap="0" bg="#C9E0EB" height="100vh">
+    <VStack padding="50px" gap="0" bg="#EEF8FD" height="100vh" bgImage="/images/guakka.svg"
+    bgRepeat="no-repeat"
+    bgPosition="left 5% top 70%"
+    bgSize="25%">
       <Image
-        src="../images/fooderra_logocrop.png"
+        src="../images/Logo.svg"
         cursor="pointer"
         width="20%"
         mb="40px"
@@ -85,17 +88,13 @@ const ForgotPassword = () => {
         >
           Reset password
         </Button>
-        <Text alignSelf="center">
-          Back to{" "}
-          <span
-            style={{ color: "blue", cursor: "pointer" }}
-            onClick={() => {
+        
+        <Button  width="100%"
+          colorScheme="blue"
+          variant="solid"
+          color="white" onClick={() => {
               router.push("/login");
-            }}
-          >
-            Login
-          </span>
-        </Text>
+            }}>Back to Login</Button>
       </VStack>
     </VStack>
   );
