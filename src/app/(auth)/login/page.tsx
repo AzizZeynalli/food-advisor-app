@@ -13,6 +13,7 @@ import {
   IconButton,
   InputGroup,
   Button,
+  Spinner,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -21,7 +22,8 @@ import { Controller, useForm } from "react-hook-form";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter()
+  const [isloading, setisLoading] = useState(false);
+  const router = useRouter();
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -33,7 +35,6 @@ const LoginPage = () => {
   } = useForm({
     mode: "all",
     defaultValues: {
-      username: "",
       email: "",
       password: "",
     },
@@ -42,10 +43,18 @@ const LoginPage = () => {
     console.log("Form submitted:", data);
   };
   return (
-    <VStack padding="50px" gap="0">
-      <Image src="../images/fooderra_logocrop.png" cursor="pointer" width="20%" mb="50px" onClick={()=>{router.push("/")}}/>
+    <VStack padding="50px" gap="0" bg="#C9E0EB" height="100vh">
+      <Image
+        src="../images/fooderra_logocrop.png"
+        cursor="pointer"
+        width="20%"
+        mb="50px"
+        onClick={() => {
+          router.push("/");
+        }}
+      />
 
-      <VStack width="35%">
+      <VStack width="35%" minWidth="465px">
         <FormControl
           width="100%"
           isInvalid={!!errors?.email}
@@ -115,9 +124,10 @@ const LoginPage = () => {
           </FormErrorMessage>
         </FormControl>
         <Text alignSelf="flex-end" color="blue">
-          <Link href="/">Forgot password?</Link>
+          <Link href="/forgotpassword">Forgot password?</Link>
         </Text>
         <Button
+          mb="20px"
           mt="20px"
           width="100%"
           colorScheme="blue"
@@ -126,8 +136,19 @@ const LoginPage = () => {
           onClick={handleSubmit(onSubmit)}
           isDisabled={!isValid}
         >
-          Login
+          {isloading ? <Spinner/> : "Login"}
         </Button>
+        <Text>
+          Don`t have an account?{" "}
+          <span
+            style={{ color: "blue", cursor: "pointer" }}
+            onClick={() => {
+              router.push("/signup");
+            }}
+          >
+            Signup
+          </span>
+        </Text>
       </VStack>
     </VStack>
   );

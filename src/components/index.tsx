@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
-      <VStack justifyContent="space-between">
+      <VStack justifyContent="space-between" gap='0'>
         <Header/>
         <Flex>{children}</Flex>
         <Footer/>
