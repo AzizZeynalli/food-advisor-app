@@ -15,12 +15,14 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const router = useRouter()
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -45,27 +47,32 @@ const SignUp = () => {
   };
   return (
     <VStack
-      minWidth="465px"
+      minWidth="400px"
       height="100vh"
       justifyContent="center"
       alignItems="center"
       gap="0"
-      bg="#D8F9F7"
-      
+      bg="#C9E0EB"
     >
-      <Image src="../images/login.svg" />
-      <Text fontWeight="700" fontSize="30px">
-        Create your account
-      </Text>
-      <Text>Register your account to save your settings</Text>
-      <FormControl width="35%" isInvalid={!!errors?.username} mb={errors?.username ? 0 : 6}>
-        <FormLabel>Username</FormLabel>
-        <Controller
-          name="username"
-          control={control}
-          rules={{
-            required: "Username is required!",
-            minLength: {
+      <Image width="20%" src="../images/fooderra_logocrop.png"  onClick={() => {
+          router.push("/");
+        }}/>
+      <VStack width="35%">
+        <Text fontWeight="700" fontSize="30px">
+          Create your account
+        </Text>
+        <Text>Register your account to save your settings</Text>
+        <FormControl
+          isInvalid={!!errors?.username}
+          mb={errors?.username ? 0 : 6}
+        >
+          <FormLabel>Username</FormLabel>
+          <Controller
+            name="username"
+            control={control}
+            rules={{
+              required: "Username is required!",
+              minLength: {
                 value: 3,
                 message: "Username must be at least 3 characters long",
               },
@@ -75,91 +82,109 @@ const SignUp = () => {
               },
               pattern: {
                 value: /^[a-zA-Z0-9_]+$/,
-                message: "Username can only contain letters, numbers, and underscores",
-              },
-          }}
-          render={({ field }) => <Input {...field} bg="white" />}
-        />
-        <FormErrorMessage fontSize="14px">{errors?.username?.message}</FormErrorMessage>
-      </FormControl>
-      <FormControl width="35%" isInvalid={!!errors?.email} mb={errors?.email ? 0 : 6}>
-        <FormLabel >Email address</FormLabel>
-        <Controller
-          name="email"
-          control={control}
-          rules={{
-            required: "Email is required!",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          }}
-          render={({ field }) => <Input {...field} bg="white" />}
-        />
-        <FormErrorMessage fontSize="14px">{errors?.email?.message}</FormErrorMessage>
-      </FormControl>
-      <FormControl width="35%" isInvalid={!!errors?.password} mb={errors?.password ? 0 : 6}>
-        <FormLabel>Password</FormLabel>
-        <InputGroup>
-          <Controller
-            name="password"
-            control={control}
-            rules={{
-              required: "Password is required!",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters long",
-              },
-              pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/,
-                message: "Password must include at least one lowercase letter, one uppercase letter, and one digit",
+                message:
+                  "Username can only contain letters, numbers, and underscores",
               },
             }}
-            render={({ field }) => (
-              <Input
-                {...field}
-                type={showPassword ? "text" : "password"}
-                bg="white"
-              />
-            )}
+            render={({ field }) => <Input {...field} bg="white" />}
           />
-
-          <InputRightElement>
-            <IconButton
-              variant="gray"
-              borderWidth="1px 1px 1px 0px"
-              backgroundColor="white"
-              borderLeftRadius="0"
-              aria-label={showPassword ? "Hide Password" : "Show Password"}
-              icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
-              onClick={handleTogglePassword}
+          <FormErrorMessage fontSize="14px">
+            {errors?.username?.message}
+          </FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={!!errors?.email} mb={errors?.email ? 0 : 6}>
+          <FormLabel>Email address</FormLabel>
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: "Email is required!",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field }) => <Input {...field} bg="white" />}
+          />
+          <FormErrorMessage fontSize="14px">
+            {errors?.email?.message}
+          </FormErrorMessage>
+        </FormControl>
+        <FormControl
+          isInvalid={!!errors?.password}
+          mb={errors?.password ? 0 : 6}
+        >
+          <FormLabel>Password</FormLabel>
+          <InputGroup>
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: "Password is required!",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/,
+                  message:
+                    "Password must include at least one lowercase letter, one uppercase letter, and one digit",
+                },
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  bg="white"
+                />
+              )}
             />
-          </InputRightElement>
-        </InputGroup>
-        <FormErrorMessage fontSize="14px">{errors?.password?.message}</FormErrorMessage>
-      </FormControl>
 
-      <Checkbox
+            <InputRightElement>
+              <IconButton
+                variant="gray"
+                borderWidth="1px 1px 1px 0px"
+                backgroundColor="white"
+                borderLeftRadius="0"
+                aria-label={showPassword ? "Hide Password" : "Show Password"}
+                icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                onClick={handleTogglePassword}
+              />
+            </InputRightElement>
+          </InputGroup>
+          <FormErrorMessage fontSize="14px">
+            {errors?.password?.message}
+          </FormErrorMessage>
+        </FormControl>
+
+        <Checkbox
+          width="100%"
+          mb="20px"
+          isChecked={agreeTerms}
+          onChange={handleToggleAgreeTerms}
+        >
+          I agree with{" "}
+          <Link
+            href={"/terms-and-conditions"}
+            style={{ color: "blue", textDecoration: "underline" }}
+          >
+            terms and conditions
+          </Link>
+        </Checkbox>
+        <Button
         mb="20px"
-        width="35%"
-        isChecked={agreeTerms}
-        onChange={handleToggleAgreeTerms}
-      >
-        I agree with{" "}
-        <Link href={"/"} style={{ color: "blue", textDecoration: "underline" }}>
-          terms and conditions
-        </Link>
-      </Checkbox>
-      <Button
-        width="35%"
-        colorScheme="blue"
-        variant="solid"
-        color="white"
-        onClick={handleSubmit(onSubmit)}
-        isDisabled={!isValid || !agreeTerms}
-      >
-        Sign Up
-      </Button>
+          width="100%"
+          colorScheme="blue"
+          variant="solid"
+          color="white"
+          onClick={handleSubmit(onSubmit)}
+          isDisabled={!isValid || !agreeTerms}
+        >
+          Sign Up
+        </Button>
+        <Text>Already have an account? <span style={{color:"blue", cursor:"pointer"}} onClick={()=>{router.push("/login")}}>Login</span></Text>
+        
+      </VStack>
     </VStack>
   );
 };
