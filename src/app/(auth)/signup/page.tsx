@@ -74,8 +74,8 @@ const SignUp = () => {
       bg="#EEF8FD"
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
-      bgPosition="left 70%"
-      bgSize="30%"
+      bgPosition="left 5% top 70%"
+      bgSize="25%"
     >
       <Image
         width="20%"
@@ -219,7 +219,6 @@ const SignUp = () => {
             <ModalHeader>Terms and Conditions</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {/* İlgili metinleri ekleyin */}
               <Text>
                 FOODERRA strives to provide information on the "Fooderra"
                 Application that is as accurate as possible. However, FOODERRA

@@ -38,8 +38,8 @@ const ForgotPassword = () => {
   return (
     <VStack padding="50px" gap="0" bg="#EEF8FD" height="100vh" bgImage="/images/guakka.svg"
     bgRepeat="no-repeat"
-    bgPosition="left center"
-    bgSize="30%">
+    bgPosition="left 5% top 70%"
+    bgSize="25%">
       <Image
         src="../images/Logo.svg"
         cursor="pointer"
