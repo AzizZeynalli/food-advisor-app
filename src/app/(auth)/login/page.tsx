@@ -41,29 +41,31 @@ const LoginPage = () => {
   });
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
+    router.push("/")
   };
   return (
     <VStack
       padding="50px"
       gap="0"
       bg="#EEF8FD"
+      minWidth="400px"
       height="100vh"
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize="20%"
+      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
     >
       <Image
         src="../images/Logo.svg"
         cursor="pointer"
-        width="20%"
-        mb="50px"
+        width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
+        mb={{base: "20px",lg:"40px"}}
         onClick={() => {
           router.push("/");
         }}
       />
 
-      <VStack width="35%" minWidth="465px">
+      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}} >
         <FormControl
           width="100%"
           isInvalid={!!errors?.email}
@@ -117,11 +119,10 @@ const LoginPage = () => {
             />
 
             <InputRightElement>
-              <IconButton
+            <IconButton
                 variant="gray"
-                borderWidth="1px 1px 1px 0px"
-                backgroundColor="white"
-                borderLeftRadius="0"
+                backgroundColor="transparent"
+                outline="none"
                 aria-label={showPassword ? "Hide Password" : "Show Password"}
                 icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                 onClick={handleTogglePassword}

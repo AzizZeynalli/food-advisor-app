@@ -64,6 +64,7 @@ const SignUp = () => {
   });
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
+    router.push("/login")
   };
   
   return (
@@ -78,21 +79,23 @@ const SignUp = () => {
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize="20%"
+      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
     >
       <Image
-        width="20%"
+        width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
         src="../images/Logo.svg"
         mb="20px"
         onClick={() => {
           router.push("/");
         }}
       />
-      <VStack width="35%">
-        <Text fontWeight="700" fontSize="30px">
+      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}}>
+        <Text fontWeight="700" 
+        fontSize={{base: "20px", md: "30px"}}
+         >
           Create your account
         </Text>
-        <Text>Register your account to save your settings</Text>
+        <Text fontSize={{base:"14px", md:"16px"}}>Register your account to save your settings</Text>
         <FormControl
           isInvalid={!!errors?.username}
           mb={errors?.username ? 0 : 6}
@@ -174,9 +177,8 @@ const SignUp = () => {
             <InputRightElement>
               <IconButton
                 variant="gray"
-                borderWidth="1px 1px 1px 0px"
-                backgroundColor="white"
-                borderLeftRadius="0"
+                backgroundColor="transparent"
+                outline="none"
                 aria-label={showPassword ? "Hide Password" : "Show Password"}
                 icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                 onClick={handleTogglePassword}
@@ -194,10 +196,7 @@ const SignUp = () => {
           isChecked={agreeTerms}
          
           onChange={() => {
-          
-            if (!agreeTerms) {
-              setIsTermsModalOpen(true); // Checkbox işaretlenmediyse modalı aç
-            }
+            setAgreeTerms(!agreeTerms);
           }}
         >
           I agree with{" "}
@@ -207,7 +206,9 @@ const SignUp = () => {
               textDecoration: "underline",
               cursor: "pointer",
             }}
-            onClick={() => setIsTermsModalOpen(true)}
+            onClick={() => {
+              setIsTermsModalOpen(true);
+            }}
           >
             terms and conditions
           </span>

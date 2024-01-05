@@ -40,27 +40,28 @@ const ForgotPassword = () => {
       padding="50px"
       gap="0"
       bg="#EEF8FD"
+      minWidth="400px"
       height="100vh"
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize="20%"
+      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
     >
       <Image
         src="../images/Logo.svg"
         cursor="pointer"
-        width="20%"
-        mb="40px"
+        width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
+        mb={{base: "20px",lg:"40px"}}
         onClick={() => {
           router.push("/");
         }}
       />
 
-      <VStack width="35%" minWidth="465px" alignItems="flex-start">
-        <Text fontSize="30px" fontWeight="600">
+      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}} alignItems="flex-start">
+        <Text fontSize={{base: "20px", md: "30px"}} fontWeight="600">
           Forgot your password?
         </Text>
-        <Text mb="20px">Please enter the email you use to sign in</Text>
+        <Text mb="20px" fontSize={{base:"14px", md:"16px"}}>Please enter the email you use to sign in</Text>
         <FormControl
           width="100%"
           isInvalid={!!errors?.email}
