@@ -3,12 +3,12 @@ import Link from "next/link";
 
 export default function Footer() { 
     return (
-       <HStack bg='gray' w='100%' justifyContent='space-around' p='28px 0'>
+       <HStack bg='#233345' w='100%' justifyContent='space-around' p='28px 0'>
             <VStack textAlign='center'>
-                <Link href={"/"} passHref ><Image src="../images/fooderra_logocrop.png" alt="Logo" maxW='220px'/></Link>
+                <Link href={"/"} passHref ><Image src="../images/white_logo.svg" alt="Logo" maxW='220px'/></Link>
                 <HStack p='16px 0' gap='12px'>
-                    <Button bg='gray'><Image src="../images/apple.png" gap='12px'/></Button>
-                    <Button bg='gray'><Image src="../images/google.png" /></Button>
+                    <Link href='' ><Image src="../images/apple.png" gap='12px' alt='' /></Link>
+                    <Link href='' ><Image src="../images/google.png" alt='' /></Link>
                 </HStack>
                 <Text color='white' fontWeight='400' fontSize='16px'>© 2023 foodvisor.io</Text>
             </VStack>
