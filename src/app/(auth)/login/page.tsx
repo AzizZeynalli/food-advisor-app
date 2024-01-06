@@ -45,15 +45,17 @@ const LoginPage = () => {
   };
   return (
     <VStack
-      padding="50px"
+      //padding="50px"
       gap="0"
       bg="#EEF8FD"
+      justifyContent="center"
+      alignItems="center"
       minWidth="400px"
       height="100vh"
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
+      bgSize={{base: "0", "2xl": "20%"}}
     >
       <Image
         src="../images/Logo.svg"
@@ -65,7 +67,7 @@ const LoginPage = () => {
         }}
       />
 
-      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}} >
+      <VStack width={{base: "80%",sm: "75%" , md:"65%", lg: "60%",xl:"50%" ,"2xl": "35%"}} >
         <FormControl
           width="100%"
           isInvalid={!!errors?.email}
