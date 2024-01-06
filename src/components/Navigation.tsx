@@ -8,13 +8,14 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Flex,
-  Image,
   Link,
+  Image,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+// import Link from "next/link";
 
 export function Navigation() {
   const router = useRouter();
@@ -30,9 +31,10 @@ export function Navigation() {
       h="80px"
     >
       <Box display="flex" alignItems="center" gap="32px">
-        <Image h="36px" src="./images/Logo.svg" alt="logo" />
+        <Link href='/' ><Image h="36px" src="../images/logo.svg" alt="logo" /></Link>
         <Box display={{ lg: "flex", base: "none" }} gap="32px">
           <Link
+          href='/blog'
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -41,6 +43,7 @@ export function Navigation() {
             Blog
           </Link>
           <Link
+          href='/recipes'
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -49,6 +52,7 @@ export function Navigation() {
             Recipes
           </Link>
           <Link
+          href='help'
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -99,6 +103,7 @@ export function Navigation() {
           <DrawerBody mt='40px' >
             <VStack>
               <Link
+              href='/blog'
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -107,6 +112,7 @@ export function Navigation() {
                 Blog
               </Link>
               <Link
+              href='recipes'
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -115,6 +121,7 @@ export function Navigation() {
                 Recipes
               </Link>
               <Link
+              href='help'
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
