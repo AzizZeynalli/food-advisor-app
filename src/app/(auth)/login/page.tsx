@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   VStack,
@@ -17,13 +18,22 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isloading, setisLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    
+  }, []);
+
+
+
+
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -39,9 +49,24 @@ const LoginPage = () => {
       password: "",
     },
   });
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
-    router.push("/")
+  const onSubmit = async () => {
+    const { email, password } = getValues();
+    setisLoading(true);
+    try {
+      
+      const response = await axios.post("http://localhost:3003/api/login/", { email, password });
+      if (response.status !== 200) {
+        alert('Failed to log in. Please check your credentials.');
+   
+        return;
+      }
+      router.push("/");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      
+    } finally {
+      setisLoading(false);
+    }
   };
   return (
     <VStack
@@ -62,6 +87,7 @@ const LoginPage = () => {
         cursor="pointer"
         width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
         mb={{base: "20px",lg:"40px"}}
+        alt=""
         onClick={() => {
           router.push("/");
         }}
