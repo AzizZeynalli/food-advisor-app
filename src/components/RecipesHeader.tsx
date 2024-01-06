@@ -58,8 +58,10 @@ export function RecipesHeader() {
         </Menu>
       </Flex>
       <Flex justifyContent='center' py='24px'>
-        <Input w='70%' placeholder="Search by recipe title" bg='#fff' />
+        <Input w='70%' placeholder="Search by recipe title" bg='#fff' border='gray.100' />
         <Button
+        zIndex='10000'
+          ml='-50px'
          bg="#233345"
          borderRadius="24px"
          _hover={{ bg: "#3e5a7b" }}
