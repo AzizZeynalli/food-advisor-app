@@ -79,17 +79,18 @@ const SignUp = () => {
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
+      bgSize={{base: "0", "2xl": "20%"}}
     >
       <Image
         width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
         src="../images/Logo.svg"
         mb="20px"
+        cursor="pointer"
         onClick={() => {
           router.push("/");
         }}
       />
-      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}}>
+      <VStack width={{base: "80%",sm: "75%" , md:"65%", lg: "60%",xl:"50%" ,"2xl": "35%"}}>
         <Text fontWeight="700" 
         fontSize={{base: "20px", md: "30px"}}
          >
