@@ -7,7 +7,7 @@ import Link from "next/link"
 export default function Home() {
   return (
     <Layout>
-      <Box>
+      <Box display='none'>
         <Box position='relative'>
           <Image src="../images/mainback.jpeg"  />
           <Box position='absolute' top='25%' left='25%' textAlign='center'>

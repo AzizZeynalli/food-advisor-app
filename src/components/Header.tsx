@@ -1,12 +1,20 @@
 "use client"
 import { Box, HStack, Image, Button, Text} from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+    const router = useRouter();
+
     return (
         <HStack p='20px' justifyContent='space-between' w='100%' maxH='64px' bg='#C9E0EB'>
             <HStack gap='16px'>
-            <Link href={"/"} passHref ><Image src="../images/fooderra_logocrop.png" alt="Logo" maxW='220px'/></Link>
+            <Image 
+            onClick={() => {
+                router.push("/");
+              }}
+              src="../images/fooderra_logocrop.png" alt="Logo" 
+              />
                 <HStack gap='16px' pt='8px' fontSize='16px' fontWeight='500px' color='gray.400'>
                     <Link href={"/blog"} passHref>
                         <Button as="a" variant="link" _hover={{ color: '#233345' }}>Blog</Button>
