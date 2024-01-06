@@ -1,4 +1,5 @@
 "use client";
+import axios from 'axios';
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Modal,
@@ -38,8 +39,7 @@ const SignUp = () => {
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
- 
-  
+   
   const handleAccept = () => {
     setAgreeTerms(true);
     setIsTermsModalOpen(false);
@@ -62,9 +62,20 @@ const SignUp = () => {
       password: "",
     },
   });
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
-    router.push("/login")
+  const onSubmit = async () => {
+    const { username, email, password } = getValues();
+    console.log("username", username, email, password);
+    try {
+      const response = await axios.post("http://localhost:3003/api/users", { username, email, password }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      alert("Account created successfully");
+      router.push("/login");
+    } catch (error) {
+      console.error("Error creating account:", error);
+    }
   };
   
   return (
@@ -85,6 +96,7 @@ const SignUp = () => {
         width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
         src="../images/Logo.svg"
         mb="20px"
+        alt=""
         onClick={() => {
           router.push("/");
         }}
@@ -236,7 +248,7 @@ const SignUp = () => {
                 implemented the means necessary for the execution of the
                 contract. The User agrees to use the "Fooderra" Application
                 under his own responsibility and at his own risk. The
-                information communicated via the "Fooderra" Application by
+                information communicated via the &quot;Fooderra&quot; Application by
                 FOODERRA is for information purposes only. The User is informed
                 that he is free to follow or not follow the advice provided
                 through the "Fooderra" Application and that he may not, under
