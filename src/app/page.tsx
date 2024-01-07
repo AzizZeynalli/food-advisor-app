@@ -1,8 +1,10 @@
 'use client'
 
 import { Layout } from "@/components";
-import { Box, Image, Text, Button, VStack } from "@chakra-ui/react";
-import Link from "next/link"
+import CardHome from "@/components/CardHome";
+import { Box, Image, Text, Button, HStack, VStack, Card} from "@chakra-ui/react";
+import Link from "next/link";
+
 
 export default function Home() {
   return (
@@ -18,6 +20,27 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
+      <HStack 
+      flexDirection={{base:"column", md: "row"}} 
+      justifyContent='space-between'>
+          <VStack  
+          order={{base: "2", sm: "1"}}
+          textAlign='center'
+          gap='12px'>
+            <Text 
+            fontSize='30px'
+            fontWeight='500'>Get daily inspiration with balanced recipes</Text>
+            <Text
+            fontSize='20px'
+            fontWeight='400'>Our quick and easy recipes are on the table in no time! All recipes are validated by our team of dietitians.</Text>
+          </VStack>
+          <HStack flexWrap='wrap'>
+            <CardHome imageUrl="../images/home1.png" cardText="Avocado toast with egg" cardTime="15 min"/>
+            <CardHome imageUrl="../images/home2.png" cardText="Yoghurt with mixed fruits" cardTime="5 min"/>
+            <CardHome imageUrl="../images/home3.png" cardText="Chicken breast & kale" cardTime="15 min"/>
+            <CardHome imageUrl="../images/home4.png" cardText="Fig & chickpeas salad" cardTime="15 min"/>
+          </HStack>
+      </HStack>
     </Layout>
   )
 }
