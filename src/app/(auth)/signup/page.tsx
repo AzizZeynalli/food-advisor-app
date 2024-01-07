@@ -66,7 +66,7 @@ const SignUp = () => {
     const { username, email, password } = getValues();
     console.log("username", username, email, password);
     try {
-      const response = await axios.post("http://localhost:3003/api/users", { username, email, password }, {
+      const response = await axios.post("https://fooderra-api.vercel.app/api/users", { username, email, password }, {
         headers: {
           'Content-Type': 'application/json'
         }

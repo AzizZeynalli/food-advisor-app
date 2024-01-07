@@ -15,6 +15,8 @@ import {
   InputGroup,
   Button,
   Spinner,
+  Alert,
+  AlertDescription,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,6 +26,7 @@ import { Controller, useForm } from "react-hook-form";
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isloading, setisLoading] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -54,15 +57,14 @@ const LoginPage = () => {
     setisLoading(true);
     try {
       
-      const response = await axios.post("http://localhost:3003/api/login/", { email, password });
+      const response = await axios.post("https://fooderra-api.vercel.app/api/login", { email, password });
       if (response.status !== 200) {
-        alert('Failed to log in. Please check your credentials.');
-   
-        return;
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       router.push("/");
     } catch (error) {
       console.error("Error logging in:", error);
+      setIsErr(true);
       
     } finally {
       setisLoading(false);
@@ -82,6 +84,7 @@ const LoginPage = () => {
       bgPosition="left 5% top 70%"
       bgSize={{base: "0", "2xl": "20%"}}
     >
+      {/* {isErr && <Alert><AlertDescription></AlertDescription></Alert>} */}
       <Image
         src="../images/Logo.svg"
         cursor="pointer"
