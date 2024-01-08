@@ -1,13 +1,16 @@
 'use client'
 
 import { Layout } from "@/components";
-import { Box, Image, Text, Button, VStack } from "@chakra-ui/react";
-import Link from "next/link"
+import CardHome from "@/components/CardHome";
+import CardPlan from "@/components/CardPlan";
+import { Box, Image, Text, Button, HStack, VStack, Card} from "@chakra-ui/react";
+import Link from "next/link";
+
 
 export default function Home() {
   return (
     <Layout>
-      <Box>
+      <Box display='none'>
         <Box position='relative'>
           <Image src="../images/mainback.jpeg"  />
           <Box position='absolute' top='25%' left='25%' textAlign='center'>
@@ -18,6 +21,53 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
+      <VStack>
+      <HStack 
+      flexDirection={{base:"column", md:"row-reverse"}}
+      justifyContent='space-between'
+      mt={{base:"64px", md:"0"}}
+      w='100%'>
+          <VStack
+          textAlign='center'
+          gap='12px'
+          p={{base:"12px 52px", md:"0"}}>
+            <Text 
+            w={{base:"100%", md:"50%"}}
+            fontSize='30px'
+            fontWeight='500'>Get daily inspiration with balanced recipes</Text>
+            <Text
+            w={{base:"100%", md:"50%"}}
+            fontSize='20px'
+            fontWeight='400'>Our quick and easy recipes are on the table in no time! All recipes are validated by our team of dietitians.</Text>
+          </VStack>
+          <HStack flexWrap='wrap'>
+            <CardHome imageUrl="../images/home1.png" cardText="Avocado toast with egg" cardTime="15 min"/>
+            <CardHome imageUrl="../images/home2.png" cardText="Yoghurt with mixed fruits" cardTime="5 min"/>
+            <CardHome imageUrl="../images/home3.png" cardText="Chicken breast & kale" cardTime="15 min"/>
+            <CardHome imageUrl="../images/home4.png" cardText="Fig & chickpeas salad" cardTime="15 min"/>
+          </HStack>
+      </HStack>
+
+      <HStack
+      w='100%'>
+        <VStack
+          textAlign='center'
+          gap='12px'
+          p={{base:"12px 52px", md:"0"}}>
+            <Text 
+            w={{base:"100%", md:"50%"}}
+            fontSize='30px'
+            fontWeight='500'>GChoose a diet plan adapted to your needs</Text>
+            <Text
+            w={{base:"100%", md:"50%"}}
+            fontSize='20px'
+            fontWeight='400'>Find the program that suits you and get sustainable results. Choose from over 15 nutritional plans!</Text>
+          </VStack>
+
+      </HStack>
+      </VStack>
+      
+
     </Layout>
   )
 }
