@@ -2,6 +2,7 @@
 
 import { Layout } from "@/components";
 import CardHome from "@/components/CardHome";
+import CardPlan from "@/components/CardPlan";
 import { Box, Image, Text, Button, HStack, VStack, Card} from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -20,17 +21,22 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
+      <VStack>
       <HStack 
-      flexDirection={{base:"column", md: "row"}} 
-      justifyContent='space-between'>
-          <VStack  
-          order={{base: "2", sm: "1"}}
+      flexDirection={{base:"column", md:"row-reverse"}}
+      justifyContent='space-between'
+      mt={{base:"64px", md:"0"}}
+      w='100%'>
+          <VStack
           textAlign='center'
-          gap='12px'>
+          gap='12px'
+          p={{base:"12px 52px", md:"0"}}>
             <Text 
+            w={{base:"100%", md:"50%"}}
             fontSize='30px'
             fontWeight='500'>Get daily inspiration with balanced recipes</Text>
             <Text
+            w={{base:"100%", md:"50%"}}
             fontSize='20px'
             fontWeight='400'>Our quick and easy recipes are on the table in no time! All recipes are validated by our team of dietitians.</Text>
           </VStack>
@@ -41,6 +47,27 @@ export default function Home() {
             <CardHome imageUrl="../images/home4.png" cardText="Fig & chickpeas salad" cardTime="15 min"/>
           </HStack>
       </HStack>
+
+      <HStack
+      w='100%'>
+        <VStack
+          textAlign='center'
+          gap='12px'
+          p={{base:"12px 52px", md:"0"}}>
+            <Text 
+            w={{base:"100%", md:"50%"}}
+            fontSize='30px'
+            fontWeight='500'>GChoose a diet plan adapted to your needs</Text>
+            <Text
+            w={{base:"100%", md:"50%"}}
+            fontSize='20px'
+            fontWeight='400'>Find the program that suits you and get sustainable results. Choose from over 15 nutritional plans!</Text>
+          </VStack>
+
+      </HStack>
+      </VStack>
+      
+
     </Layout>
   )
 }

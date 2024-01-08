@@ -1,6 +1,5 @@
 "use client"
 import { Card, CardBody, Image, Text,Box} from "@chakra-ui/react";
-import Link from "next/link";
 
 export default function Cards({ imageUrl, cardText, cardTime }: any) {
 

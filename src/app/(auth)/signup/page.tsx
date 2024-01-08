@@ -1,4 +1,5 @@
 "use client";
+import axios from 'axios';
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Modal,
@@ -38,8 +39,7 @@ const SignUp = () => {
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
- 
-  
+   
   const handleAccept = () => {
     setAgreeTerms(true);
     setIsTermsModalOpen(false);
@@ -62,9 +62,20 @@ const SignUp = () => {
       password: "",
     },
   });
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
-    router.push("/login")
+  const onSubmit = async () => {
+    const { username, email, password } = getValues();
+    console.log("username", username, email, password);
+    try {
+      const response = await axios.post("https://fooderra-api.vercel.app/api/users", { username, email, password }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      alert("Account created successfully");
+      router.push("/login");
+    } catch (error) {
+      console.error("Error creating account:", error);
+    }
   };
   
   return (
@@ -79,17 +90,19 @@ const SignUp = () => {
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
+      bgSize={{base: "0", "2xl": "20%"}}
     >
       <Image
         width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
         src="../images/Logo.svg"
         mb="20px"
+        alt=""
+        cursor="pointer"
         onClick={() => {
           router.push("/");
         }}
       />
-      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}}>
+      <VStack width={{base: "80%",sm: "75%" , md:"65%", lg: "60%",xl:"50%" ,"2xl": "35%"}}>
         <Text fontWeight="700" 
         fontSize={{base: "20px", md: "30px"}}
          >
@@ -236,7 +249,7 @@ const SignUp = () => {
                 implemented the means necessary for the execution of the
                 contract. The User agrees to use the "Fooderra" Application
                 under his own responsibility and at his own risk. The
-                information communicated via the "Fooderra" Application by
+                information communicated via the &quot;Fooderra&quot; Application by
                 FOODERRA is for information purposes only. The User is informed
                 that he is free to follow or not follow the advice provided
                 through the "Fooderra" Application and that he may not, under

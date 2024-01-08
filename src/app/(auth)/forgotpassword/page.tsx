@@ -37,15 +37,17 @@ const ForgotPassword = () => {
   };
   return (
     <VStack
-      padding="50px"
+      //padding="50px"
       gap="0"
       bg="#EEF8FD"
       minWidth="400px"
       height="100vh"
+      justifyContent="center"
+      alignItems="center"
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
+      bgSize={{base: "0", "2xl": "20%"}}
     >
       <Image
         src="../images/Logo.svg"
@@ -57,7 +59,7 @@ const ForgotPassword = () => {
         }}
       />
 
-      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}} alignItems="flex-start">
+      <VStack width={{base: "80%",sm: "75%" , md:"65%", lg: "60%",xl:"50%" ,"2xl": "35%"}} alignItems="flex-start">
         <Text fontSize={{base: "20px", md: "30px"}} fontWeight="600">
           Forgot your password?
         </Text>

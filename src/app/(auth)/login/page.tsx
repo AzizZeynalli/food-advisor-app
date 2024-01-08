@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   VStack,
@@ -14,16 +15,28 @@ import {
   InputGroup,
   Button,
   Spinner,
+  Alert,
+  AlertDescription,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isloading, setisLoading] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    
+  }, []);
+
+
+
+
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -39,33 +52,51 @@ const LoginPage = () => {
       password: "",
     },
   });
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
-    router.push("/")
+  const onSubmit = async () => {
+    const { email, password } = getValues();
+    setisLoading(true);
+    try {
+      
+      const response = await axios.post("https://fooderra-api.vercel.app/api/login", { email, password });
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      router.push("/");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setIsErr(true);
+      
+    } finally {
+      setisLoading(false);
+    }
   };
   return (
     <VStack
-      padding="50px"
+      //padding="50px"
       gap="0"
       bg="#EEF8FD"
+      justifyContent="center"
+      alignItems="center"
       minWidth="400px"
       height="100vh"
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize={{base: "10%",sm:"15%", lg: "20%"}}
+      bgSize={{base: "0", "2xl": "20%"}}
     >
+      {/* {isErr && <Alert><AlertDescription></AlertDescription></Alert>} */}
       <Image
         src="../images/Logo.svg"
         cursor="pointer"
         width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
         mb={{base: "20px",lg:"40px"}}
+        alt=""
         onClick={() => {
           router.push("/");
         }}
       />
 
-      <VStack width={{base: "70%",sm: "60%" , md:"55%", lg: "45%", xl: "35%"}} >
+      <VStack width={{base: "80%",sm: "75%" , md:"65%", lg: "60%",xl:"50%" ,"2xl": "35%"}} >
         <FormControl
           width="100%"
           isInvalid={!!errors?.email}
