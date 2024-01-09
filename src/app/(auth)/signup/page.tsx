@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { VStack, Image, Text } from "@chakra-ui/react";
+import { VStack, Image, Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -16,6 +16,8 @@ const SignUp = () => {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isloading, setisLoading] = useState(false);
+  
+  const toast = useToast();
   const router = useRouter();
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -43,7 +45,7 @@ const SignUp = () => {
       password: "",
     },
   });
-  const onSubmit = async () => {
+  async function onSubmit() {
     const { username, email, password } = getValues();
     console.log("username", username, email, password);
     setisLoading(true);
@@ -57,15 +59,29 @@ const SignUp = () => {
           },
         }
       );
-      alert("Account created successfully");
+      toast({
+        title: 'You successfully registered',
+        status: 'success',
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+      //alert("Account created successfully");
       router.push("/login");
     } catch (error) {
+      toast({
+        title: 'Something went wrong',
+        status: 'error',
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
       console.error("Error creating account:", error);
     }
-    finally{
-      setisLoading(false)
+    finally {
+      setisLoading(false);
     }
-  };
+  }
 
   return (
     <VStack

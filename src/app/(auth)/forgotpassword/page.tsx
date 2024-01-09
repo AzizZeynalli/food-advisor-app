@@ -1,4 +1,6 @@
 "use client";
+import EmailInput from "@/components/(formComponents)/EmailInput";
+import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   VStack,
@@ -64,53 +66,8 @@ const ForgotPassword = () => {
           Forgot your password?
         </Text>
         <Text mb="20px" fontSize={{base:"14px", md:"16px"}}>Please enter the email you use to sign in</Text>
-        <FormControl
-          width="100%"
-          isInvalid={!!errors?.email}
-          mb={errors?.email ? 0 : 6}
-        >
-          <FormLabel>Email address</FormLabel>
-          <Controller
-            name="email"
-            control={control}
-            rules={{
-              required: "Email is required!",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            }}
-            render={({ field }) => <Input {...field} bg="white" />}
-          />
-          <FormErrorMessage fontSize="14px">
-            {errors?.email?.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <Button
-          mb="20px"
-          mt="20px"
-          width="100%"
-          colorScheme="blue"
-          variant="solid"
-          color="white"
-          onClick={handleSubmit(onSubmit)}
-          isDisabled={!isValid}
-        >
-          Reset password
-        </Button>
-
-        <Button
-          width="100%"
-          colorScheme="blue"
-          variant="solid"
-          color="white"
-          onClick={() => {
-            router.push("/login");
-          }}
-        >
-          Back to Login
-        </Button>
+        <EmailInput errors={errors} control={control}/>
+        <ForgotPassButton handleSubmit={handleSubmit} onSubmit={onSubmit} isValid={isValid}/>
       </VStack>
     </VStack>
   );
