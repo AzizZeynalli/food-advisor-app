@@ -7,7 +7,7 @@ export default function Header() {
     const router = useRouter();
 
     return (
-        <HStack p='20px' justifyContent='space-between' w='100%' maxH='64px' bg='#C9E0EB'>
+        <HStack p='20px' justifyContent='space-between' w='100%' maxH='64px' bg='#EEF8FD'>
             <HStack gap='16px'>
             <Image 
             onClick={() => {
