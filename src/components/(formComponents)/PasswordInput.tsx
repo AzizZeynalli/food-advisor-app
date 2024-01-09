@@ -25,7 +25,7 @@ const PasswordInput: React.FC<PasswordProps> = ({errors,control,showPassword,han
                   message: "Password must be at least 8 characters long",
                 },
                 pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/,
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]*$/,
                   message:
                     "Password must include at least one lowercase letter, one uppercase letter, and one digit",
                 },
