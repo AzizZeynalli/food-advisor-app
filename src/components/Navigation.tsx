@@ -62,8 +62,8 @@ export function Navigation() {
           </Link>
         </Box>
       </Box>
-      <Button variant="ghost" ref={btnRef} onClick={onOpen}>
-        <Image src="/images/hamburger.svg" alt="" display={{ lg: "none" }} />
+      <Button variant="ghost" ref={btnRef} onClick={onOpen}  display={{ lg: "none" }}>
+        <Image src="/images/hamburger.svg" alt="" />
       </Button>
       <Box display={{ lg: "flex", base: "none" }} alignItems="center" bg="#fff">
         <Link
