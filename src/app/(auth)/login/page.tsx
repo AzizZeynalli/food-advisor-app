@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isloading, setisLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
-  
+
   const toast = useToast();
   const router = useRouter();
 
@@ -41,14 +41,19 @@ const LoginPage = () => {
         { email, password }
       );
       if (response.status !== 200) {
-       
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       router.push("/");
     } catch (error) {
+      toast({
+        title: "Email or password is incorrect",
+        status: "error",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
       console.error("Error logging in:", error);
       setIsErr(true);
-     
     } finally {
       setisLoading(false);
     }
@@ -89,7 +94,7 @@ const LoginPage = () => {
           "2xl": "35%",
         }}
       >
-        <form action="" style={{width:"100%"}}>
+        <form action="" style={{ width: "100%" }}>
           <EmailInput errors={errors} control={control} />
           <PasswordInput
             errors={errors}
@@ -97,7 +102,7 @@ const LoginPage = () => {
             showPassword={showPassword}
             handleTogglePassword={handleTogglePassword}
           />
-          <Text alignSelf="flex-end" color="blue">
+          <Text textAlign="right" color="blue">
             <Link href="/forgotpassword">Forgot password?</Link>
           </Text>
           <LoginButton

@@ -1,4 +1,4 @@
-import { Button, Spinner,Text } from '@chakra-ui/react';
+import { Button, Spinner,Text, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import React from 'react'
  interface ILoginButtonProps {
@@ -11,7 +11,7 @@ const LoginButton: React.FC<ILoginButtonProps> = ({handleSubmit,onSubmit, isload
     const router = useRouter();
   return (
     
-    <>
+    <VStack width="100%">
      <Button
           mb="20px"
           mt="20px"
@@ -35,7 +35,7 @@ const LoginButton: React.FC<ILoginButtonProps> = ({handleSubmit,onSubmit, isload
             Signup
           </span>
         </Text>
-    </>
+    </VStack>
   )
 }
 
