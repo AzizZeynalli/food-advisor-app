@@ -38,7 +38,7 @@ export default function Footer() {
                 <Text 
                 color='white' 
                 fontWeight='400' 
-                fontSize='16px'>© 2023 foodvisor.io</Text>
+                fontSize='16px'>© 2023 fooderra.az</Text>
             </VStack>
             <HStack 
             justifyContent='space-around' 
@@ -50,7 +50,7 @@ export default function Footer() {
             gap='20px'>
                 <VStack 
                 alignItems={{ base: "center", md: "flex-start" }} >
-                    <Text fontSize='20px' fontWeight='600'>About Foodvisor</Text>
+                    <Text fontSize='20px' fontWeight='600'>About Fooderra</Text>
                     <Link href={"/press"} passHref>Press</Link>
                     <Link href={"/termsofservice"} passHref>Terms of service</Link>
                     <Link href={"/privacypolicy"} passHref>Privacy policy</Link>
@@ -60,29 +60,29 @@ export default function Footer() {
                 gap='8px'
                 alignItems={{ base: "center", md: "flex-start" }}>
                     <Text fontSize='20px' fontWeight='600'>Contact us</Text>
-                    <Link href={"/contactus"} passHref>contact@foodvisor.io</Link>
+                    <Link href={"/contactus"} passHref>contact@fooderra.az</Link>
                     <Text fontSize='20px' fontWeight='600' pb='12px'>Follow us</Text>
                     <HStack gap='8px' alignItems='flex-start'>
                         <Image 
                         onClick={() => {
                             router.push("/");
                           }}
-                          src="../images/instagram.png" alt="instagram" borderRadius='500px' bg='white' p='8px 20px'/>
+                          src="../images/instagram.png" alt="instagram" borderRadius='500px' bg='white' p='8px 20px' border='none'/>
                         <Image 
                         onClick={() => {
                             router.push("/");
                           }}
-                          src="../images/twitter.png" alt="twitter"  borderRadius='500px' bg='white' p='8px 20px'/>
+                          src="../images/twitter.png" alt="twitter"  borderRadius='500px' bg='white' p='8px 20px' border='none'/>
                         <Image 
                         onClick={() => {
                             router.push("/");
                           }}
-                          src="../images/facebook.png" alt="facebook"  borderRadius='500px' bg='white' p='8px 20px'/>
+                          src="../images/facebook.png" alt="facebook"  borderRadius='500px' bg='white' p='8px 20px' border='none'/>
                         <Image 
                         onClick={() => {
                             router.push("/");
                           }}
-                          src="../images/linkedin.png" alt="linkedin"  borderRadius='500px' bg='white' p='8px 20px'/>
+                          src="../images/linkedin.png" alt="linkedin"  borderRadius='500px' bg='white' p='8px 20px' border='none'/>
                     </HStack>
                 </VStack>
             </HStack>

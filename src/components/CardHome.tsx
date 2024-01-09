@@ -4,9 +4,9 @@ import { Card, CardBody, Image, Text,Box} from "@chakra-ui/react";
 export default function Cards({ imageUrl, cardText, cardTime }: any) {
 
     return (
-        <Card 
-        m='12px' 
-        boxShadow='0'>
+        <Card
+        boxShadow='0'
+        w='350px'>
             <CardBody>
                 <Box position='relative'>
                     <Image src={imageUrl} ></Image>
