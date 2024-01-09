@@ -9,11 +9,14 @@ import {
   Image,
   SimpleGrid,
   Skeleton,
+  SkeletonText,
   Text,
   VStack,
-  Link
+  Link,
+  Flex,
 } from "@chakra-ui/react";
-import { BiLike,  BiShare } from "react-icons/bi";
+import { useRouter } from "next/navigation";
+import { BiLike, BiShare } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import axios from "axios";
 type Meal = {
@@ -54,17 +57,19 @@ export function CardContainer() {
     <Box padding="24px">
       {loading ? (
         <SimpleGrid
-          spacing={4}
+          spacing={10}
           templateColumns="repeat(auto-fill, minmax(280px, 1fr))"
         >
           {[1, 2, 3, 4].map((index) => (
             <Card key={index}>
               <CardBody>
                 <Skeleton height="200px" />
-                <Box py="4px"></Box>
-                <Skeleton height="20px" />
-                <Box py="4px"></Box>
-                <Skeleton height="60px" />
+                <Skeleton height="32px" width='100px' mt='4' />
+                <SkeletonText mt='4' noOfLines={3} spacing='2' skeletonHeight='4' />
+                <Flex>
+                <Skeleton height="40px" w='100%' mt='4' />
+                <Skeleton height="40px" w='100%' mt='4' ml='2' />
+                </Flex>
               </CardBody>
             </Card>
           ))}
@@ -83,12 +88,17 @@ export function CardContainer() {
                     <Heading mt="8px" fontSize="24px">
                       {meal.strMeal}
                     </Heading>
-                    <Text>
+                    <Text
+                      fontSize="16px"
+                      fontStyle="normal"
+                      fontWeight="400"
+                      lineHeight="24px"
+                    >
                       {truncateInstructions(meal.strInstructions)}
                       <Link
-                        href={`recipes/${meal.strMeal}`}
+                        href={`/recipes/${encodeURIComponent(meal.strMeal)}`}
                         color="blue.500"
-                        _hover={{color:'red', textDecoration:'underline'}}
+                        _hover={{ color: "red", textDecoration: "underline" }}
                       >
                         read more
                       </Link>
