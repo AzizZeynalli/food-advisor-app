@@ -22,7 +22,7 @@ export default function Blog({params : {blogId}} : any) {
       }
     }
     fetchBlog();
-  }, []);
+  }, [blogId]);
 
   return (
     <div>

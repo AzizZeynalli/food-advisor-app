@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 
-type Blog = {
+type TBlog = {
   id: string;
   title: string;
   content: string;
@@ -13,23 +13,25 @@ type Blog = {
 };
 
 export default function Blog() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<TBlog[]>([]);
   
   useEffect(() => {
-    fetch('http://localhost:3003/api/blogs')
-      .then(response => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch('http://localhost:3003/api/blogs');
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
+
+        const data = await response.json();
         setBlogs(data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching blogs:', error);
-      });
+      }
+    };
+
+    fetchBlogs();
   }, []);
 
   return (

@@ -24,12 +24,14 @@ export default function Footer() {
                 src="../images/white_logo.svg" alt="Logo"/>
                 <HStack p='16px 0' gap='12px'>
                     <Image 
+                    alt=""
                     gap='12px'
                     onClick={() => {
                         router.push("/");
                       }}
                        src="../images/apple.png" />
                     <Image 
+                    alt=""
                     onClick={() => {
                         router.push("/");
                       }}

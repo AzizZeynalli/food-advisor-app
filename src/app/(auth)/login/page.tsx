@@ -17,6 +17,15 @@ const LoginPage = () => {
   const toast = useToast();
   const router = useRouter();
 
+  useEffect(() => {
+    if (window) {
+      window.history.pushState(null, '', window.location.href);
+      window.onpopstate = function () {
+        window.history.go(1);
+      };
+    }
+  }, []);
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
