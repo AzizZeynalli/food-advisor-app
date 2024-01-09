@@ -16,7 +16,7 @@ const SignUp = () => {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isloading, setisLoading] = useState(false);
-  
+
   const toast = useToast();
   const router = useRouter();
   const handleTogglePassword = () => {
@@ -60,8 +60,8 @@ const SignUp = () => {
         }
       );
       toast({
-        title: 'You successfully registered',
-        status: 'success',
+        title: "You successfully registered",
+        status: "success",
         duration: 3000,
         position: "top",
         isClosable: true,
@@ -70,15 +70,14 @@ const SignUp = () => {
       router.push("/login");
     } catch (error) {
       toast({
-        title: 'Something went wrong',
-        status: 'error',
+        title: "Something went wrong",
+        status: "error",
         duration: 3000,
         position: "top",
         isClosable: true,
       });
       console.error("Error creating account:", error);
-    }
-    finally {
+    } finally {
       setisLoading(false);
     }
   }
@@ -122,7 +121,7 @@ const SignUp = () => {
         <Text fontSize={{ base: "14px", md: "16px" }}>
           Register your account to save your settings
         </Text>
-        <form style={{width:"100%"}}>
+        <form style={{ width: "100%" }}>
           <UsernameInput errors={errors} control={control} />
           <EmailInput errors={errors} control={control} />
           <PasswordInput
