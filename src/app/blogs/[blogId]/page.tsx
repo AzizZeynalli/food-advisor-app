@@ -10,21 +10,19 @@ type BlogData = {
   image: string;
 };
 
-export default function Blog() {
+export default function Blog({params : {blogId}} : any) {
   const [blogData, setBlogData] = useState<BlogData | null>(null);
-  const router = useRouter();
-  const idBlog = router.query ? router.query.idBlog : null;
-
+  console.log(blogId); 
   useEffect(() => {
     const fetchBlog = async () => {
-      if (idBlog) {
-        const res = await fetch(`http://localhost:3003/api/blogs/${idBlog}`);
+      if (blogId) {
+        const res = await fetch(`http://localhost:3003/api/blogs/${blogId}`);
         const data: BlogData = await res.json();
         setBlogData(data);
       }
     }
     fetchBlog();
-  }, [idBlog]);
+  }, []);
 
   return (
     <div>
@@ -34,7 +32,7 @@ export default function Blog() {
           <h2>{blogData.title}</h2>
           <p>{blogData.content}</p>
           <p>{blogData.likes}</p>
-          <Image src={blogData.image} alt="blog image" />
+          <Image src={`data:image/jpg;base64,${blogData.image}`} alt="blog image" height={'50px'} width={'50px'}/>
         </div>
       )}
     </div>
