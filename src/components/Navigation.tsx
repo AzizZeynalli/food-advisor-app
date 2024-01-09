@@ -34,13 +34,13 @@ export function Navigation() {
         <Link href='/' ><Image h="36px" src="../images/logo.svg" alt="logo" /></Link>
         <Box display={{ lg: "flex", base: "none" }} gap="32px">
           <Link
-          href='/blog'
+          href='/blogs'
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
             lineHeight="normal"
           >
-            Blog
+            Blogs
           </Link>
           <Link
           href='/recipes'

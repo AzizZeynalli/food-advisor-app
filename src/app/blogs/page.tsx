@@ -1,6 +1,5 @@
 "use client";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import {Layout} from "@/components/";
 import { useEffect, useState } from "react";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 
@@ -35,8 +34,8 @@ export default function Blog() {
   }, []);
 
   return (
-    <>
-      <Header />
+    <Layout>
+    
       <VStack spacing={4} align="stretch">
         <Heading as="h1" size="xl">
           All blogs
@@ -50,7 +49,7 @@ export default function Blog() {
           </Box>
         ))}
       </VStack>
-      <Footer />
-    </>
+      
+    </Layout>
   );
 }
