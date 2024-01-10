@@ -1,25 +1,9 @@
 "use client";
 import EmailInput from "@/components/(formComponents)/EmailInput";
 import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import {
-  VStack,
-  Image,
-  Box,
-  Text,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
-  InputRightElement,
-  IconButton,
-  InputGroup,
-  Button,
-} from "@chakra-ui/react";
-import Link from "next/link";
+import { VStack, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 
 const ForgotPassword = () => {
   const router = useRouter();
@@ -39,7 +23,6 @@ const ForgotPassword = () => {
   };
   return (
     <VStack
-      //padding="50px"
       gap="0"
       bg="#EEF8FD"
       minWidth="400px"
@@ -49,25 +32,40 @@ const ForgotPassword = () => {
       bgImage="/images/guakka.svg"
       bgRepeat="no-repeat"
       bgPosition="left 5% top 70%"
-      bgSize={{base: "0", "2xl": "20%"}}
+      bgSize={{ base: "0", "2xl": "20%" }}
     >
       <Image
         src="../images/Logo.svg"
         cursor="pointer"
-        width={{base:"40%",sm:"35%",md: "30%",lg:"20%"}}
-        mb={{base: "20px",lg:"40px"}}
+        width={{ base: "40%", sm: "35%", md: "30%", lg: "20%" }}
+        mb={{ base: "20px", lg: "40px" }}
         onClick={() => {
           router.push("/");
         }}
       />
-
-      <VStack width={{base: "80%",sm: "75%" , md:"65%", lg: "60%",xl:"50%" ,"2xl": "35%"}} alignItems="flex-start">
-        <Text fontSize={{base: "20px", md: "30px"}} fontWeight="600">
+      <VStack
+        width={{
+          base: "80%",
+          sm: "75%",
+          md: "65%",
+          lg: "60%",
+          xl: "50%",
+          "2xl": "35%",
+        }}
+        alignItems="flex-start"
+      >
+        <Text fontSize={{ base: "20px", md: "30px" }} fontWeight="600">
           Forgot your password?
         </Text>
-        <Text mb="20px" fontSize={{base:"14px", md:"16px"}}>Please enter the email you use to sign in</Text>
-        <EmailInput errors={errors} control={control}/>
-        <ForgotPassButton handleSubmit={handleSubmit} onSubmit={onSubmit} isValid={isValid}/>
+        <Text mb="20px" fontSize={{ base: "14px", md: "16px" }}>
+          Please enter the email you use to sign in
+        </Text>
+        <EmailInput errors={errors} control={control} />
+        <ForgotPassButton
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          isValid={isValid}
+        />
       </VStack>
     </VStack>
   );
