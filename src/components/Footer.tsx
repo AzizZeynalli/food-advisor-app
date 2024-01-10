@@ -5,10 +5,10 @@ export default function Footer() {
     return (
        <HStack bg='#233345' w='100%' justifyContent='space-around' p='28px 0'>
             <VStack textAlign='center'>
-                <Link href={"/"} passHref ><Image src="../images/white_logo.svg" alt="Logo" maxW='220px'/></Link>
+                <Link href={"/"} passHref ><Image src="/images/white_logo.svg" alt="Logo" maxW='220px'/></Link>
                 <HStack p='16px 0' gap='12px'>
-                    <Link href='' ><Image src="../images/apple.png" gap='12px' alt='' /></Link>
-                    <Link href='' ><Image src="../images/google.png" alt='' /></Link>
+                    <Link href='' ><Image src="/images/apple.png" gap='12px' alt='' /></Link>
+                    <Link href='' ><Image src="/images/google.png" alt='' /></Link>
                 </HStack>
                 <Text color='white' fontWeight='400' fontSize='16px'>© 2023 foodvisor.io</Text>
             </VStack>
@@ -25,10 +25,10 @@ export default function Footer() {
                     <Link href={"/contactus"} passHref>contact@foodvisor.io</Link>
                     <Text fontSize='20px' fontWeight='600' pb='12px'>Follow us</Text>
                     <HStack gap='8px'>
-                        <Link href={"/instagram"} passHref><Image src="../images/instagram.png" alt="instagram" borderRadius='500px' bg='white' p='8px 20px'/></Link>
-                        <Link href={"/twitter"} passHref><Image src="../images/twitter.png" alt="twitter"  borderRadius='500px' bg='white' p='8px 20px'/></Link>
-                        <Link href={"/facebook"} passHref><Image src="../images/facebook.png" alt="facebook"  borderRadius='500px' bg='white' p='8px 20px'/></Link>
-                        <Link href={"/linkedin"} passHref><Image src="../images/linkedin.png" alt="linkedin"  borderRadius='500px' bg='white' p='8px 20px'/></Link>
+                        <Link href={"/instagram"} passHref><Image src="/images/instagram.png" alt="instagram" borderRadius='500px' bg='white' p='8px 20px'/></Link>
+                        <Link href={"/twitter"} passHref><Image src="/images/twitter.png" alt="twitter"  borderRadius='500px' bg='white' p='8px 20px'/></Link>
+                        <Link href={"/facebook"} passHref><Image src="/images/facebook.png" alt="facebook"  borderRadius='500px' bg='white' p='8px 20px'/></Link>
+                        <Link href={"/linkedin"} passHref><Image src="/images/linkedin.png" alt="linkedin"  borderRadius='500px' bg='white' p='8px 20px'/></Link>
                     </HStack>
                 </VStack>
             </HStack>
