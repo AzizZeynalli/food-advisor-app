@@ -1,33 +1,39 @@
-"use client"
-import { ChevronDownIcon, Search2Icon } from "@chakra-ui/icons";
-import {
-  Box,
-  Flex,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Icon,
-  Input,
-  Button,
-  Select,
-} from "@chakra-ui/react";
+"use client";
+import { Search2Icon } from "@chakra-ui/icons";
+import { Box, Flex, Icon, Input, Button, Select } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 type Category = {
   strArea: string;
   strCategory: string;
-}
+};
 
 export function RecipesHeader() {
   const [areas, setAreas] = useState<Category[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const router = useRouter();
+  const [selectedArea, setSelectedArea] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
+  const handleAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    setSelectedArea(selectedValue);
+    router.push(`recipes/areas/${selectedValue}`);
+  };
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    setSelectedCategory(selectedValue);
+    router.push(`recipes/categories/${selectedValue}`);
+  };
 
   useEffect(() => {
     const fetchAreas = async () => {
       try {
-        const response = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+        const response = await axios.get(
+          "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+        );
         setAreas(response.data.meals || []);
       } catch (error) {
         console.log(error);
@@ -36,7 +42,9 @@ export function RecipesHeader() {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+        const response = await axios.get(
+          "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+        );
         setCategories(response.data.meals || []);
       } catch (error) {
         console.log(error);
@@ -44,9 +52,7 @@ export function RecipesHeader() {
     };
 
     Promise.all([fetchAreas(), fetchCategories()]);
-
   }, []);
-
 
   return (
     <Box
@@ -55,30 +61,59 @@ export function RecipesHeader() {
       bgRepeat="no-repeat"
       bgPosition="top 20px left 20px"
     >
-      <Flex display='flex' justifyContent='center' gap='24px' pt='24px'>
-        <Select w='150px' borderRadius='24px' outline='0' border='0' _hover={{bg:"#d6e0e7"}} _active={{bg:"#d6e0e7", color:"#405167"}}>
+      <Flex display="flex" justifyContent="center" gap="24px" pt="24px">
+        <Select
+          w="150px"
+          borderRadius="24px"
+          outline="0"
+          border="0"
+          _hover={{ bg: "#d6e0e7" }}
+          _active={{ bg: "#d6e0e7", color: "#405167" }}
+          onChange={handleAreaChange}
+        >
           <option>Select</option>
           {areas.map((area) => (
-            <option key={area.strArea}>{area.strArea}</option>
+            <option
+              key={area.strArea}
+              onClick={() => {
+                router.push(`recipes/area/${area.strArea}`);
+              }}
+            >
+              {area.strArea}
+            </option>
           ))}
-        </Select> 
-        <Select w='150px' borderRadius='24px' outline='0' border='0' _hover={{bg:"#d6e0e7"}} _focus={{bg:"#d6e0e7", color:"#405167"}}>
+        </Select>
+        <Select
+          w="150px"
+          borderRadius="24px"
+          outline="0"
+          border="0"
+          _hover={{ bg: "#d6e0e7" }}
+          _focus={{ bg: "#d6e0e7", color: "#405167" }}
+          onChange={handleCategoryChange}
+        >
           <option>Select</option>
           {categories.map((category) => (
             <option key={category.strCategory}>{category.strCategory}</option>
           ))}
         </Select>
       </Flex>
-      <Flex justifyContent='center' py='24px'>
-        <Input w='70%' placeholder="Search by recipe title" bg='#fff' border='gray.100' />
+      <Flex justifyContent="center" py="24px">
+        <Input
+          w="70%"
+          placeholder="Search by recipe title"
+          bg="#fff"
+          border="gray.100"
+        />
         <Button
-        zIndex='1'
-          ml='-50px'
-         bg="#233345"
-         borderRadius="24px"
-         _hover={{ bg: "#3e5a7b" }}
-         px='24px'>
-          <Icon as={Search2Icon} color='#fff' />
+          zIndex="1"
+          ml="-50px"
+          bg="#233345"
+          borderRadius="24px"
+          _hover={{ bg: "#3e5a7b" }}
+          px="24px"
+        >
+          <Icon as={Search2Icon} color="#fff" />
         </Button>
       </Flex>
     </Box>
