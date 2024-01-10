@@ -19,7 +19,10 @@ const ForgotPassButton: React.FC<IForgotPassButtonProps> = ({handleSubmit, onSub
           colorScheme="blue"
           variant="solid"
           color="white"
-          onClick={handleSubmit(onSubmit)}
+          onClick={()=>{
+            handleSubmit(onSubmit)
+            router.push("/resetpassword");
+          }}
           isDisabled={!isValid}
         >
           Reset password
