@@ -81,7 +81,101 @@ export function Navigation() {
         >
           My Account
         </Button>
+        <Link
+          href="/login"
+          color="#95A6BD"
+          fontSize="16px"
+          fontWeight="500"
+          lineHeight="40px"
+          px="16px"
+          h="40px"
+        >
+          Already have an account? Log in
+        </Link>
+        <Button
+          bg="#233345"
+          color="#fff"
+          borderRadius="24px"
+          _hover={{ bg: "#3e5a7b" }}
+          fontSize="13.672px"
+          fontStyle="normal"
+          fontWeight="500"
+          lineHeight="normal"
+          onClick={() => router.push("/signup")}
+        >
+          Sign Up
+        </Button>
       </Box>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerBody mt="40px">
+            <VStack>
+              <Link
+                href="/blog"
+                color="#95A6BD"
+                fontSize="16px"
+                fontWeight="500"
+                lineHeight="normal"
+              >
+                Blog
+              </Link>
+              <Link
+                href="recipes"
+                color="#95A6BD"
+                fontSize="16px"
+                fontWeight="500"
+                lineHeight="normal"
+              >
+                Recipes
+              </Link>
+              <Link
+                href="help"
+                color="#95A6BD"
+                fontSize="16px"
+                fontWeight="500"
+                lineHeight="normal"
+              >
+                Help
+              </Link>
+              <Button
+                bg="#F5F8FC"
+                color="#000"
+                borderRadius="24px"
+                _hover={{ bg: "#e4ecf7" }}
+                fontSize="13.672px"
+                fontStyle="normal"
+                fontWeight="500"
+                lineHeight="normal"
+                onClick={() => router.push("/login")}
+                px="40px"
+              >
+                Log in
+              </Button>
+              <Button
+                bg="#233345"
+                color="#fff"
+                borderRadius="24px"
+                _hover={{ bg: "#3e5a7b" }}
+                fontSize="13.672px"
+                fontStyle="normal"
+                fontWeight="500"
+                lineHeight="normal"
+                px="40px"
+                onClick={() => router.push("/signup")}
+              >
+                Sign Up
+              </Button>
+            </VStack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </Flex>
   );
 }
