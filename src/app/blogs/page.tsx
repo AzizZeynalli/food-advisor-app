@@ -1,7 +1,9 @@
 "use client";
 import {Layout} from "@/components/";
 import { useEffect, useState } from "react";
-import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import Image from "next/image";
+import BlogCard from "@/components/BlogCard";
 
 type TBlog = {
   id: string;
@@ -9,6 +11,10 @@ type TBlog = {
   content: string;
   likes: number;
   image: string;
+  user: {
+    id: string;
+    name: string;
+  };
 };
 
 export default function Blog() {
@@ -34,22 +40,22 @@ export default function Blog() {
   }, []);
 
   return (
+  
     <Layout>
-    
+   
       <VStack spacing={4} align="stretch">
         <Heading as="h1" size="xl">
           All blogs
         </Heading>
+        <Flex justifyContent="space-around">
         {blogs.map((blog) => (
-          <Box key={blog.id} p={5} shadow="md" borderWidth="1px">
-            <Heading as="h2" size="lg">
-              {blog.title}
-            </Heading>
-            <Text mt={4}>{blog.content}</Text>
-          </Box>
+          <BlogCard key={blog.id} blog={blog} />
         ))}
+        </Flex>
       </VStack>
+     
       
     </Layout>
+    
   );
 }

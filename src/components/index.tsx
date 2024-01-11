@@ -4,9 +4,9 @@ import { Navigation } from "./Navigation";
 
 export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
-      <Box>
+      <Box display="flex" flexDirection="column" minHeight="100vh">
         <Navigation />
-        <Flex>{children}</Flex>
+        <Box flexGrow={1}>{children}</Box>
         <Footer/>
       </Box>
     );
