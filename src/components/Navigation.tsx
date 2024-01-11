@@ -97,7 +97,7 @@ export function Navigation() {
           color="#fff"
           borderRadius="24px"
           _hover={{ bg: "#3e5a7b" }}
-          fontSize="13.673px"
+          fontSize="13.675px"
           fontStyle="normal"
           fontWeight="500"
           lineHeight="normal"
