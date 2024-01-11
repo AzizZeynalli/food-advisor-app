@@ -31,10 +31,12 @@ export function Navigation() {
       h="80px"
     >
       <Box display="flex" alignItems="center" gap="32px">
+
         <Link href='/' ><Image h="36px" src="/images/logo.svg" alt="logo" /></Link>
+
         <Box display={{ lg: "flex", base: "none" }} gap="32px">
           <Link
-          href='/blogs'
+            href="/blogs"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -43,7 +45,7 @@ export function Navigation() {
             Blogs
           </Link>
           <Link
-          href='/recipes'
+            href="/recipes"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -52,7 +54,7 @@ export function Navigation() {
             Recipes
           </Link>
           <Link
-          href='help'
+            href="help"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -62,10 +64,20 @@ export function Navigation() {
           </Link>
         </Box>
       </Box>
-      <Button variant="ghost" ref={btnRef} onClick={onOpen}  display={{ lg: "none" }}>
+      <Button
+        variant="ghost"
+        ref={btnRef}
+        onClick={onOpen}
+        display={{ lg: "none" }}
+      >
         <Image src="/images/hamburger.svg" alt="" />
       </Button>
-      <Box display={{ lg: "flex", base: "none" }} alignItems="center" bg="#fff">
+      <Box
+        borderRadius="24px"
+        display={{ lg: "flex", base: "none" }}
+        alignItems="center"
+        bg="#fff"
+      >
         <Link
           href="/login"
           color="#95A6BD"
@@ -90,7 +102,7 @@ export function Navigation() {
         >
           Sign Up
         </Button>
-      </Box>     
+      </Box>
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -100,10 +112,10 @@ export function Navigation() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerBody mt='40px' >
+          <DrawerBody mt="40px">
             <VStack>
               <Link
-              href='/blog'
+                href="/blog"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -112,7 +124,7 @@ export function Navigation() {
                 Blog
               </Link>
               <Link
-              href='recipes'
+                href="recipes"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -121,7 +133,7 @@ export function Navigation() {
                 Recipes
               </Link>
               <Link
-              href='help'
+                href="help"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -139,7 +151,7 @@ export function Navigation() {
                 fontWeight="500"
                 lineHeight="normal"
                 onClick={() => router.push("/login")}
-                px='40px'
+                px="40px"
               >
                 Log in
               </Button>
@@ -152,7 +164,7 @@ export function Navigation() {
                 fontStyle="normal"
                 fontWeight="500"
                 lineHeight="normal"
-                px='40px'
+                px="40px"
                 onClick={() => router.push("/signup")}
               >
                 Sign Up

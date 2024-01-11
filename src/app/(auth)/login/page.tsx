@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (window) {
-      window.history.pushState(null, '', window.location.href);
+      window.history.pushState(null, "", window.location.href);
       window.onpopstate = function () {
         window.history.go(1);
       };
@@ -69,7 +69,6 @@ const LoginPage = () => {
   };
   return (
     <VStack
-      //padding="50px"
       gap="0"
       bg="#EEF8FD"
       justifyContent="center"
@@ -81,7 +80,6 @@ const LoginPage = () => {
       bgPosition="left 5% top 70%"
       bgSize={{ base: "0", "2xl": "20%" }}
     >
-      {/* {isErr && <Alert><AlertDescription></AlertDescription></Alert>} */}
       <Image
         src="../images/Logo.svg"
         cursor="pointer"

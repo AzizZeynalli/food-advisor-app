@@ -47,23 +47,9 @@ const SignUp = () => {
   });
   async function onSubmit() {
     const { username, email, password } = getValues();
-    console.log("username", username, email, password);
+    console.log("username:", username, email, password);
     setisLoading(true);
     try {
-      const userCheckResponse = await axios.get(
-        `https://fooderra-api.vercel.app/api/users?username=${username}&email=${email}`
-      );
-      if (userCheckResponse.data.length > 0) {
-        toast({
-          title: "This account is already registered",
-          status: "error",
-          duration: 3000,
-          position: "top",
-          isClosable: true,
-        });
-        return;
-      }
-
       const response = await axios.post(
         "https://fooderra-api.vercel.app/api/users",
         { username, email, password },
@@ -74,7 +60,7 @@ const SignUp = () => {
         }
       );
       toast({
-        title: "You successfully registered",
+        title: "You successfully registered!",
         status: "success",
         duration: 3000,
         position: "top",
@@ -83,7 +69,7 @@ const SignUp = () => {
       router.push("/login");
     } catch (error) {
       toast({
-        title: "Something went wrong",
+        title: "This account already exist!",
         status: "error",
         duration: 3000,
         position: "top",

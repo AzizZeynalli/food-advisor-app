@@ -1,26 +1,26 @@
 "use client";
 import EmailInput from "@/components/(formComponents)/EmailInput";
 import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
-import { VStack, Image, Text } from "@chakra-ui/react";
+import ResetNew from "@/components/(formComponents)/ResetNew";
+import ResetRepeat from "@/components/(formComponents)/ResetRepeat";
+import { VStack, Image, Text, Button } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import {  useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const router = useRouter();
-  const {
-    control,
-    formState: { errors, isValid },
-    handleSubmit,
-    getValues,
-  } = useForm({
+  const methods = useForm({
     mode: "all",
     defaultValues: {
-      email: "",
+      newPassword: "",
+      confirmPassword: "",
     },
   });
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
   };
+ 
   return (
     <VStack
       gap="0"
@@ -55,19 +55,44 @@ const ForgotPassword = () => {
         alignItems="flex-start"
       >
         <Text fontSize={{ base: "20px", md: "30px" }} fontWeight="600">
-          Forgot your password?
+          Reset your password
         </Text>
         <Text mb="20px" fontSize={{ base: "14px", md: "16px" }}>
-          Please enter the email you use to sign in
+          Please choose a new password to finishing sign in
         </Text>
-        <EmailInput errors={errors} control={control} />
-        <ForgotPassButton
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          isValid={isValid}
-        />
+        <FormProvider {...methods}>
+          <ResetNew methods={methods} />
+          <ResetRepeat methods={methods} />
+          <Button
+            mb="20px"
+            mt="20px"
+            width="100%"
+            colorScheme="blue"
+            variant="solid"
+            type="submit"
+            color="white"
+            onClick={() => {
+              methods.handleSubmit(onSubmit);
+              router.push("/login");
+            }}
+            isDisabled={!methods.formState.isValid}
+          >
+            Confirm
+          </Button>
+          <Button
+          width="100%"
+          colorScheme="blue"
+          variant="solid"
+          color="white"
+          onClick={() => {
+            router.push("/login");
+          }}
+        >
+          Back to Login
+        </Button>
+        </FormProvider>
       </VStack>
     </VStack>
   );
 };
-export default ForgotPassword;
+export default ResetPassword;
