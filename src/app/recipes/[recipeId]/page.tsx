@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 
 export default function Recipe({ params: { recipeId } }: any) {
   const decodedWord = decodeURIComponent(recipeId);
-  console.log(decodedWord);
 
   type Meal = {
     idMeal: string;

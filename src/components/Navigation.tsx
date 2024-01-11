@@ -31,9 +31,9 @@ export function Navigation() {
       h="80px"
     >
       <Box display="flex" alignItems="center" gap="32px">
-        <Link href="/">
-          <Image h="36px" src="../images/logo.svg" alt="logo" />
-        </Link>
+
+        <Link href='/' ><Image h="36px" src="/images/logo.svg" alt="logo" /></Link>
+
         <Box display={{ lg: "flex", base: "none" }} gap="32px">
           <Link
             href="/blogs"

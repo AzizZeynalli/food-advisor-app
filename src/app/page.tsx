@@ -3,18 +3,37 @@
 import { Layout } from "@/components";
 import CardHome from "@/components/CardHome";
 import CardPlan from "@/components/CardPlan";
-import { Image, Text, HStack, VStack, Heading, Button, Box} from "@chakra-ui/react";
+import { Image, Text, HStack, VStack, Heading, Button, Grid, GridItem} from "@chakra-ui/react";
 import Link from "next/link";
+import router from "next/router";
+import Slider from 'react-slick';
+
 
 
 export default function Home() {
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   responsive: [
+  //     {
+  //       breakpoint: 768, 
+  //       settings: {
+  //         slidesToShow: 1,
+  //       },
+  //     },
+  //   ],
+  // };
   return (
     <Layout>
       <VStack>
       <HStack
       pt='62px'
       w='100%'
-      bg='#EEF8FD'
+      bgImage={{base:"none", md:"../images/bghome.png"}}
+      bgColor={{base:"#eef8fd", md:"none"}}
       justifyContent='space-around'
       alignItems='center'
       flexDirection={{base:"column", md:"row"}}>
@@ -25,78 +44,99 @@ export default function Home() {
           <Heading 
           pb='16px'
           fontSize='40px'
-          fontWeight='500'>Your personal nutrition guide</Heading>
+          fontWeight='500'>Cook, Share, Savor!</Heading>
           <Text 
           pb='40px'
           fontSize='20px'
           fontWeight='400'
-          >Get your personalized program and start your journey to a healthier, happier you.</Text>
-          <Button p='20px 70px' borderRadius="500px" color='white' bg='#233345' _hover={{ color: '#233345', backgroundColor: "white"}} ><Link href={"/signup"}>Start now</Link></Button>
+          >Kickstart Your Path to a Healthier, Happier You!.</Text>
+          <Button 
+          p='20px 70px' 
+          borderRadius="500px" 
+          color='white' 
+          bg='#233345' 
+          _hover={{ color: '#233345', backgroundColor: "white"}}
+          onClick={() => {
+            router.push("/");
+          }} >
+          Start</Button>
         </VStack>
-        <Image src="../images/phone.svg" pb='12px'></Image>
-        <Image 
-        display={{base:"none", md:"flex"}}
-        src="../images/guakka.svg"
-        right='30px'
-        bottom='30px'></Image>
+        <Image src="../images/iPhone14.png" pb='12px'></Image>
       </HStack>
 
       <HStack 
-      flexDirection={{base:"column", md:"row-reverse"}}
+      flexDirection='row'
       justifyContent='space-between'
-      mt={{base:"64px", md:"0"}}>
+      mt='64px'>
+          <Grid
+              templateRows="repeat(2, 1fr)"
+              templateColumns="repeat(2, 1fr)"
+              gap={4}
+              justifyContent='center'
+              display={{ base: "none", md: "grid" }}
+            >
+              <GridItem>
+                <CardHome imageUrl="../images/home1.png" cardText="Avocado toast with egg" cardTime="15 min" />
+              </GridItem>
+              <GridItem>
+                <CardHome imageUrl="../images/home2.png" cardText="Yoghurt with mixed fruits" cardTime="5 min" />
+              </GridItem>
+              <GridItem>
+                <CardHome imageUrl="../images/home3.png" cardText="Chicken breast & kale" cardTime="15 min" />
+              </GridItem>
+              <GridItem>
+                <CardHome imageUrl="../images/home4.png" cardText="Fig & chickpeas salad" cardTime="15 min" />
+              </GridItem>
+            </Grid>
+            {/* <Slider {...settings}>
+              <CardHome imageUrl="../images/home1.png" cardText="Avocado toast with egg" cardTime="15 min" />
+              <CardHome imageUrl="../images/home2.png" cardText="Yoghurt with mixed fruits" cardTime="5 min" />
+              <CardHome imageUrl="../images/home3.png" cardText="Chicken breast & kale" cardTime="15 min" />
+              <CardHome imageUrl="../images/home4.png" cardText="Fig & chickpeas salad" cardTime="15 min" />
+            </Slider> */}
           <VStack
           textAlign='center'
           gap='12px'
-          p={{base:"12px 52px", md:"0"}}
-          w={{base:"100%", md:"50%"}}>
+          p="12px 52px">
             <Text 
-            w={{base:"100%", md:"50%"}}
             fontSize='30px'
             fontWeight='500'>Get daily inspiration with balanced recipes</Text>
             <Text
-            w={{base:"100%", md:"50%"}}
             fontSize='20px'
             fontWeight='400'>Our quick and easy recipes are on the table in no time! All recipes are validated by our team of dietitians.</Text>
           </VStack>
-          <HStack 
-          flexWrap='wrap'
-          w={{base:"100%", md:"50%"}}
-          justifyContent='center'>
-            <CardHome imageUrl="../images/home1.png" cardText="Avocado toast with egg" cardTime="15 min"/>
-            <CardHome imageUrl="../images/home2.png" cardText="Yoghurt with mixed fruits" cardTime="5 min"/>
-            <CardHome imageUrl="../images/home3.png" cardText="Chicken breast & kale" cardTime="15 min"/>
-            <CardHome imageUrl="../images/home4.png" cardText="Fig & chickpeas salad" cardTime="15 min"/>
-          </HStack>
       </HStack>
 
       <HStack
-      flexDirection={{base:"column", md:"row"}}
+      flexDirection='row'
       alignItems='center'
-      mt={{base:"64px", md:"0"}}
+      mt="64px"
       justifyContent='space-between'>
         <VStack
           textAlign='center'
           gap='12px'
-          w={{base:"100%", md:"50%"}}>
+          p="12px 52px">
             <Text 
-            w={{base:"100%", md:"50%"}}
             fontSize='30px'
             fontWeight='500'>Choose a diet plan adapted to your needs</Text>
             <Text
-            w={{base:"100%", md:"50%"}}
             fontSize='20px'
             fontWeight='400'>Find the program that suits you and get sustainable results. Choose from over 15 nutritional plans!</Text>
         </VStack>
-        <HStack 
-        flexWrap='wrap' 
-        gap='24px' 
-        w={{base:"100%", md:"50%"}}>
-            <CardPlan imagePng="../images/calendar.png" cardHeading="Keto Diet" cardMain="Most popular for weight loss"/>
-            <CardPlan imagePng="../images/meal.png" cardHeading="Meal planning" cardMain="Most popular for lifestyle"/>
-            <CardPlan imagePng="../images/bulk.png" cardHeading="Bulk Up" cardMain="Most popular for sport"/>
-            <CardPlan imagePng="../images/carb.png" cardHeading="Low Carb" cardMain="Most popular for weight loss"/>
-        </HStack>
+        <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(2, 1fr)" gap="24px" display={{ base: "none", md: "grid" }}>
+            <GridItem>
+                <CardPlan imagePng="../images/calendar.png" cardHeading="Keto Diet" cardMain="Most popular for weight loss" />
+            </GridItem>
+            <GridItem>
+                <CardPlan imagePng="../images/meal.png" cardHeading="Meal planning" cardMain="Most popular for lifestyle" />
+            </GridItem>
+            <GridItem>
+                <CardPlan imagePng="../images/bulk.png" cardHeading="Bulk Up" cardMain="Most popular for sport" />
+            </GridItem>
+            <GridItem>
+                <CardPlan imagePng="../images/carb.png" cardHeading="Low Carb" cardMain="Most popular for weight loss" />
+            </GridItem>
+        </Grid>
 
       </HStack>
       </VStack>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 export default function Footer() { 
 
     const router = useRouter();
+    const mailto = "mailto:contact@fooderra.az";
 
 
     return (
@@ -12,6 +13,7 @@ export default function Footer() {
         bg='#233345' 
         w='100%' 
         justifyContent='space-around' 
+        alignItems='center'
         p='28px 0'
         flexDirection={{ base: "column", md: "row" }}
         width='100%'>
@@ -22,21 +24,6 @@ export default function Footer() {
                     router.push("/");
                   }}
                 src="../images/white_logo.svg" alt="Logo"/>
-                <HStack p='16px 0' gap='12px'>
-                    <Image 
-                    alt=""
-                    gap='12px'
-                    onClick={() => {
-                        router.push("/");
-                      }}
-                       src="../images/apple.png" />
-                    <Image 
-                    alt=""
-                    onClick={() => {
-                        router.push("/");
-                      }}
-                    src="../images/google.png" />
-                </HStack>
                 <Text 
                 color='white' 
                 fontWeight='400' 
@@ -53,39 +40,37 @@ export default function Footer() {
                 <VStack 
                 alignItems={{ base: "center", md: "flex-start" }} >
                     <Text fontSize='20px' fontWeight='600'>About Fooderra</Text>
-                    <Link href={"/press"} passHref>Press</Link>
-                    <Link href={"/termsofservice"} passHref>Terms of service</Link>
-                    <Link href={"/privacypolicy"} passHref>Privacy policy</Link>
-                    <Link href={"/cookiespolicy"} passHref>Cookies policy</Link>
+                    <Text onClick={() => {
+                    router.push("/blog");
+                    }}
+                    >Blog</Text>
+                    <Text onClick={() => {
+                    router.push("/recipes");
+                    }}
+                    >Recipes</Text>
+                    <Text onClick={() => {
+                    router.push("/areas");
+                    }}
+                    >Areas</Text>
+                    <Text onClick={() => {
+                    router.push("/categories");
+                    }}
+                    >Categories</Text>
+                    <Text onClick={() => {
+                    router.push("/termsandconditions");
+                    }}
+                    >Terms and Conditions</Text>
                 </VStack>
                 <VStack 
                 gap='8px'
                 alignItems={{ base: "center", md: "flex-start" }}>
                     <Text fontSize='20px' fontWeight='600'>Contact us</Text>
-                    <Link href={"/contactus"} passHref>contact@fooderra.az</Link>
-                    <Text fontSize='20px' fontWeight='600' pb='12px'>Follow us</Text>
-                    <HStack gap='8px' alignItems='flex-start'>
-                        <Image 
-                        onClick={() => {
-                            router.push("/");
-                          }}
-                          src="../images/instagram.png" alt="instagram" borderRadius='500px' bg='white' p='8px 20px' border='none'/>
-                        <Image 
-                        onClick={() => {
-                            router.push("/");
-                          }}
-                          src="../images/twitter.png" alt="twitter"  borderRadius='500px' bg='white' p='8px 20px' border='none'/>
-                        <Image 
-                        onClick={() => {
-                            router.push("/");
-                          }}
-                          src="../images/facebook.png" alt="facebook"  borderRadius='500px' bg='white' p='8px 20px' border='none'/>
-                        <Image 
-                        onClick={() => {
-                            router.push("/");
-                          }}
-                          src="../images/linkedin.png" alt="linkedin"  borderRadius='500px' bg='white' p='8px 20px' border='none'/>
-                    </HStack>
+                    <Text 
+                    onClick={(e) => {
+                        window.location.href = mailto;
+                        e.preventDefault();
+                      }}>
+                        contact@fooderra.az</Text>
                 </VStack>
             </HStack>
        </HStack>
