@@ -32,8 +32,9 @@ export function Navigation() {
     >
       <Box display="flex" alignItems="center" gap="32px">
         <Link href="/">
-          <Image h="36px" src="../images/logo.svg" alt="logo" />
+          <Image h="36px" src="/images/logo.svg" alt="logo" />
         </Link>
+
         <Box display={{ lg: "flex", base: "none" }} gap="32px">
           <Link
             href="/blogs"
@@ -42,7 +43,7 @@ export function Navigation() {
             fontWeight="500"
             lineHeight="normal"
           >
-            Blog
+            Blogs
           </Link>
           <Link
             href="/recipes"
@@ -64,8 +65,13 @@ export function Navigation() {
           </Link>
         </Box>
       </Box>
-      <Button variant="ghost" ref={btnRef} onClick={onOpen}>
-        <Image src="/images/hamburger.svg" alt="" display={{ lg: "none" }} />
+      <Button
+        variant="ghost"
+        ref={btnRef}
+        onClick={onOpen}
+        display={{ lg: "none" }}
+      >
+        <Image src="/images/hamburger.svg" alt="" />
       </Button>
       <Box display={{ lg: "flex", base: "none" }} alignItems="center" bg="#fff">
         <Button
