@@ -21,7 +21,7 @@ export default function Footer() {
             <VStack textAlign='center'>
                 <Image
                 onClick={() => {
-                    router.push("/");
+                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
                   }}
                 src="../images/white_logo.svg" alt="Logo"/>
                 <Text 
