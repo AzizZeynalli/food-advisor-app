@@ -31,10 +31,12 @@ export function Navigation() {
       h="80px"
     >
       <Box display="flex" alignItems="center" gap="32px">
-        <Link href='/' ><Image h="36px" src="../images/logo.svg" alt="logo" /></Link>
+        <Link href="/">
+          <Image h="36px" src="../images/logo.svg" alt="logo" />
+        </Link>
         <Box display={{ lg: "flex", base: "none" }} gap="32px">
           <Link
-          href='/blog'
+            href="/blogs"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -43,7 +45,7 @@ export function Navigation() {
             Blog
           </Link>
           <Link
-          href='/recipes'
+            href="/recipes"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -52,7 +54,7 @@ export function Navigation() {
             Recipes
           </Link>
           <Link
-          href='help'
+            href="help"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
@@ -66,6 +68,19 @@ export function Navigation() {
         <Image src="/images/hamburger.svg" alt="" display={{ lg: "none" }} />
       </Button>
       <Box display={{ lg: "flex", base: "none" }} alignItems="center" bg="#fff">
+        <Button
+          bg="#233345"
+          color="#fff"
+          borderRadius="24px"
+          _hover={{ bg: "#3e5a7b" }}
+          fontSize="13.672px"
+          fontStyle="normal"
+          fontWeight="500"
+          lineHeight="normal"
+          onClick={() => router.push("/profile")}
+        >
+          My Account
+        </Button>
         <Link
           href="/login"
           color="#95A6BD"
@@ -90,7 +105,7 @@ export function Navigation() {
         >
           Sign Up
         </Button>
-      </Box>     
+      </Box>
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -100,10 +115,10 @@ export function Navigation() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerBody mt='40px' >
+          <DrawerBody mt="40px">
             <VStack>
               <Link
-              href='/blog'
+                href="/blog"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -112,7 +127,7 @@ export function Navigation() {
                 Blog
               </Link>
               <Link
-              href='recipes'
+                href="recipes"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -121,7 +136,7 @@ export function Navigation() {
                 Recipes
               </Link>
               <Link
-              href='help'
+                href="help"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -139,7 +154,7 @@ export function Navigation() {
                 fontWeight="500"
                 lineHeight="normal"
                 onClick={() => router.push("/login")}
-                px='40px'
+                px="40px"
               >
                 Log in
               </Button>
@@ -152,7 +167,7 @@ export function Navigation() {
                 fontStyle="normal"
                 fontWeight="500"
                 lineHeight="normal"
-                px='40px'
+                px="40px"
                 onClick={() => router.push("/signup")}
               >
                 Sign Up
