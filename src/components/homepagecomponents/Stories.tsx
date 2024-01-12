@@ -4,6 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Box, Heading, VStack, useBreakpointValue } from "@chakra-ui/react";
 import CardStory from "@/components/homepagecomponents/CardStory";
+import "./slider.css";
 
 export function Stories() {
   const cardCount = useBreakpointValue({ base: 1, md: 10 }) || 0;
@@ -22,17 +23,21 @@ export function Stories() {
       <Heading textAlign="center" fontSize="30px" fontWeight="500">
         Join millions of success stories
       </Heading>
-      <Box 
-      p="75px 20px"
-      position="relative">
-      <VStack position="absolute" left="0" top='40%' display={{base:"none", md:"Flex"}}>
+      <Box p="75px 20px" position="relative">
+        <VStack
+          position="absolute"
+          left="0"
+          top="40%"
+          display={{ base: "none", md: "Flex" }}
+        >
           <button onClick={handlePrevClick}>&lt;</button>
         </VStack>
         <Carousel
-          showArrows
           selectedItem={selectedItem}
           onChange={setSelectedItem}
           width={400}
+          showStatus={false}
+          showArrows={false}
         >
           <CardStory
             imageStory="../images/tarana.png"
@@ -77,7 +82,12 @@ export function Stories() {
             cardAbout="sagol"
           ></CardStory>
         </Carousel>
-        <Box position="absolute" right="0" top='40%' display={{base:"none", md:"Flex"}}>
+        <Box
+          position="absolute"
+          right="0"
+          top="40%"
+          display={{ base: "none", md: "Flex" }}
+        >
           <button onClick={handleNextClick}>&gt;</button>
         </Box>
       </Box>

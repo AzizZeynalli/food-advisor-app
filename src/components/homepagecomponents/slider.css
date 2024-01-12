@@ -1,0 +1,10 @@
+/* .carousel .slide {
+  min-width: 200px !important;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+} */
+
+.carousel .control-dots {
+  margin: 0;
+}
