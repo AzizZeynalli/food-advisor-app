@@ -13,7 +13,7 @@ export default function CardPlan({  cardHeading, cardMain, imagePng }: any) {
                 borderRadius='24px'
                 justifyContent='space-between'
                 alignItems='center'>
-                    <VStack gap='12px' pl='28px'
+                    <VStack gap='12px' pl='20px'
                     alignItems='flex-start'>
                         <Heading
                         fontSize='30px'
@@ -22,7 +22,10 @@ export default function CardPlan({  cardHeading, cardMain, imagePng }: any) {
                         fontSize='16px'
                         fontWeight='400'>{cardMain}</Text>
                     </VStack>
-                    <Image src={imagePng}></Image>
+                    <Image 
+                    src={imagePng}
+                    maxH='172px'
+                    maxW='113px'></Image>
                 </HStack>
             </CardBody>
         </Card>
