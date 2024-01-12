@@ -11,16 +11,21 @@ import { FormProvider, useForm } from "react-hook-form";
 const ResetPassword = () => {
   const router = useRouter();
   const methods = useForm({
-    mode: "all",
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
       newPassword: "",
       confirmPassword: "",
     },
   });
+
+  const { formState, handleSubmit, watch } = methods;
+  const { isValid } = formState;
+
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
   };
- 
+
   return (
     <VStack
       gap="0"
@@ -61,8 +66,8 @@ const ResetPassword = () => {
           Please choose a new password to finishing sign in
         </Text>
         <FormProvider {...methods}>
-          <ResetNew methods={methods} />
-          <ResetRepeat methods={methods} />
+          <ResetNew />
+          <ResetRepeat />
           <Button
             mb="20px"
             mt="20px"
@@ -72,24 +77,26 @@ const ResetPassword = () => {
             type="submit"
             color="white"
             onClick={() => {
-              methods.handleSubmit(onSubmit);
+              handleSubmit(onSubmit);
               router.push("/login");
             }}
-            isDisabled={!methods.formState.isValid}
+            isDisabled={
+              !isValid || watch("newPassword") !== watch("confirmPassword")
+            }
           >
             Confirm
           </Button>
           <Button
-          width="100%"
-          colorScheme="blue"
-          variant="solid"
-          color="white"
-          onClick={() => {
-            router.push("/login");
-          }}
-        >
-          Back to Login
-        </Button>
+            width="100%"
+            colorScheme="blue"
+            variant="solid"
+            color="white"
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            Back to Login
+          </Button>
         </FormProvider>
       </VStack>
     </VStack>
