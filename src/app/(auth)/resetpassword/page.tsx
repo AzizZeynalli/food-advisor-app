@@ -4,6 +4,7 @@ import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
 import ResetNew from "@/components/(formComponents)/ResetNew";
 import ResetRepeat from "@/components/(formComponents)/ResetRepeat";
 import { VStack, Image, Text, Button } from "@chakra-ui/react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -11,16 +12,39 @@ import { FormProvider, useForm } from "react-hook-form";
 const ResetPassword = () => {
   const router = useRouter();
   const methods = useForm({
-    mode: "all",
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
       newPassword: "",
       confirmPassword: "",
     },
   });
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
+
+  const { formState, handleSubmit, watch } = methods;
+  const { isValid } = formState;
+
+  const onSubmit = async (data: any) => {
+    try {
+      const resetData = {
+        email: data.email,
+        newPassword: data.newPassword,
+      };
+      const response = await axios.put(
+        'https://fooderra-api.vercel.app/api/resetpassword',
+        resetData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      console.log('Password reset successful:', response.data);
+  
+    } catch (error) {
+      console.error('Password reset failed:', error);
+    }
   };
- 
+
   return (
     <VStack
       gap="0"
@@ -61,8 +85,8 @@ const ResetPassword = () => {
           Please choose a new password to finishing sign in
         </Text>
         <FormProvider {...methods}>
-          <ResetNew methods={methods} />
-          <ResetRepeat methods={methods} />
+          <ResetNew />
+          <ResetRepeat />
           <Button
             mb="20px"
             mt="20px"
@@ -72,24 +96,26 @@ const ResetPassword = () => {
             type="submit"
             color="white"
             onClick={() => {
-              methods.handleSubmit(onSubmit);
+              handleSubmit(onSubmit);
               router.push("/login");
             }}
-            isDisabled={!methods.formState.isValid}
+            isDisabled={
+              !isValid || watch("newPassword") !== watch("confirmPassword")
+            }
           >
             Confirm
           </Button>
           <Button
-          width="100%"
-          colorScheme="blue"
-          variant="solid"
-          color="white"
-          onClick={() => {
-            router.push("/login");
-          }}
-        >
-          Back to Login
-        </Button>
+            width="100%"
+            colorScheme="blue"
+            variant="solid"
+            color="white"
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            Back to Login
+          </Button>
         </FormProvider>
       </VStack>
     </VStack>

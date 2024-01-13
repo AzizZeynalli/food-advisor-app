@@ -10,41 +10,49 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-interface IReseetRepeatProps {
-  methods: any;
-}
-const ResetRepeat: React.FC<IReseetRepeatProps> = ({ methods }) => {
+
+const ResetRepeat: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const { control, formState, clearErrors, getValues, setValue, setError } =
-    useFormContext();
+  const {
+    control,
+    formState,
+    clearErrors,
+    getValues,
+    setValue,
+    setError,
+    trigger,
+  } = useFormContext();
+
+  const { errors } = formState;
 
   return (
     <FormControl
-      isInvalid={!!methods.formState.errors?.confirmPassword}
-      mb={methods.formState.errors?.confirmPassword ? 0 : 6}
+      isInvalid={!!errors?.confirmPassword}
+      mb={errors?.confirmPassword ? 0 : 6}
     >
       <FormLabel>Confirm new password</FormLabel>
       <InputGroup>
         <Controller
           name="confirmPassword"
-          control={methods.control}
+          control={control}
           rules={{
             required: "Password confirmation is required!",
           }}
           render={({ field }) => (
             <Input
               {...field}
+              isInvalid={!!errors.confirmPassword}
               type={showPassword ? "text" : "password"}
               bg="white"
               onChange={(e) => {
                 setValue("confirmPassword", e.target.value);
                 const newPasswordValue = getValues("newPassword");
-              
-                if (e.target.value !== "") {
+
+                if (e.target.value) {
                   if (newPasswordValue !== e.target.value) {
                     setError("confirmPassword", {
                       type: "matching",
@@ -53,17 +61,13 @@ const ResetRepeat: React.FC<IReseetRepeatProps> = ({ methods }) => {
                   } else {
                     clearErrors("confirmPassword");
                   }
-                } else {
+                } else if (e.target.value === "") {
                   setError("confirmPassword", {
                     type: "required",
                     message: "Password confirmation is required!",
                   });
                 }
               }}
-              onBlur={() => {
-                methods.trigger("confirmPassword");
-              }}
-              
             />
           )}
         />
@@ -80,7 +84,7 @@ const ResetRepeat: React.FC<IReseetRepeatProps> = ({ methods }) => {
         </InputRightElement>
       </InputGroup>
       <FormErrorMessage fontSize="14px">
-        {methods.formState.errors?.confirmPassword?.message}
+        {errors?.confirmPassword?.message as React.ReactNode}
       </FormErrorMessage>
     </FormControl>
   );

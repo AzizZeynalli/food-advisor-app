@@ -31,8 +31,9 @@ export function Navigation() {
       h="80px"
     >
       <Box display="flex" alignItems="center" gap="32px">
-
-        <Link href='/' ><Image h="36px" src="/images/logo.svg" alt="logo" /></Link>
+        <Link href="/">
+          <Image h="36px" src="/images/logo.svg" alt="logo" />
+        </Link>
 
         <Box display={{ lg: "flex", base: "none" }} gap="32px">
           <Link
@@ -72,12 +73,8 @@ export function Navigation() {
       >
         <Image src="/images/hamburger.svg" alt="" />
       </Button>
-      <Box
-        borderRadius="24px"
-        display={{ lg: "flex", base: "none" }}
-        alignItems="center"
-        bg="#fff"
-      >
+      <Box borderRadius="24px" display={{ lg: "flex", base: "none" }} alignItems="center" bg="#fff">
+      
         <Link
           href="/login"
           color="#95A6BD"
@@ -115,7 +112,7 @@ export function Navigation() {
           <DrawerBody mt="40px">
             <VStack>
               <Link
-                href="/blog"
+              href='/blogs'
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"

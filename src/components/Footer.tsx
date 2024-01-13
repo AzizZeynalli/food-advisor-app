@@ -1,13 +1,26 @@
 import { HStack, Box, Image, Button, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import FooterTermsCondition from "./FooterTermsCondition";
+ interface TermsAndConditionsButtonProps {
+  openModal: () => void;
+}
 
-export default function Footer() { 
+const Footer: React.FC<TermsAndConditionsButtonProps>=({ openModal }) =>{ 
 
     const router = useRouter();
     const mailto = "mailto:contact@fooderra.az";
+    
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
 
+  const openTermsModal = () => {
+    setIsTermsModalOpen(true);
+  };
 
+  const closeTermsModal = () => {
+    setIsTermsModalOpen(false);
+  };
     return (
        <HStack 
         bg='#233345' 
@@ -20,8 +33,9 @@ export default function Footer() {
         
             <VStack textAlign='center'>
                 <Image
+                cursor="pointer"
                 onClick={() => {
-                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                    window.scrollTo({top:0, left:0, behavior:"smooth"})
                   }}
                 src="../images/white_logo.svg" alt="Logo"/>
                 <Text 
@@ -40,32 +54,32 @@ export default function Footer() {
                 <VStack 
                 alignItems={{ base: "center", md: "flex-start" }} >
                     <Text fontSize='20px' fontWeight='600'>About Fooderra</Text>
-                    <Text onClick={() => {
+                    <Text cursor="pointer" onClick={() => {
                     router.push("/blog");
                     }}
                     >Blog</Text>
-                    <Text onClick={() => {
+                    <Text cursor="pointer" onClick={() => {
                     router.push("/recipes");
                     }}
                     >Recipes</Text>
-                    <Text onClick={() => {
+                    <Text  cursor="pointer" onClick={() => {
                     router.push("/areas");
                     }}
                     >Areas</Text>
-                    <Text onClick={() => {
+                    <Text cursor="pointer" onClick={() => {
                     router.push("/categories");
                     }}
                     >Categories</Text>
-                    <Text onClick={() => {
-                    router.push("/termsandconditions");
-                    }}
+                    <Text cursor="pointer" onClick={openTermsModal}
                     >Terms and Conditions</Text>
+                    <FooterTermsCondition isOpen={isTermsModalOpen} closeModal={closeTermsModal}/>
                 </VStack>
                 <VStack 
                 gap='8px'
                 alignItems={{ base: "center", md: "flex-start" }}>
                     <Text fontSize='20px' fontWeight='600'>Contact us</Text>
                     <Text 
+                    cursor="pointer"
                     onClick={(e) => {
                         window.location.href = mailto;
                         e.preventDefault();
@@ -76,3 +90,4 @@ export default function Footer() {
        </HStack>
     );
 }
+export default Footer;

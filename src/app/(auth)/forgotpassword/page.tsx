@@ -2,8 +2,9 @@
 import EmailInput from "@/components/(formComponents)/EmailInput";
 import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
 import { VStack, Image, Text } from "@chakra-ui/react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const ForgotPassword = () => {
   const router = useRouter();
@@ -18,8 +19,22 @@ const ForgotPassword = () => {
       email: "",
     },
   });
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
+  const onSubmit = async (data: any) => {
+    //console.log("Form submitted:", data);
+    //const email = getValues();
+    try {
+      const response = await axios.post(
+        "https://fooderra-api.vercel.app/api/users",
+        { email: data.email },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <VStack
