@@ -16,19 +16,18 @@ export function RecipesHeader() {
   const [selectedArea, setSelectedArea] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const pathName = usePathname();
-  const pathNameFirst = pathName.split('/')[1];
-
+  
   const handleAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     setSelectedArea(selectedValue);
-    router.push(`recipes/areas/${selectedValue}`);
+    router.push(`/recipes/areas/${selectedValue}`);
+    
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
-    setSelectedCategory(selectedValue);
-    router.push(`recipes/categories/${selectedValue}`);
+   // setSelectedCategory(selectedValue);
+    router.push(`/recipes/categories/${selectedValue}`);
   };
 
   useEffect(() => {
@@ -59,7 +58,7 @@ export function RecipesHeader() {
 
   const onSearch = (e:React.FormEvent) => {
     e.preventDefault();
-    router.push(`${pathNameFirst}/search/${searchValue}`);
+    router.push(`/recipes/search/${searchValue}`);
   }
 
   return (
@@ -72,20 +71,19 @@ export function RecipesHeader() {
       <Flex display="flex" justifyContent="center" gap="24px" pt="24px" flexDirection={{base:'column', md:'row'}} alignItems='center'>
         <Select
           maxW="220px"
-          placeholder="Filter by area"
+          placeholder={`Filter by area ${selectedArea ? `- ${selectedArea}` : ''}`}
           borderRadius="24px"
           outline="0"
           border="0"
           _hover={{ bg: "#d6e0e7" }}
           _active={{ bg: "#d6e0e7", color: "#405167" }}
           onChange={handleAreaChange}
+          value={selectedArea}
         >
           {areas.map((area) => (
             <option
               key={area.strArea}
-              onClick={() => {
-                router.push(`recipes/area/${area.strArea}`);
-              }}
+              
             >
               {area.strArea}
             </option>
