@@ -73,20 +73,8 @@ export function Navigation() {
       >
         <Image src="/images/hamburger.svg" alt="" />
       </Button>
-      <Box display={{ lg: "flex", base: "none" }} alignItems="center" bg="#fff">
-        <Button
-          bg="#233345"
-          color="#fff"
-          borderRadius="24px"
-          _hover={{ bg: "#3e5a7b" }}
-          fontSize="13.672px"
-          fontStyle="normal"
-          fontWeight="500"
-          lineHeight="normal"
-          onClick={() => router.push("/profile")}
-        >
-          My Account
-        </Button>
+      <Box borderRadius="24px" display={{ lg: "flex", base: "none" }} alignItems="center" bg="#fff">
+      
         <Link
           href="/login"
           color="#95A6BD"
