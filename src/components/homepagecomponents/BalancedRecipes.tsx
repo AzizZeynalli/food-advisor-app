@@ -13,7 +13,7 @@ import { SliderHome } from "@/components/homepagecomponents/SliderHome";
 export default function BalancedRecipes() {
   return (
     <HStack
-      flexDirection={{ base: "column-reverse", md: "row" }}
+      flexDirection={{ base: "column-reverse", lg: "row" }}
       justifyContent="space-between"
       mt="64px"
     >

@@ -11,6 +11,7 @@ export function SliderHome() {
       <Box display={{ md: "none" }} textAlign="center">
         <Carousel
           autoPlay
+          showStatus={false}
           showArrows={false}
           infiniteLoop
           interval={5000}

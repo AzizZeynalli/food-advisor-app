@@ -7,7 +7,7 @@ import { SliderPlan } from "@/components/homepagecomponents/SliderPlan";
 export default function DietPlan() {
   return (
     <HStack
-      flexDirection={{ base: "column", md: "row" }}
+      flexDirection={{ base: "column", lg: "row" }}
       alignItems="center"
       mt="64px"
       justifyContent="space-between"
