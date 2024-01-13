@@ -103,7 +103,7 @@ export function Navigation() {
           <DrawerBody mt='40px' >
             <VStack>
               <Link
-              href='/blog'
+              href='/blogs'
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"

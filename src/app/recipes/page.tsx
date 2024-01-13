@@ -1,6 +1,7 @@
+'use client'
 import { CardContainer } from "@/components/CardContainer";
+import Footer from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
-import { RecipesFooter } from "@/components/RecipesFooter";
 import { RecipesHeader } from "@/components/RecipesHeader";
 import { Box } from "@chakra-ui/react";
 
@@ -10,7 +11,7 @@ export default function Recipes() {
             <Navigation />
             <RecipesHeader />
             <CardContainer />
-            <RecipesFooter />
+            <Footer />
         </Box>
     );
 }
