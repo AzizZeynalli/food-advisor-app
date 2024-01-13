@@ -16,15 +16,23 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { BiLike, BiShare } from "react-icons/bi";
+import { BiLike, BiSolidLike, BiShare, BiHeart, BiSolidHeart } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from "next-share";
+
 type Meal = {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
   strInstructions: string;
 };
+
 export function CardContainer() {
   const truncateInstructions = (instructions: string): string => {
     const words = instructions.split(" ");
@@ -35,6 +43,7 @@ export function CardContainer() {
 
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
+  const [likedStates, setLikedStates] = useState<boolean[]>([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -43,6 +52,7 @@ export function CardContainer() {
           "https://www.themealdb.com/api/json/v1/1/search.php?s"
         );
         setMeals(response.data.meals || []);
+        setLikedStates(Array(response.data.meals.length).fill(false));
       } catch (err) {
         console.log(err);
       } finally {
@@ -52,6 +62,16 @@ export function CardContainer() {
 
     fetchRecipes();
   }, []);
+
+  const router = useRouter();
+
+  const handleLikeClick = (index: number) => {
+    setLikedStates((prevLikedStates) => {
+      const newLikedStates = [...prevLikedStates];
+      newLikedStates[index] = !newLikedStates[index];
+      return newLikedStates;
+    });
+  };
 
   return (
     <Box padding="24px">
@@ -64,11 +84,16 @@ export function CardContainer() {
             <Card key={index}>
               <CardBody>
                 <Skeleton height="200px" />
-                <Skeleton height="32px" width='100px' mt='4' />
-                <SkeletonText mt='4' noOfLines={3} spacing='2' skeletonHeight='4' />
+                <Skeleton height="32px" width="100px" mt="4" />
+                <SkeletonText
+                  mt="4"
+                  noOfLines={3}
+                  spacing="2"
+                  skeletonHeight="4"
+                />
                 <Flex>
-                <Skeleton height="40px" w='100%' mt='4' />
-                <Skeleton height="40px" w='100%' mt='4' ml='2' />
+                  <Skeleton height="40px" w="100%" mt="4" />
+                  <Skeleton height="40px" w="100%" mt="4" ml="2" />
                 </Flex>
               </CardBody>
             </Card>
@@ -80,7 +105,7 @@ export function CardContainer() {
           templateColumns="repeat(auto-fill, minmax(280px, 1fr))"
         >
           {meals.length > 0 &&
-            meals.map((meal) => (
+            meals.map((meal, index) => (
               <Card key={meal.idMeal} variant="outline">
                 <CardBody>
                   <Image src={meal.strMealThumb} alt="" />
@@ -103,27 +128,42 @@ export function CardContainer() {
                         read more
                       </Link>
                     </Text>
-                    <Divider />
-                    <Box width="100%">
-                      <Box width="100%">
-                        <Button
-                          width="50%"
-                          variant="ghost"
-                          leftIcon={<BiLike />}
-                        >
-                          Like
-                        </Button>
-                        <Button
-                          width="50%"
-                          variant="ghost"
-                          leftIcon={<BiShare />}
-                        >
-                          Share
-                        </Button>
-                      </Box>
-                    </Box>
                   </VStack>
                 </CardBody>
+                <Divider />
+                <Box width="100%" p="8px">
+                  <Flex width="100%" gap="8px">
+                    <Button
+                      width="50%"
+                      color={likedStates[index] ? "red" : ""}
+                      leftIcon={
+                        likedStates[index] ? <BiSolidHeart /> : <BiHeart />
+                      }
+                      onClick={() => handleLikeClick(index)}
+                    >
+                      {likedStates[index] ? "Liked" : "Like"}
+                    </Button>
+                    <TwitterShareButton
+                      style={{
+                        display: "flex",
+                        width: "50%",
+                        height: "40px",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background:'#000',
+                        borderRadius:'8px',
+                        color:'#fff',
+                        fontWeight:'500'
+                      }}
+                      url={'http://localhost:3000/recipes/${encodeURIComponent(meal.strMeal)}'}
+                      title={`"Share the Joy: Discover the Delightful Recipe of ${meal.strMeal} with #fooderra on Twitter!"`}
+                      hashtags={['#fooderra']}
+                    >
+                      <TwitterIcon size={40} />
+                      Share
+                    </TwitterShareButton>
+                  </Flex>
+                </Box>
               </Card>
             ))}
         </SimpleGrid>
