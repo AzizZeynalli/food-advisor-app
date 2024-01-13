@@ -84,7 +84,7 @@ const ResetRepeat: React.FC = () => {
         </InputRightElement>
       </InputGroup>
       <FormErrorMessage fontSize="14px">
-        {errors?.confirmPassword?.message}
+        {errors?.confirmPassword?.message as React.ReactNode}
       </FormErrorMessage>
     </FormControl>
   );

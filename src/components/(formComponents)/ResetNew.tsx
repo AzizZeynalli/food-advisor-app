@@ -70,7 +70,7 @@ const ResetNew: React.FC = () => {
         </InputRightElement>
       </InputGroup>
       <FormErrorMessage fontSize="14px">
-        {errors?.newPassword?.message}
+        {errors?.newPassword?.message as React.ReactNode}
       </FormErrorMessage>
     </FormControl>
   );

@@ -4,6 +4,7 @@ import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
 import ResetNew from "@/components/(formComponents)/ResetNew";
 import ResetRepeat from "@/components/(formComponents)/ResetRepeat";
 import { VStack, Image, Text, Button } from "@chakra-ui/react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -22,8 +23,26 @@ const ResetPassword = () => {
   const { formState, handleSubmit, watch } = methods;
   const { isValid } = formState;
 
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
+  const onSubmit = async (data: any) => {
+    try {
+      const resetData = {
+        email: data.email,
+        newPassword: data.newPassword,
+      };
+      const response = await axios.put(
+        'https://fooderra-api.vercel.app/api/resetpassword',
+        resetData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      console.log('Password reset successful:', response.data);
+  
+    } catch (error) {
+      console.error('Password reset failed:', error);
+    }
   };
 
   return (
