@@ -1,12 +1,16 @@
 "use client";
 import Footer from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
+import { RecipesHeader } from "@/components/RecipesHeader";
 import {
   Box,
+  Circle,
+  Flex,
   Heading,
   Link,
   SimpleGrid,
   Skeleton,
+  Image
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -36,52 +40,40 @@ export default function Categories() {
   }, []);
 
   return (
-    <Box
-      display="flex"
-      justifyContent="space-between"
-      minH="100vh"
-      flexDirection="column"
-    >
+    <>
       <Navigation />
-      <Heading ml="24px">List of the all countrys:</Heading>
+      <RecipesHeader />
+      <Heading ml="24px" mt='24px'>List of the all countrys:</Heading>
       <Box p="24px">
         {loading ? (
-          <SimpleGrid minChildWidth="200px" spacing={5}>
-            <Skeleton height="50px" />
-            <Skeleton height="50px" />
-            <Skeleton height="50px" />
-            <Skeleton height="50px" />
-            <Skeleton height="50px" />
-          </SimpleGrid>
+          <Skeleton height="300px" borderRadius='24px' />
         ) : (
-          <SimpleGrid minChildWidth="200px">
+          <>
+          <SimpleGrid minChildWidth="250px" bg="#EEF8FD" py='16px' px='32px' borderRadius='24px'>
             {categories.length > 0 &&
               categories.map((category) => (
-                <Box
+                <Flex
                   key={category.strCategory}
-                  bg="#EEF8FD"
-                  borderRadius="48px"
-                  px="16px"
                   py="8px"
-                  m="8px"
-                  textAlign="center"
+                  alignItems='baseline'
                 >
+                  <Circle size='16px' bg="#9babc1" mr='12px' />
                   <Link
                     mt="8px"
                     fontSize="24px"
-                    m="0"
                     fontWeight="500"
                     _hover={{ color: "red" }}
                     href={`categories/${category.strCategory}`}
                   >
                     {category.strCategory}
                   </Link>
-                </Box>
+                </Flex>
               ))}
           </SimpleGrid>
+          </>
         )}
       </Box>
       <Footer />
-    </Box>
+    </>
   );
 }
