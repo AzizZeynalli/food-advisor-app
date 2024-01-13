@@ -11,6 +11,7 @@ export function SliderPlan() {
       <Box display={{ md: "none" }}>
         <Carousel
           autoPlay
+          showStatus={false}
           showArrows={false}
           infiniteLoop
           interval={5000}
