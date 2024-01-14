@@ -48,7 +48,7 @@ const HelpPage = () => {
 
   const sendEmail = (e: any) => {
    
-  
+    setIsLoading(true); 
     if (form.current) {
       emailjs
         .sendForm(
@@ -72,7 +72,10 @@ const HelpPage = () => {
           (error) => {
             console.log(error.text);
           }
-        );
+        )
+        .finally(() => {
+          setIsLoading(false); // Set loading back to false regardless of success or failure
+        });;
     } else {
       console.error("Form ref is not defined.");
     }
