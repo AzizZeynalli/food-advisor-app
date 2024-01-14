@@ -55,7 +55,7 @@ export function Navigation() {
             Recipes
           </Link>
           <Link
-            href="help"
+            href="/help"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
