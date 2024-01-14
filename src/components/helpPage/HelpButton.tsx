@@ -30,10 +30,10 @@ const HelpButton: React.FC<IHelpButtonProps> = ({handleSubmit,onSubmit, isloadin
           variant="solid"
           color="white"
           onClick={() => {
-            router.push("/login");
+            router.push("/");
           }}
         >
-          Back to Login
+          Back to Home page
         </Button>
     </VStack>
   )
