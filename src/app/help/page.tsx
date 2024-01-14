@@ -88,12 +88,8 @@ const HelpPage = () => {
       gap="0"
       justifyContent="center"
       alignItems="center"
-      minWidth="400px"
       height="100vh"
       padding="50px"
-      shadow="sm"
-      borderWidth={3}
-      borderRadius="lg"
     >
       <Image
         src="../images/Logo.svg"
@@ -105,16 +101,17 @@ const HelpPage = () => {
           router.push("/");
         }}
       />
-      <Text
-        alignSelf="flex-start"
-        pl="10%"
-        pb="20px"
-        fontSize="20px"
-        fontWeight="700"
+
+      <VStack
+        width="80%"
+        shadow="sm"
+        borderWidth={3}
+        borderRadius="lg"
+        padding="20px"
       >
-        If you have any problem, please write us!
-      </Text>
-      <VStack width="80%">
+        <Text alignSelf="flex-start" pb="20px" fontSize="20px" fontWeight="700">
+          If you have any problem, please write us!
+        </Text>
         <form ref={form} style={{ width: "100%" }} action="#">
           <EmailInput errors={errors} control={control} />
           <HelpTitle errors={errors} control={control} />
