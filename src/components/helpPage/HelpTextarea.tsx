@@ -18,15 +18,15 @@ const HelpTextarea: React.FC<IHelpTextareaProps> = ({ errors, control }) => {
       isInvalid={!!errors?.complaint}
       mb={errors?.complaint ? 0 : 6}
     >
-      <FormLabel>Your complaint</FormLabel>
+      <FormLabel>Your message</FormLabel>
       <Controller
         name="complaint"
         control={control}
         rules={{
-          required: "Please write your complaint!",
+          required: "Please write your message!",
          
         }}
-        render={({ field }) => <Textarea {...field} height="150px"/>}
+        render={({ field }) => <Textarea {...field} height="100px"/>}
       />
       <FormErrorMessage fontSize="14px">
         {errors?.complaint?.message}
