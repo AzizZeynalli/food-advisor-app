@@ -47,8 +47,7 @@ const HelpPage = () => {
   const form: RefObject<HTMLFormElement> = useRef(null);
 
   const sendEmail = (e: any) => {
-   
-    setIsLoading(true); 
+    setIsLoading(true);
     if (form.current) {
       emailjs
         .sendForm(
@@ -61,7 +60,8 @@ const HelpPage = () => {
           (result) => {
             console.log(result.text);
             toast({
-              title: "We received your application. Please wait for our response!",
+              title:
+                "We received your application. Please wait for our response!",
               status: "success",
               duration: 3000,
               position: "top",
@@ -74,15 +74,14 @@ const HelpPage = () => {
           }
         )
         .finally(() => {
-          setIsLoading(false); // Set loading back to false regardless of success or failure
-        });;
+          setIsLoading(false);
+        });
     } else {
       console.error("Form ref is not defined.");
     }
   };
   const onSubmit = (data: any) => {
     console.log(data);
-    
   };
   return (
     <VStack
