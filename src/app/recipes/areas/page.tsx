@@ -73,7 +73,9 @@ export default function Areas() {
           </SimpleGrid>
         )}
       </Box>
-      <Footer />
+      <Footer openModal={function (): void {
+        throw new Error("Function not implemented.");
+      } } />
     </>
   );
 }
