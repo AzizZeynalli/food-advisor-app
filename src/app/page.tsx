@@ -67,7 +67,8 @@ export default function Home() {
             pb="12px"
             pr="40px"
             display={{ base: "none", xl: "flex" }}
-          ></Image>
+            alt=""
+          />
         </HStack>
         <BalancedRecipes />
         <DietPlan />

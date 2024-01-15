@@ -86,6 +86,7 @@ export function Navigation() {
           display={{ lg: "flex", base: "none" }}
           alignItems="center"
           bg="#fff"
+          borderRadius="24px"
         >
           <Link
             href="/login"
