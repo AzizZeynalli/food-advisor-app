@@ -7,21 +7,22 @@ import { SliderPlan } from "@/components/homepagecomponents/SliderPlan";
 export default function DietPlan() {
   return (
     <HStack
-      flexDirection={{ base: "column", lg: "row" }}
+      flexDirection={{ base: "column", xl: "row" }}
       alignItems="center"
       mt="64px"
       justifyContent="space-between"
     >
-      <VStack textAlign="center" gap="12px" >
+      <VStack textAlign="center" gap="12px" p="12px 52px">
         <Text fontSize="30px" fontWeight="500">
-          Choose a diet plan adapted to your needs
+          Explore Culinary Delights Tailored to Your Tastes
         </Text>
         <Text fontSize="20px" fontWeight="400">
-          Find the program that suits you and get sustainable results. Choose
-          from over 15 nutritional plans!
+          Discover the perfect recipes for your lifestyle and savor long-lasting
+          satisfaction. Choose from a diverse selection of over 15 personalized
+          culinary plans!
         </Text>
       </VStack>
-      <SliderPlan/>
+      <SliderPlan />
       <Grid
         templateRows="repeat(2, 1fr)"
         templateColumns="repeat(2, 1fr)"
