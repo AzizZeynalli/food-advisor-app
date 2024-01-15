@@ -13,6 +13,8 @@ import {
   useDisclosure,
   VStack,
   Spinner,
+  Avatar,
+  Text
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
@@ -85,7 +87,7 @@ export function Navigation() {
     </Box>
   ) : (
     user ? (
-      <Box>Welcome, {user.username}</Box>
+      <Flex fontWeight="bold" alignItems="center"> <Avatar size="md" name={user.username} mr={4}/><Text fontSize="md">{user.username}</Text></Flex>
     ) : (
       <Box
         display={{ lg: "flex", base: "none" }}
