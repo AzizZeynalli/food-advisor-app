@@ -11,22 +11,13 @@ import LoginButton from "@/components/(formComponents)/LoginButton";
 import { useAuth } from "@/contexts/authContext";
 
 const LoginPage = () => {
-  const { user, setUser, loading, setLoading, login } = useAuth();
+  const { user, logout, loading, setLoading, login } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const [isErr, setIsErr] = useState(false);
 
   const toast = useToast();
   const router = useRouter();
-
-  useEffect(() => {
-    if (window) {
-      window.history.pushState(null, "", window.location.href);
-      window.onpopstate = function () {
-        window.history.go(1);
-      };
-    }
-  }, []);
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -55,6 +46,9 @@ const LoginPage = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.data;
+      if(user) {
+        logout();
+      }
       login(data);
       router.push("/");
     } catch (error) {

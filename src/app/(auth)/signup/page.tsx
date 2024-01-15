@@ -3,19 +3,27 @@ import axios from "axios";
 import { VStack, Image, Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import EmailInput from "@/components/(formComponents)/EmailInput";
 import PasswordInput from "@/components/(formComponents)/PasswordInput";
 import UsernameInput from "@/components/(formComponents)/UsernameInput";
 import TermsCondition from "@/components/(formComponents)/TermsCondition";
 import SignButton from "@/components/(formComponents)/SignButton";
+import { useAuth } from "@/contexts/authContext";
 
 const SignUp = () => {
+  const { user, logout } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isloading, setisLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      logout();
+    }
+  })
 
   const toast = useToast();
   const router = useRouter();
@@ -47,17 +55,16 @@ const SignUp = () => {
   });
   async function onSubmit() {
     const { username, email, password } = getValues();
-    console.log("username:", username, email, password);
     setisLoading(true);
     try {
       const response = await axios.post(
-        "https://fooderra-api.vercel.app/api/users",
+        "http://localhost:3003/api/users",
         { username, email, password },
         {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        }      
       );
       toast({
         title: "You successfully registered!",
