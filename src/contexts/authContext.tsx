@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { set } from 'react-hook-form';
 
 type TUser  = {
     username: string;
     email: string;
     avatar: string;
     token: string;
+    likedRecipes: string[];
 }
 
 interface AuthContextType {
@@ -16,6 +18,8 @@ interface AuthContextType {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   login: (user: TUser) => void;
   logout: () => void;
+  likeRecipe: (mealId: string) => void;
+  unlikeRecipe: (mealId: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -57,8 +61,36 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser(null);
     };
 
+    const likeRecipe = (mealId : string) => {
+        axios.patch('http://localhost:3003/api/users/like', {
+            mealId
+        }, {
+            headers: {
+                Authorization: `Bearer ${user?.token}`
+            }
+        }).then(response => {
+            setUser(response.data);
+        }).catch(error => {
+            console.error('Error liking recipe:', error);
+        });
+    }
+
+    const unlikeRecipe = (mealId : string) => {
+        axios.patch('http://localhost:3003/api/users/removelike', {
+            mealId
+        }, {
+            headers: {
+                Authorization: `Bearer ${user?.token}`
+            }
+        }).then(response => {
+            setUser(response.data);
+        }).catch(error => {
+            console.error('Error unliking recipe:', error);
+        });
+    }
+
     return (
-        <AuthContext.Provider value={{ user, setUser, loading, setLoading, login, logout }}>
+        <AuthContext.Provider value={{ user, setUser, loading, setLoading, login, logout, likeRecipe, unlikeRecipe }}>
             {children}
         </AuthContext.Provider>
     );

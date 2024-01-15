@@ -25,6 +25,7 @@ import {
   TwitterIcon,
   TwitterShareButton,
 } from "next-share";
+import { useAuth } from "@/contexts/authContext";
 
 type Meal = {
   idMeal: string;
@@ -34,6 +35,7 @@ type Meal = {
 };
 
 export function CardContainer() {
+  const { user, likeRecipe, unlikeRecipe } = useAuth();
   const truncateInstructions = (instructions: string): string => {
     const words = instructions.split(" ");
     const truncatedText = words.slice(0, 10).join(" ");
@@ -43,8 +45,8 @@ export function CardContainer() {
 
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
-  const [likedStates, setLikedStates] = useState<boolean[]>([]);
-
+  const [likedRecipes, setLikedRecipes] = useState<string[]>([]);
+  console.log(user);
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -52,25 +54,32 @@ export function CardContainer() {
           "https://www.themealdb.com/api/json/v1/1/search.php?s"
         );
         setMeals(response.data.meals || []);
-        setLikedStates(Array(response.data.meals.length).fill(false));
+        setLikedRecipes(user?.likedRecipes || []);
       } catch (err) {
         console.log(err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchRecipes();
-  }, []);
+  }, [user]);
 
   const router = useRouter();
 
-  const handleLikeClick = (index: number) => {
-    setLikedStates((prevLikedStates) => {
-      const newLikedStates = [...prevLikedStates];
-      newLikedStates[index] = !newLikedStates[index];
-      return newLikedStates;
-    });
+  const handleLikeClick = (idMeal:string) => {
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+    if(likedRecipes.includes(idMeal)) { 
+      unlikeRecipe(idMeal);
+      const newLikedRecipes = likedRecipes.filter((recipeId) => recipeId !== idMeal);
+      setLikedRecipes(newLikedRecipes);
+    } else {
+      likeRecipe(idMeal);
+      const newLikedRecipes = [...likedRecipes, idMeal]; 
+      setLikedRecipes(newLikedRecipes);
+    }
   };
 
   return (
@@ -105,7 +114,7 @@ export function CardContainer() {
           templateColumns="repeat(auto-fill, minmax(280px, 1fr))"
         >
           {meals.length > 0 &&
-            meals.map((meal, index) => (
+            meals.map((meal) => (
               <Card key={meal.idMeal} variant="outline">
                 <CardBody>
                   <Image src={meal.strMealThumb} alt="" />
@@ -135,13 +144,13 @@ export function CardContainer() {
                   <Flex width="100%" gap="8px">
                     <Button
                       width="50%"
-                      color={likedStates[index] ? "red" : ""}
+                      color={likedRecipes.includes(meal.idMeal) ? "red" : ""}
                       leftIcon={
-                        likedStates[index] ? <BiSolidHeart /> : <BiHeart />
+                        likedRecipes.includes(meal.idMeal) ? <BiSolidHeart /> : <BiHeart />
                       }
-                      onClick={() => handleLikeClick(index)}
+                      onClick={() => handleLikeClick(meal.idMeal)}
                     >
-                      {likedStates[index] ? "Liked" : "Like"}
+                      {likedRecipes.includes(meal.idMeal) ? "Liked" : "Like"}
                     </Button>
                     <TwitterShareButton
                       style={{
