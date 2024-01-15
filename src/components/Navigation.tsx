@@ -12,6 +12,7 @@ import {
   Image,
   useDisclosure,
   VStack,
+  Spinner,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
@@ -19,7 +20,7 @@ import { useAuth } from "@/contexts/authContext";
 // import Link from "next/link";
 
 export function Navigation() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
@@ -78,42 +79,48 @@ export function Navigation() {
       >
         <Image src="/images/hamburger.svg" alt="" />
       </Button>
-
-      {user ? (
-        <Box>Welcome, {user.username}</Box>
-      ) : (
-        <Box
-          display={{ lg: "flex", base: "none" }}
-          alignItems="center"
-          bg="#fff"
-          borderRadius="24px"
+      {loading ? (
+    <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+      <Spinner size="sm" thickness="3px" />
+    </Box>
+  ) : (
+    user ? (
+      <Box>Welcome, {user.username}</Box>
+    ) : (
+      <Box
+        display={{ lg: "flex", base: "none" }}
+        alignItems="center"
+        bg="#fff"
+      >
+        <Link
+          href="/login"
+          color="#95A6BD"
+          fontSize="16px"
+          fontWeight="500"
+          lineHeight="40px"
+          px="16px"
+          h="40px"
         >
-          <Link
-            href="/login"
-            color="#95A6BD"
-            fontSize="16px"
-            fontWeight="500"
-            lineHeight="40px"
-            px="16px"
-            h="40px"
-          >
-            Already have an account? Log in
-          </Link>
-          <Button
-            bg="#233345"
-            color="#fff"
-            borderRadius="24px"
-            _hover={{ bg: "#3e5a7b" }}
-            fontSize="13.672px"
-            fontStyle="normal"
-            fontWeight="500"
-            lineHeight="normal"
-            onClick={() => router.push("/signup")}
-          >
-            Sign Up
-          </Button>
-        </Box>
-      )}
+          Already have an account? Log in
+        </Link>
+        <Button
+          bg="#233345"
+          color="#fff"
+          borderRadius="24px"
+          _hover={{ bg: "#3e5a7b" }}
+          fontSize="13.672px"
+          fontStyle="normal"
+          fontWeight="500"
+          lineHeight="normal"
+          onClick={() => router.push("/signup")}
+        >
+          Sign Up
+        </Button>
+      </Box>
+    )
+  )}
+
+      
 
       <Drawer
         isOpen={isOpen}

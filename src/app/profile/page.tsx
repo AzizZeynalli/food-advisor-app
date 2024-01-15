@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/contexts/authContext";
 import {
   Avatar,
   Box,
@@ -20,7 +21,7 @@ import {
   Card,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BiUser,
   BiHeart,
@@ -28,14 +29,22 @@ import {
   BiSolidEditAlt,
   BiHash,
   BiSave,
-  BiArrowBack
+  BiArrowBack,
 } from "react-icons/bi";
 
 export default function Profile() {
+  const { user, logout } = useAuth();
   const [isEditing, setIsEditing] = useBoolean();
   const router = useRouter();
-  const [editedUsername, setEditedUsername] = useState("Murad Israfilov");
-  const [editedEmail, setEditedEmail] = useState("muradisrafilov542@gmail.com");
+  const [editedUsername, setEditedUsername] = useState("");
+  const [editedEmail, setEditedEmail] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setEditedUsername(user.username);
+      setEditedEmail(user.email);
+    }
+  }, [user]);
 
   const handleEditClick = () => {
     setIsEditing.toggle();
@@ -51,15 +60,21 @@ export default function Profile() {
         display="flex"
         flexDirection={{ lg: "row", base: "column" }}
       >
-        <Button position='absolute' top='32px' left='32px' zIndex='1' bg="#233345"
-            color="#fff"
-            borderRadius="24px"
-            _hover={{ bg: "#3e5a7b" }}
-            fontStyle="normal"
-            fontWeight="500"
-            lineHeight="normal"
-            onClick={() => router.back()}>
-            <BiArrowBack/>
+        <Button
+          position="absolute"
+          top="32px"
+          left="32px"
+          zIndex="1"
+          bg="#233345"
+          color="#fff"
+          borderRadius="24px"
+          _hover={{ bg: "#3e5a7b" }}
+          fontStyle="normal"
+          fontWeight="500"
+          lineHeight="normal"
+          onClick={() => router.back()}
+        >
+          <BiArrowBack />
         </Button>
         <VStack
           minW="350px"
@@ -70,8 +85,8 @@ export default function Profile() {
           pos={{ lg: "fixed" }}
         >
           <VStack>
-            <Avatar size="2xl" name="Murad Israfilov" />
-            <Heading>Murad Israfilov</Heading>
+            <Avatar size="2xl" name={user?.username} />
+            <Heading>{user?.username}</Heading>
           </VStack>
           <TabList flexDirection="column" alignItems="strech" w={{ lg: "90%" }}>
             <Tab _selected={{ color: "white", bg: "#233345" }}>
@@ -94,7 +109,10 @@ export default function Profile() {
             fontStyle="normal"
             fontWeight="500"
             lineHeight="normal"
-            onClick={() => router.push("/")}
+            onClick={() => {
+              logout();
+              router.push("/");
+            }}
           >
             Sign out
           </Button>
@@ -186,26 +204,33 @@ export default function Profile() {
                 p={{ md: "32px", base: "16px" }}
                 alignItems="stretch"
               >
-                <Card direction="row" overflow="hidden" variant="outline">
-                  <Image
-                    objectFit="cover"
-                    w="100px"
-                    h="100px"
-                    src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-                    alt=""
-                  />
-                  <Flex
-                    p="16px"
-                    justifyContent="space-between"
-                    w="100%"
-                    flexDirection={{ sm: "row", base: "column" }}
+                {user?.likedRecipes.map((idMeal) => (
+                  <Card
+                    key={idMeal}
+                    direction="row"
+                    overflow="hidden"
+                    variant="outline"
                   >
-                    <Heading size="md">Latte</Heading>
-                    <Button color="red" leftIcon={<BiSolidHeart />}>
-                      Liked
-                    </Button>
-                  </Flex>
-                </Card>
+                    <Image
+                      objectFit="cover"
+                      w="100px"
+                      h="100px"
+                      src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+                      alt=""
+                    />
+                    <Flex
+                      p="16px"
+                      justifyContent="space-between"
+                      w="100%"
+                      flexDirection={{ sm: "row", base: "column" }}
+                    >
+                      <Heading size="md">Latte</Heading>
+                      <Button color="red" leftIcon={<BiSolidHeart />}>
+                        Liked
+                      </Button>
+                    </Flex>
+                  </Card>
+                ))}
               </VStack>
             </TabPanel>
             <TabPanel h={{ lg: "100vh" }} p={{ lg: "48px", base: "16px" }}>
