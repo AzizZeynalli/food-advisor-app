@@ -57,9 +57,9 @@ export default function Home() {
               fontStyle="normal"
               fontWeight="600"
               lineHeight="normal"
-              onClick={() => router.push("/signup")}
+              onClick={() => router.push("/recipes")}
             >
-              Sign Up
+              Start now
             </Button>
           </VStack>
           <Image
@@ -72,6 +72,25 @@ export default function Home() {
         </HStack>
         <BalancedRecipes />
         <DietPlan />
+        <VStack bg="#EEF8FD"  textAlign="center" gap="60px" p="64px 52px">
+          <Heading fontSize="30px" fontWeight="500" >Lorem ipsum dolor sit amet, consectetur adipiscing elit</Heading>
+          <Text fontSize="20px" fontWeight="400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</Text>
+          <Image src="../images/image 5.png"/>
+          <Button
+            p='20px 80px'
+              bg="#233345"
+              color="#fff"
+              borderRadius="24px"
+              _hover={{ bg: "#3e5a7b" }}
+              fontSize="18px"
+              fontStyle="normal"
+              fontWeight="600"
+              lineHeight="normal"
+              onClick={() => router.push("/areasp")}
+            >
+              Start now
+            </Button>
+        </VStack>
         <Stories />
       </VStack>
     </Layout>
