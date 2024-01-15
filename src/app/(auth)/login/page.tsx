@@ -8,10 +8,12 @@ import { Controller, useForm } from "react-hook-form";
 import PasswordInput from "@/components/(formComponents)/PasswordInput";
 import EmailInput from "@/components/(formComponents)/EmailInput";
 import LoginButton from "@/components/(formComponents)/LoginButton";
+import { useAuth } from "@/contexts/authContext";
 
 const LoginPage = () => {
+  const { user, setUser, loading, setLoading, login } = useAuth();
+
   const [showPassword, setShowPassword] = useState(false);
-  const [isloading, setisLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
 
   const toast = useToast();
@@ -43,15 +45,17 @@ const LoginPage = () => {
   });
   const onSubmit = async () => {
     const { email, password } = getValues();
-    setisLoading(true);
+    setLoading(true);
     try {
       const response = await axios.post(
-        "https://fooderra-api.vercel.app/api/login",
+        "http://localhost:3003/api/login",
         { email, password }
       );
       if (response.status !== 200) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      const data = await response.data;
+      login(data);
       router.push("/");
     } catch (error) {
       toast({
@@ -64,7 +68,7 @@ const LoginPage = () => {
       console.error("Error logging in:", error);
       setIsErr(true);
     } finally {
-      setisLoading(false);
+      setLoading(false);
     }
   };
   return (
@@ -116,7 +120,7 @@ const LoginPage = () => {
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             isValid={isValid}
-            isloading={isloading}
+            isloading={loading}
           />
         </form>
       </VStack>

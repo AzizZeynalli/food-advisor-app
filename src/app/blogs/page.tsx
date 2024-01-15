@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import { Layout } from "@/components/";
 import { useEffect, useState } from "react";
 import {
@@ -21,16 +22,18 @@ type TBlog = {
   content: string;
   likes: number;
   image: string;
-  dateCreated: string;
+  dateCreated: Date;
   user: {
     username: string;
     email: string;
+    avatar: string;
   };
 };
 
 export default function Blog() {
   const [blogs, setBlogs] = useState<TBlog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -56,7 +59,7 @@ export default function Blog() {
       <VStack spacing={4} align="stretch">
         <Center p={4}>
           <Heading size="lg" color="blue.500">
-            Read and enjoy the latest blogs! 😊
+            Read and enjoy the latest blogs! 🥑
           </Heading>
         </Center>
         {isLoading && (
@@ -71,11 +74,15 @@ export default function Blog() {
             <Text as="p" mt={4}>Loading content...</Text>
           </Flex>
         )}
-        <Grid templateColumns="repeat(3, 1fr)" justifyContent="space-around" p={10} gap={10}>
-          {blogs.map((blog) => {
-            console.log(blog);
-            return <BlogCard key={blog.id} blog={blog} />
-})}
+        <Grid
+          templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
+          gap={6}
+          p={{ base: 4, md: 8 }}
+          justifyItems="center"
+        >
+          {blogs.map((blog) => (
+            <BlogCard key={blog.id} blog={blog} />
+          ))}
         </Grid>
       </VStack>
     </Layout>
