@@ -13,14 +13,19 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useRef } from "react";
+import { useAuth } from "@/contexts/authContext";
+
+
 
 export default function BlogForm() {
+  const { user } = useAuth();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState("Select Image" as any);
 
   const toast = useToast();
+  console.log(user);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +41,7 @@ export default function BlogForm() {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${user?.token}`
           },
         }
       );

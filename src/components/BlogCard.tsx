@@ -1,3 +1,4 @@
+"use client"
 import {
   Icon,
   Card,
@@ -13,6 +14,8 @@ import {
   HStack,
   Link,
   Flex,
+  WrapItem,
+  Avatar,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -24,11 +27,12 @@ type TBlog = {
   content: string;
   likes: number;
   image: string;
-  dateCreated: string;
+  dateCreated: Date;
   user: {
     username: string;
     email: string;
-  }
+    avatar: string;
+  };
 };
 
 type TBlogCard = {
@@ -37,7 +41,6 @@ type TBlogCard = {
 
 const BlogCard = ({ blog }: TBlogCard) => {
   useEffect(() => {
-    // Consider handling token storage and retrieval more securely
     localStorage.setItem("token", "");
   }, []);
 
@@ -47,47 +50,65 @@ const BlogCard = ({ blog }: TBlogCard) => {
     try {
       const response = await axios.patch(
         `http://localhost:3003/api/blogs/${blog.id}/like`,
-        {}, // Empty object for the request body
+        {},
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
-      console.log(response.data); // Log or handle the response data if needed
     } catch (error) {
       console.error(error);
-      throw error; // Rethrow the error to handle it in the calling function if needed
+      throw error;
     }
   };
 
   const handleLike = async () => {
     try {
-      setLikes((prev) => prev + 1);
       await updateLikes();
+      setLikes((prev) => prev + 1);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Card w="md" h="xl" rounded="xl" shadow="md">
+    <Card w={{ base: "full", md: "sm" }} h="xl" rounded="xl" shadow="md">
       <CardHeader>
-        <Flex gap="2">
-          <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Box>
-              <Heading size="sm">{blog.user.username}</Heading>
-            </Box>
-            {blog.dateCreated && <Text fontSize="sm">{blog.dateCreated}</Text>}
-          </Flex>
+        <Flex justify="space-between">
+          <Stack align={{ base: "start", md: "center" }}>
+            <WrapItem>
+              <Avatar src={blog.user.avatar || ""} />
+            </WrapItem>
+            <Heading size="sm">
+              @{blog.user.username}
+            </Heading>
+          </Stack>
+          {blog.dateCreated && (
+            <Text color="gray.500" fontSize="md">
+              {new Date(blog.dateCreated)
+                .toLocaleString(undefined, {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                })
+                .replace(
+                  /(\d{2})\.(\d{2})\.(\d{4}),\s(\d{2}):(\d{2})/,
+                  "$1.$2.$3, $4:$5"
+                )}
+            </Text>
+          )}
         </Flex>
       </CardHeader>
       <CardBody>
-        <Stack mt="2" spacing="3">
+        <Stack spacing="2">
           <Heading size="md">{blog.title}</Heading>
-          <Text>{blog.content}</Text>
-          <Link color="blue.600" fontSize="lg" mt={3}>
-            Read more...
+          <Text noOfLines={[1, 2]}>{blog.content}</Text>
+          <Link color="blue.500" fontSize="md">
+            Read more
           </Link>
         </Stack>
       </CardBody>
@@ -96,7 +117,7 @@ const BlogCard = ({ blog }: TBlogCard) => {
           src={`data:image/jpg;base64,${blog.image}`}
           alt="blog image"
           width="full"
-          height={250}
+          height={{base: 200, md: 230, lg: 250}}
           mx="auto"
           objectFit="cover"
           objectPosition="top"
