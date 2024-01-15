@@ -21,24 +21,27 @@ import { Stories } from "@/components/homepagecomponents/Stories";
 export default function Home() {
   const router = useRouter();
 
-  const buttonHoverStyles = useBreakpointValue({
+  const button1HoverStyles = useBreakpointValue({
     base: { color: "#233345", backgroundColor: "white" },
     md: { color: "white", backgroundColor: "#233345" },
   });
-  
+
   return (
     <Layout>
       <VStack>
         <HStack
           pt="62px"
           w="100%"
-          bgImage={{ base: "none", md: "../images/startnow.png" }}
+          bgImage={{ base: "none", md: "../images/bghime.png" }}
           bgColor={{ base: "#eef8fd", md: "none" }}
-          justifyContent='space-between'
+          bgSize="cover"
+          bgPosition="center"
+          bgRepeat="no-repeat"
+          justifyContent={{ base: "center", xl: "space-between" }}
           alignItems="center"
           flexDirection={{ base: "column", md: "row" }}
         >
-          <VStack w={{ base: "80%", md: "50%" }} textAlign="left" pb="36px" color={{base:"black", md:"white"}}>
+          <VStack pb="36px" color="black" pl={{ base: "none", xl: "200px" }}>
             <Heading pb="16px" fontSize="40px" fontWeight="500">
               Cook, Share, Savor!
             </Heading>
@@ -46,51 +49,30 @@ export default function Home() {
               Kickstart Your Path to a Healthier, Happier You!.
             </Text>
             <Button
-              p="25px 100px"
-              borderRadius="500px"
-              color={{base:"white", md:"#233345"}}
-              bg={{base:"#233345", md:"white"}}
-              _hover={buttonHoverStyles}
-              onClick={() => {
-                router.push("/");
-              }}
+            p='20px 80px'
+              bg="#233345"
+              color="#fff"
+              borderRadius="24px"
+              _hover={{ bg: "#3e5a7b" }}
+              fontSize="18px"
+              fontStyle="normal"
+              fontWeight="600"
+              lineHeight="normal"
+              onClick={() => router.push("/signup")}
             >
-              Start now
+              Sign Up
             </Button>
           </VStack>
-          <Image 
-          src="../images/iPhone14.png" pb="12px" pr='40px'
-          display={{base:"none", xl:"flex"}}></Image>
+          <Image
+            src="../images/iPhone14.png"
+            pb="12px"
+            pr="40px"
+            display={{ base: "none", xl: "flex" }}
+          ></Image>
         </HStack>
         <BalancedRecipes />
         <DietPlan />
-        <Box
-        h={{base:"100xp", md:"500px"}}
-        w='100%'
-        bgImage="../images/blueback.png"
-        bgSize="cover"
-        bgPosition="center"
-        bgRepeat="no-repeat"
-        display='flex'
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center">
-          <Button
-          p="25px 100px"
-          borderRadius="500px"
-          color="white"
-          bg="#233345"
-          m='100px 0'
-          _hover={{ color: "#233345", backgroundColor: "white" }}
-          onClick={() => {
-            router.push("/");
-          }}
-        >
-          Start now
-        </Button>
-        </Box>
-        
-        <Stories/>
+        <Stories />
       </VStack>
     </Layout>
   );

@@ -13,7 +13,7 @@ import { SliderHome } from "@/components/homepagecomponents/SliderHome";
 export default function BalancedRecipes() {
   return (
     <HStack
-      flexDirection={{ base: "column-reverse", lg: "row" }}
+      flexDirection={{ base: "column-reverse", xl: "row" }}
       justifyContent="space-between"
       mt="64px"
     >
@@ -56,11 +56,10 @@ export default function BalancedRecipes() {
       <SliderHome />
       <VStack textAlign="center" gap="12px" p="12px 52px">
         <Text fontSize="30px" fontWeight="500">
-          Get daily inspiration with balanced recipes
+          Get Daily Inspiration with Balanced Recipes: Quick and Easy Delights!
         </Text>
         <Text fontSize="20px" fontWeight="400">
-          Our quick and easy recipes are on the table in no time! All recipes
-          are validated by our team of dietitians.
+        Our quick and easy recipes are always on the table in no time! All recipes are approved by our expert chef team, providing you with a healthy and balanced culinary experience.
         </Text>
       </VStack>
     </HStack>
