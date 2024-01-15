@@ -59,7 +59,7 @@ export function Navigation() {
           </Link>
           <Link
 
-            href="help"
+            href="/help"
 
             color="#95A6BD"
             fontSize="16px"
