@@ -114,7 +114,7 @@ export default function Recipe({ params: { recipeId } }: any) {
           ))
         )}
       </Box>
-      <Footer />
+      <Footer openModal={()=>{}} />
     </Box>
   );
 }
