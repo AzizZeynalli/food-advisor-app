@@ -62,14 +62,6 @@ export function Stories() {
             </SwiperSlide>
             <SwiperSlide>
               <CardStory
-                imageStory="../images/sama1.png"
-                cardName="Sama 31"
-                cardHistory="sagol"
-                cardAbout="sagol"
-              ></CardStory>
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardStory
                 imageStory="../images/aziz1.png"
                 cardName="Sama 31"
                 cardHistory="sagol"
@@ -78,7 +70,7 @@ export function Stories() {
             </SwiperSlide>
             <SwiperSlide>
               <CardStory
-                imageStory="../images/sama1.png"
+                imageStory="../images/kanan.png"
                 cardName="Sama 31"
                 cardHistory="sagol"
                 cardAbout="sagol"
@@ -86,7 +78,7 @@ export function Stories() {
             </SwiperSlide>
             <SwiperSlide>
               <CardStory
-                imageStory="../images/aziz1.png"
+                imageStory="../images/fagan.png"
                 cardName="Sama 31"
                 cardHistory="sagol"
                 cardAbout="sagol"
