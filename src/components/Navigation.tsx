@@ -14,7 +14,7 @@ import {
   VStack,
   Spinner,
   Avatar,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
@@ -37,7 +37,6 @@ export function Navigation() {
     >
       <Box display="flex" alignItems="center" gap="32px">
         <Link href="/">
-
           <Image h="36px" src="../images/logo.svg" alt="logo" />
         </Link>
 
@@ -61,15 +60,13 @@ export function Navigation() {
             Recipes
           </Link>
           <Link
-
-            href="/help"
-
+            href="/contact"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
             lineHeight="normal"
           >
-            Help
+            Contact us
           </Link>
         </Box>
       </Box>
@@ -82,47 +79,52 @@ export function Navigation() {
         <Image src="/images/hamburger.svg" alt="" />
       </Button>
       {loading ? (
-    <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-      <Spinner size="sm" thickness="3px" />
-    </Box>
-  ) : (
-    user ? (
-      <Flex fontWeight="bold" alignItems="center"> <Avatar size="md" name={user.username} mr={4}/><Text fontSize="md">{user.username}</Text></Flex>
-    ) : (
-      <Box
-        display={{ lg: "flex", base: "none" }}
-        alignItems="center"
-        bg="#fff"
-      >
-        <Link
-          href="/login"
-          color="#95A6BD"
-          fontSize="16px"
-          fontWeight="500"
-          lineHeight="40px"
-          px="16px"
-          h="40px"
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
         >
-          Already have an account? Log in
-        </Link>
-        <Button
-          bg="#233345"
-          color="#fff"
-          borderRadius="24px"
-          _hover={{ bg: "#3e5a7b" }}
-          fontSize="13.672px"
-          fontStyle="normal"
-          fontWeight="500"
-          lineHeight="normal"
-          onClick={() => router.push("/signup")}
+          <Spinner size="sm" thickness="3px" />
+        </Box>
+      ) : user ? (
+        <Flex fontWeight="bold" alignItems="center">
+          {" "}
+          <Avatar size="md" name={user.username} mr={4} />
+          <Text fontSize="md">{user.username}</Text>
+        </Flex>
+      ) : (
+        <Box
+          display={{ lg: "flex", base: "none" }}
+          alignItems="center"
+          bg="#fff"
         >
-          Sign Up
-        </Button>
-      </Box>
-    )
-  )}
-
-      
+          <Link
+            href="/login"
+            color="#95A6BD"
+            fontSize="16px"
+            fontWeight="500"
+            lineHeight="40px"
+            px="16px"
+            h="40px"
+          >
+            Already have an account? Log in
+          </Link>
+          <Button
+            bg="#233345"
+            color="#fff"
+            borderRadius="24px"
+            _hover={{ bg: "#3e5a7b" }}
+            fontSize="13.672px"
+            fontStyle="normal"
+            fontWeight="500"
+            lineHeight="normal"
+            onClick={() => router.push("/signup")}
+          >
+            Sign Up
+          </Button>
+        </Box>
+      )}
 
       <Drawer
         isOpen={isOpen}
@@ -137,12 +139,11 @@ export function Navigation() {
             <VStack>
               <Link
                 href="/blog"
-               
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
                 lineHeight="normal"
-  >
+              >
                 Blog
               </Link>
               <Link
@@ -197,7 +198,6 @@ export function Navigation() {
                   </Button>
                 </Box>
               )}
-
             </VStack>
           </DrawerBody>
         </DrawerContent>
