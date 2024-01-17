@@ -39,7 +39,7 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3003/api/login",
+        "https://fooderra-api.vercel.app/api/login",
         { email, password }
       );
       if (response.status !== 200) {
@@ -65,6 +65,19 @@ const LoginPage = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    const handleKeyPress = (e:any) => {
+      if (e.key === 'Enter' && isValid) {
+        handleSubmit(onSubmit)();
+      }
+    };
+  
+    document.addEventListener('keypress', handleKeyPress);
+  
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress);
+    };
+  }, [isValid, handleSubmit, onSubmit]);
   return (
     <VStack
       gap="0"
@@ -99,7 +112,7 @@ const LoginPage = () => {
           "2xl": "35%",
         }}
       >
-        <form action="" style={{ width: "100%" }}>
+        <form action="" style={{ width: "100%" }}  onSubmit={handleSubmit(onSubmit)}>
           <EmailInput errors={errors} control={control} />
           <PasswordInput
             errors={errors}

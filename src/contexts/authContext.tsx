@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     useEffect(() => {
         const token = Cookies.get('userToken');
         if (token) {
-            axios.get('http://localhost:3003/api/users/details', {
+            axios.get('https://fooderra-api.vercel.app/api/users/details', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
 
     const likeRecipe = (mealId : string) => {
-        axios.patch('http://localhost:3003/api/users/like', {
+        axios.patch('https://fooderra-api.vercel.app/api/users/like', {
             mealId
         }, {
             headers: {
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     const unlikeRecipe = (mealId : string) => {
-        axios.patch('http://localhost:3003/api/users/removelike', {
+        axios.patch('https://fooderra-api.vercel.app/api/users/removelike', {
             mealId
         }, {
             headers: {
