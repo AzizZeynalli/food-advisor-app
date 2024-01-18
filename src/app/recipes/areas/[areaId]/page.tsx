@@ -57,8 +57,6 @@ export default function Area({ params: { areaId } }: any) {
 
   return (
     <>
-      <Navigation />
-      <RecipesHeader />
       <Box>
         <Box padding="24px">
           {loading ? (
@@ -119,7 +117,6 @@ export default function Area({ params: { areaId } }: any) {
           )}
         </Box>
       </Box>
-      <Footer />
     </>
   );
 }

@@ -1,3 +1,4 @@
+'use client'
 import { HStack, Box, Image, Button, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -37,7 +38,7 @@ const Footer: React.FC<TermsAndConditionsButtonProps>=({ openModal }) =>{
                 onClick={() => {
                     window.scrollTo({top:0, left:0, behavior:"smooth"})
                   }}
-                src="../images/white_logo.svg" alt="Logo"/>
+                src="/images/white_logo.svg" alt="Logo"/>
                 <Text 
                 color='white' 
                 fontWeight='400' 

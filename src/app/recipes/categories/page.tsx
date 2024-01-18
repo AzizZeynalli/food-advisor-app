@@ -41,8 +41,6 @@ export default function Categories() {
 
   return (
     <>
-      <Navigation />
-      <RecipesHeader />
       <Heading ml="24px" mt='24px'>List of the all countrys:</Heading>
       <Box p="24px">
         {loading ? (
@@ -73,7 +71,6 @@ export default function Categories() {
           </>
         )}
       </Box>
-      <Footer />
     </>
   );
 }
