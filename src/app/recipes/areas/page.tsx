@@ -41,8 +41,8 @@ export default function Areas() {
 
   return (
     <>
-      <Navigation />
-      <RecipesHeader />
+      {/* <Navigation /> */}
+      {/* <RecipesHeader /> */}
       <Heading ml="24px" mt='24px'>List of the all areas:</Heading>
       <Box p="24px">
         {loading ? (
@@ -73,7 +73,7 @@ export default function Areas() {
           </SimpleGrid>
         )}
       </Box>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

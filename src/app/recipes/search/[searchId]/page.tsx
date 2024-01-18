@@ -77,8 +77,6 @@ export default function SearchId({ params: { searchId } }: any) {
 
   return (
     <>
-    <Navigation />
-    <RecipesHeader />
       <Box padding="24px">
         {loading ? (
           <SimpleGrid
@@ -174,7 +172,6 @@ export default function SearchId({ params: { searchId } }: any) {
           </>
         )}
       </Box>
-      <Footer />
     </>
   );
 }

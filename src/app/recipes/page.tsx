@@ -8,10 +8,10 @@ import { Box } from "@chakra-ui/react";
 export default function Recipes() {
     return (
         <Box>
-            <Navigation />
-            <RecipesHeader />
+            {/* <Navigation /> */}
+            {/* <RecipesHeader /> */}
             <CardContainer />
-            <Footer />
+            {/* <Footer /> */}
         </Box>
     );
 }
