@@ -98,15 +98,15 @@ const HelpPage = () => {
   return (
     <VStack width="100%" height="100vh" padding="20px 70px">
       <HStack justifyContent="space-between" width="100%">
-        <Image src="../images/image 28.png" onClick={()=>router.push("/")}/>
-        <Flex fontWeight="bold" alignItems="center">
+        <Image src="../images/image 28.png" onClick={()=>router.push("/")} cursor="pointer"/>
+        <Flex fontWeight="bold" alignItems="center" onClick={()=> router.push("/profile")}>
           {" "}
-          <Avatar size="md" name={user?.username} mr={4} />
+          <Avatar size="sm" name={user?.username} mr={3} />
           <Text fontSize="md">{user?.username}</Text>
         </Flex>
       </HStack>
       <HStack width="100%" justifyContent="space-between">
-        <VStack alignItems="flex-start" width="50%">
+        <VStack alignItems="flex-start" width={{base: "100%",md:"50%"}}>
           <Heading fontWeight="600">Contact us:</Heading>
           <Text fontSize="16px" fontWeight="200" mb="20px">
             We’re here to help! Send us your feedback via the form below or send
@@ -129,7 +129,7 @@ const HelpPage = () => {
             />
           </form>
         </VStack>
-        <Image src="../images/tarana1.png" height="80vh" />
+        <Image src="../images/Page-1.png" width={{base:"0",md:"25%"}} mr="50px"/>
       </HStack>
     </VStack>
   );
