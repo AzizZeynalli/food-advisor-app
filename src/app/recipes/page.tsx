@@ -11,7 +11,9 @@ export default function Recipes() {
             <Navigation />
             <RecipesHeader />
             <CardContainer />
-            <Footer />
+            <Footer openModal={function (): void {
+                throw new Error("Function not implemented.");
+            } } />
         </Box>
     );
 }

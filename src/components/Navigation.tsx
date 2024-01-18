@@ -26,6 +26,14 @@ export function Navigation() {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
+  const handleLinkClick = () => {
+    if (!user) {
+      router.push('/login');
+    } else {
+      router.push('/contact');
+    }
+  };
+
   return (
     <Flex
       py="20px"
@@ -60,11 +68,11 @@ export function Navigation() {
             Recipes
           </Link>
           <Link
-            href="/contact"
             color="#95A6BD"
             fontSize="16px"
             fontWeight="500"
             lineHeight="normal"
+            onClick={handleLinkClick}
           >
             Contact us
           </Link>
@@ -90,7 +98,7 @@ export function Navigation() {
       ) : user ? (
         <Flex fontWeight="bold" alignItems="center">
           {" "}
-          <Avatar size="md" name={user.username} mr={4} />
+          <Avatar size="sm" name={user.username} mr={3} />
           <Text fontSize="md">{user.username}</Text>
         </Flex>
       ) : (
