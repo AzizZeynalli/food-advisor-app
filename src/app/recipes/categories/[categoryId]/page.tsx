@@ -53,8 +53,6 @@ export default function Category({ params: { categoryId } }: any) {
 
   return (
     <>
-      <Navigation />
-      <RecipesHeader />
       <Box>
         <Box padding="24px">
           {loading ? (
@@ -120,7 +118,6 @@ export default function Category({ params: { categoryId } }: any) {
           )}
         </Box>
       </Box>
-      <Footer />
     </>
   );
 }

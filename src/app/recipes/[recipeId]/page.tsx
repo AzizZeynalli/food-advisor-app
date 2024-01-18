@@ -54,7 +54,6 @@ export default function Recipe({ params: { recipeId } }: any) {
       flexDirection="column"
       justifyContent="space-between"
     >
-      <Navigation />
       <Box p="32px" h="100%">
         {loading ? (
           <Box>
@@ -149,7 +148,6 @@ export default function Recipe({ params: { recipeId } }: any) {
           ))
         )}
       </Box>
-      <Footer openModal={() => {}} />
     </Box>
   );
 }

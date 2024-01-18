@@ -1,6 +1,7 @@
 "use client";
 import { Search2Icon } from "@chakra-ui/icons";
 import { Box, Flex, Icon, Input, Button, Select } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -13,20 +14,21 @@ export function RecipesHeader() {
   const [areas, setAreas] = useState<Category[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const router = useRouter();
-  const [selectedArea, setSelectedArea] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [searchValue, setSearchValue] = useState('');
-  
+  const [selectedArea, setSelectedArea] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+
   const handleAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     setSelectedArea(selectedValue);
     router.push(`/recipes/areas/${selectedValue}`);
-    
   };
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedValue = event.target.value;
-   // setSelectedCategory(selectedValue);
+    setSelectedCategory(selectedValue);
     router.push(`/recipes/categories/${selectedValue}`);
   };
 
@@ -56,10 +58,10 @@ export function RecipesHeader() {
     Promise.all([fetchAreas(), fetchCategories()]);
   }, []);
 
-  const onSearch = (e:React.FormEvent) => {
+  const onSearch = (e: React.FormEvent) => {
     e.preventDefault();
     router.push(`/recipes/search/${searchValue}`);
-  }
+  };
 
   return (
     <Box
@@ -68,10 +70,19 @@ export function RecipesHeader() {
       bgRepeat="no-repeat"
       bgPosition="top 20px left 20px"
     >
-      <Flex display="flex" justifyContent="center" gap="24px" pt="24px" flexDirection={{base:'column', md:'row'}} alignItems='center'>
+      <Flex
+        display="flex"
+        justifyContent="center"
+        gap="24px"
+        pt="24px"
+        flexDirection={{ base: "column", md: "row" }}
+        alignItems="center"
+      >
         <Select
           maxW="220px"
-          placeholder={`Filter by area ${selectedArea ? `- ${selectedArea}` : ''}`}
+          placeholder={`Filter by area ${
+            selectedArea ? `- ${selectedArea}` : ""
+          }`}
           borderRadius="24px"
           outline="0"
           border="0"
@@ -81,12 +92,7 @@ export function RecipesHeader() {
           value={selectedArea}
         >
           {areas.map((area) => (
-            <option
-              key={area.strArea}
-              
-            >
-              {area.strArea}
-            </option>
+            <option key={area.strArea}>{area.strArea}</option>
           ))}
         </Select>
         <Select
@@ -104,19 +110,35 @@ export function RecipesHeader() {
           ))}
         </Select>
       </Flex>
-      <Flex justifyContent="center" py="24px" as='form' onSubmit={onSearch}>
+      <Flex justifyContent='center'>
+        <Flex  w={{lg:"70%", base:'90%'}}  position="relative" py="24px" as="form" onSubmit={onSearch}>
         <Input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          w="70%"
+          w="100%"
           placeholder="Search by recipe title"
           bg="#fff"
           border="gray.100"
+          pl='40px'
+          borderRadius="24px"
+          
         />
+        {searchValue && ( 
+          <Button
+          variant='ghost'
+            position="absolute"
+            zIndex='500'
+            p="0"
+            borderRadius="24px"
+            onClick={() => setSearchValue("")}
+          >
+            <CloseIcon color="#3e5a7b" />
+          </Button>
+        )}
         <Button
-        type="submit"
+          type="submit"
           zIndex="1"
-          ml="-50px"
+          ml="-64px"
           bg="#233345"
           borderRadius="24px"
           _hover={{ bg: "#3e5a7b" }}
@@ -124,6 +146,7 @@ export function RecipesHeader() {
         >
           <Icon as={Search2Icon} color="#fff" />
         </Button>
+      </Flex>
       </Flex>
     </Box>
   );

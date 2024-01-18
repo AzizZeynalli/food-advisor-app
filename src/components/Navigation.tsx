@@ -12,9 +12,13 @@ import {
   Image,
   useDisclosure,
   VStack,
-  Spinner,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   Avatar,
-  Text,
+  Spinner,
+  Text
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
@@ -50,15 +54,31 @@ export function Navigation() {
           >
             Blogs
           </Link>
-          <Link
-            href="/recipes"
-            color="#95A6BD"
-            fontSize="16px"
-            fontWeight="500"
-            lineHeight="normal"
-          >
-            Recipes
-          </Link>
+          <Menu>
+            <MenuButton
+              color="#95A6BD"
+              fontSize="16px"
+              fontWeight="500"
+              lineHeight="normal"
+              _hover={{ textDecoration: "underline" }}
+            >
+              Recipes
+            </MenuButton>
+            <MenuList>
+              <MenuItem as="a" href="/recipes">
+                Recipes
+              </MenuItem>
+              <MenuItem as="a" href="/recipes/areas">
+                Areas
+              </MenuItem>
+              <MenuItem as="a" href="/recipes/categories">
+                Categories
+              </MenuItem>
+              <MenuItem as="a" href="/recipes/search">
+                Search
+              </MenuItem>
+            </MenuList>
+          </Menu>
           <Link
             href="/contact"
             color="#95A6BD"
@@ -138,7 +158,7 @@ export function Navigation() {
           <DrawerBody mt="40px">
             <VStack>
               <Link
-                href="/blog"
+                href="/blogs"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
@@ -147,13 +167,40 @@ export function Navigation() {
                 Blog
               </Link>
               <Link
-                href="recipes"
+                href="/recipes"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
                 lineHeight="normal"
               >
                 Recipes
+              </Link>
+              <Link
+                href="/recipes/areas"
+                color="#95A6BD"
+                fontSize="16px"
+                fontWeight="500"
+                lineHeight="normal"
+              >
+                Areas
+              </Link>
+              <Link
+                href="/recipes/categories"
+                color="#95A6BD"
+                fontSize="16px"
+                fontWeight="500"
+                lineHeight="normal"
+              >
+                Categories
+              </Link>
+              <Link
+                href="/recipes/search"
+                color="#95A6BD"
+                fontSize="16px"
+                fontWeight="500"
+                lineHeight="normal"
+              >
+                Search
               </Link>
               <Link
                 href="help"
