@@ -8,8 +8,15 @@ type TUser  = {
     email: string;
     avatar: string;
     token: string;
-    likedRecipes: string[];
+    likedRecipes: Meal[];
 }
+
+type Meal = {
+    idMeal: string;
+    strMeal: string;
+    strMealThumb: string;
+    strInstructions: string;
+};
 
 interface AuthContextType {
   user: null | TUser; 
@@ -18,7 +25,7 @@ interface AuthContextType {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   login: (user: TUser) => void;
   logout: () => void;
-  likeRecipe: (mealId: string) => void;
+  likeRecipe: (meal: Meal) => void;
   unlikeRecipe: (mealId: string) => void;
 }
 
@@ -61,9 +68,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser(null);
     };
 
-    const likeRecipe = (mealId : string) => {
+    const likeRecipe = (meal: Meal) => {
         axios.patch('https://fooderra-api.vercel.app/api/users/like', {
-            mealId
+            meal
         }, {
             headers: {
                 Authorization: `Bearer ${user?.token}`
