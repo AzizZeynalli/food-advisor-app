@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.11.0",
     "axios": "^1.6.4",
     "emailjs-com": "^3.2.0",
+    "firebase": "^10.7.2",
     "framer-motion": "^10.16.16",
     "js-cookie": "^3.0.5",
     "next": "14.0.4",
@@ -27,13 +28,15 @@
     "react-icons": "^4.12.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.21.2",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.7",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "typescript": "^5"
