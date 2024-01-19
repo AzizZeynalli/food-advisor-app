@@ -45,8 +45,7 @@ export function CardContainer() {
 
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
-  const [likedRecipes, setLikedRecipes] = useState<string[]>([]);
-  console.log(user);
+  const [likedRecipes, setLikedRecipes] = useState<Meal[]>([]);
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -66,18 +65,19 @@ export function CardContainer() {
 
   const router = useRouter();
 
-  const handleLikeClick = (idMeal:string) => {
+  const handleLikeClick = (meal: Meal) => {
     if (!user) {
       router.push("/login");
       return;
     }
-    if(likedRecipes.includes(idMeal)) { 
-      unlikeRecipe(idMeal);
-      const newLikedRecipes = likedRecipes.filter((recipeId) => recipeId !== idMeal);
+    const found = likedRecipes.some((likedRecipe) => likedRecipe.idMeal === meal.idMeal);
+    if(found) { 
+      unlikeRecipe(meal.idMeal);
+      const newLikedRecipes = likedRecipes.filter((recipe) => recipe.idMeal !== meal.idMeal);
       setLikedRecipes(newLikedRecipes);
     } else {
-      likeRecipe(idMeal);
-      const newLikedRecipes = [...likedRecipes, idMeal]; 
+      likeRecipe(meal);
+      const newLikedRecipes = [...likedRecipes, meal]; 
       setLikedRecipes(newLikedRecipes);
     }
   };
@@ -144,13 +144,13 @@ export function CardContainer() {
                   <Flex width="100%" gap="8px">
                     <Button
                       width="50%"
-                      color={likedRecipes.includes(meal.idMeal) ? "red" : ""}
+                      color={likedRecipes.some((likedRecipe) => likedRecipe.idMeal === meal.idMeal) ? "red" : ""}
                       leftIcon={
-                        likedRecipes.includes(meal.idMeal) ? <BiSolidHeart /> : <BiHeart />
+                        likedRecipes.some((likedRecipe) => likedRecipe.idMeal === meal.idMeal) ? <BiSolidHeart /> : <BiHeart />
                       }
-                      onClick={() => handleLikeClick(meal.idMeal)}
+                      onClick={() => handleLikeClick(meal)}
                     >
-                      {likedRecipes.includes(meal.idMeal) ? "Liked" : "Like"}
+                      {likedRecipes.some((likedRecipe) => likedRecipe.idMeal === meal.idMeal) ? "Liked" : "Like"}
                     </Button>
                     <TwitterShareButton
                       style={{
