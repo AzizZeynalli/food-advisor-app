@@ -11,7 +11,7 @@ import FooterTermsCondition from "./FooterTermsCondition";
 const Footer: React.FC<TermsAndConditionsButtonProps>=({ openModal }) =>{ 
 
     const router = useRouter();
-    const mailto = "mailto:contact@fooderra.az";
+    const mailto = "fooderra.contact@gmail.com";
     
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
 
@@ -85,7 +85,7 @@ const Footer: React.FC<TermsAndConditionsButtonProps>=({ openModal }) =>{
                         window.location.href = mailto;
                         e.preventDefault();
                       }}>
-                        contact@fooderra.az</Text>
+                        fooderra.contact@gmail.com</Text>
                 </VStack>
             </HStack>
        </HStack>

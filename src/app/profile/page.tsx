@@ -67,7 +67,7 @@ export default function Profile() {
         flexDirection={{ lg: "row", base: "column" }}
       >
         <Button
-          position="absolute"
+          position="fixed"
           top="32px"
           left="32px"
           zIndex="1"
