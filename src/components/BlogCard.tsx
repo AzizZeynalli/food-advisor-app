@@ -26,7 +26,7 @@ type TBlog = {
   title: string;
   content: string;
   likes: number;
-  image: string;
+  imageUrl: string;
   dateCreated: Date;
   user: {
     username: string;
@@ -112,9 +112,9 @@ const BlogCard = ({ blog }: TBlogCard) => {
           </Link>
         </Stack>
       </CardBody>
-      {blog.image && (
+      {blog.imageUrl && (
         <Image
-          src={`data:image/jpg;base64,${blog.image}`}
+          src={blog.imageUrl}
           alt="blog image"
           width="full"
           height={{base: 200, md: 230, lg: 250}}
