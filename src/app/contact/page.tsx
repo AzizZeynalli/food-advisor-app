@@ -9,6 +9,7 @@ import {
   Flex,
   Avatar,
   Heading,
+  Box,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,6 +23,7 @@ import HelpTextarea from "@/components/helpPage/HelpTextarea";
 import HelpButton from "@/components/helpPage/HelpButton";
 import emailjs from "@emailjs/browser";
 import { useAuth } from "@/contexts/authContext";
+import UsernameInput from "@/components/(formComponents)/UsernameInput";
 const HelpPage = () => {
   const {user} = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -62,8 +64,8 @@ const HelpPage = () => {
     if (form.current) {
       emailjs
         .sendForm(
-          "service_h58rsde",
-          "template_bmikcsn",
+          "service_c8rv9pl",
+          "template_objj23j",
           form.current,
           "g7ff1YFVqqwiDDX1K"
         )
