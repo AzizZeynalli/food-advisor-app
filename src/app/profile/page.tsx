@@ -245,7 +245,7 @@ export default function Profile() {
               </VStack>
             </TabPanel>
             <TabPanel h={{ lg: "100vh" }} p={{ lg: "48px", base: "16px" }}>
-              <Heading color="#3e5a7b">Liked blogs</Heading>
+              <Heading color="#3e5a7b">My blogs</Heading>
               <VStack
                 mt={{ lg: "48px", base: "16px" }}
                 bg="#ffffff"
@@ -255,26 +255,29 @@ export default function Profile() {
                 p={{ md: "32px", base: "16px" }}
                 alignItems="stretch"
               >
-                <Card direction="row" overflow="hidden" variant="outline">
-                  <Image
-                    objectFit="cover"
-                    w="100px"
-                    h="100px"
-                    src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-                    alt=""
-                  />
-                  <Flex
-                    p="16px"
-                    justifyContent="space-between"
-                    w="100%"
-                    flexDirection={{ sm: "row", base: "column" }}
-                  >
-                    <Heading size="md">Latte</Heading>
-                    <Button color="red" leftIcon={<BiSolidHeart />}>
-                      Liked
-                    </Button>
-                  </Flex>
-                </Card>
+                {user?.blogs.map((blog) => (
+                  <Card key={blog.id} direction="row" overflow="hidden" variant="outline">
+                    <Image
+                      objectFit="cover"
+                      w="100px"
+                      h="100px"
+                      src={blog.imageUrl}
+                      alt=""
+                    />
+                    <Flex
+                      p="16px"
+                      justifyContent="space-between"
+                      w="100%"
+                      flexDirection={{ sm: "row", base: "column" }}
+                    >
+                      <Heading size="md">{blog.title}</Heading>
+                      <Text>{blog.content}</Text>
+                      <Button color="red">
+                        Delete
+                      </Button>
+                    </Flex>
+                  </Card>
+                ))}
               </VStack>
             </TabPanel>
           </TabPanels>
