@@ -23,7 +23,7 @@ const SignUp = () => {
     if (user) {
       logout();
     }
-  })
+  }, [])
 
   const toast = useToast();
   const router = useRouter();
@@ -99,7 +99,7 @@ const SignUp = () => {
     return () => {
       document.removeEventListener('keypress', handleKeyPress);
     };
-  }, [isValid, agreeTerms, handleSubmit, onSubmit]);
+  }, [isValid, agreeTerms]);
   return (
     <VStack
       minWidth="400px"
