@@ -6,7 +6,12 @@ export default function Cards({ imageUrl, cardText, cardTime }: any) {
     return (
         <Card
         boxShadow='0'
-        w='350px'>
+        w='350px'
+        _hover={{
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            transform: "scale(1.1)",
+            transition: "transform 0.3s ease",
+          }}>
             <CardBody>
                 <Box position='relative'>
                     <Image src={imageUrl} ></Image>

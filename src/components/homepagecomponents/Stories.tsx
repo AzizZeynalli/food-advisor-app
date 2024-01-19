@@ -124,7 +124,7 @@ export function Stories() {
                 <Flex alignItems="center" justifyContent="center" height="100%">
                   <CardStory
                     imageStory="../images/eldar.png"
-                    cardName="Eldar"
+                    cardName="Eldar 22"
                     cardHistory="Lost 7 lbs in 2 months"
                     cardAbout="The recipes I discovered on your site allowed me to try different flavors in the kitchen."
                   ></CardStory>
