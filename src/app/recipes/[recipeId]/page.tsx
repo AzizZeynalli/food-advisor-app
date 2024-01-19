@@ -1,6 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
 import {
   Box,
   Heading,
@@ -86,7 +84,7 @@ export default function Recipe({ params: { recipeId } }: any) {
                   borderRadius="8px"
                   float={{ md: "right" }}
                   w="100%"
-                  h="400px"
+                  h={{md:"500px", base:'400px'}}
                   objectFit="cover"
                   src={meal.strMealThumb}
                   alt=""
@@ -95,8 +93,8 @@ export default function Recipe({ params: { recipeId } }: any) {
                 <Box
                   pos="absolute"
                   w="100%"
-                  h="400px"
-                  bg="linear-gradient(to top, white, rgba(255, 255, 255, 0.7) 50%, transparent)"
+                  h={{md:"500px", base:'400px'}}
+                  bg="linear-gradient(to top, white, rgba(255, 255, 255, 0.5) 50%, transparent)"
                   top="0"
                 >
                   <Heading

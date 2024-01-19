@@ -1,8 +1,4 @@
 "use client";
-import { Layout } from "@/components";
-import Footer from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
-import { RecipesHeader } from "@/components/RecipesHeader";
 import {
   Box,
   Circle,
@@ -44,9 +40,7 @@ export default function Areas() {
       <Heading ml="24px" mt='24px'>List of the all areas:</Heading>
       <Box p="24px">
         {loading ? (
-          
             <Skeleton height="300px" borderRadius='24px' />
-       
         ) : (
           <SimpleGrid minChildWidth="250px" bg="#EEF8FD" py='16px' px='32px' borderRadius='24px'>
             {areas.length > 0 &&
