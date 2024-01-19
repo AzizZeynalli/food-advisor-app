@@ -11,7 +11,8 @@ import {
   VStack,
   Spinner,
   Center,
-  Grid
+  Grid,
+  SimpleGrid
 } from "@chakra-ui/react";
 import Image from "next/image";
 import BlogCard from "@/components/BlogCard";
@@ -37,10 +38,10 @@ export default function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("http://localhost:3003/api/blogs");
+        const response = await fetch("https://fooderra-api.vercel.app/api/blogs");
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(HTTP error! status: ${response.status});
         }
 
         const data = await response.json();
@@ -74,16 +75,11 @@ export default function Blog() {
             <Text as="p" mt={4}>Loading content...</Text>
           </Flex>
         )}
-        <Grid
-          templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
-          gap={6}
-          p={{ base: 4, md: 8 }}
-          justifyItems="center"
-        >
+        <SimpleGrid justifyItems="center" spacing={10} p={{ base: 4, md: 8 }} templateColumns='repeat(auto-fill, minmax(350px, 1fr))'>
           {blogs.map((blog) => (
             <BlogCard key={blog.id} blog={blog} />
           ))}
-        </Grid>
+        </SimpleGrid>
       </VStack>
     </Layout>
   );
