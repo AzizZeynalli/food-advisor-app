@@ -41,7 +41,7 @@ export default function Blog() {
         const response = await fetch("https://fooderra-api.vercel.app/api/blogs");
 
         if (!response.ok) {
-          throw new Error(HTTP error! status: ${response.status});
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();

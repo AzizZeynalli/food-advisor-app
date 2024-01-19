@@ -8,37 +8,38 @@ import {
   Input,
   Textarea,
   Button,
-  useToast
+  useToast,
+  HStack
 } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
-import { useRef } from "react";
 import { useAuth } from "@/contexts/authContext";
-
-
+import { imageDb } from "@/firebase/config";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Image from "next/image"
 
 export default function BlogForm() {
   const { user } = useAuth();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const fileInput = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState("Select Image" as any);
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const toast = useToast();
   console.log(user);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    let imageUrl = "";
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    if (fileInput.current && fileInput.current.files) {
-      formData.append("image", fileInput.current.files[0]);
+    if(image) {
+      const imageRef = ref(imageDb, `images/${image.name}`);
+      const snapshot = await uploadBytes(imageRef,image);
+      imageUrl = await getDownloadURL(snapshot.ref);
     }
     try {
       const response = await axios.post(
-        "http://localhost:3003/api/blogs",
-        formData,
+        "https://fooderra-api.vercel.app/api/blogs",
+        {title, content, imageUrl},
         {
           headers: {
             Authorization: `Bearer ${user?.token}`
@@ -58,7 +59,7 @@ export default function BlogForm() {
         })
         setTitle("");
         setContent("");
-        fileInput.current && (fileInput.current.value = "");
+        setImage(null);
       } else {
         toast({
           title: "Could not create blog post. Please try again.",
@@ -115,19 +116,21 @@ export default function BlogForm() {
               accept="image/*"
               hidden
               id="file-upload"
-              ref={fileInput}
               onChange={(event) => {
                 if(event.target.files && event.target.files.length > 0) {
-                  const file = event.target.files[0];
-                  setFileName(file.name);
+                  setImage(event.target.files[0]);
+                  setImageUrl(URL.createObjectURL(event.target.files[0]));
                 } 
               }}
             />
-            <FormLabel htmlFor="file-upload" mx={4} mt={2} cursor="pointer">
-              <Text mr={2} color="green" fontSize="lg">
-                {fileName}
-              </Text>
-            </FormLabel>
+            {!imageUrl && <FormLabel htmlFor="file-upload" mx={4} mt={2} cursor="pointer">
+              Upload Image
+            </FormLabel>}
+            {imageUrl && <HStack>
+              <Text mx={4} mt={2}>{image?.name}</Text>
+              <Image alt="" src={imageUrl} width={100} height={100} />
+              <Button onClick={() => {setImageUrl(""); setImage(null)}} ml={4}>Remove</Button>
+              </HStack>}
           </Flex>
         </FormControl>
         <Button type="submit" mt={10} colorScheme="green">

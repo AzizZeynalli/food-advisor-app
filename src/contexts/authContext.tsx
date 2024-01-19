@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { set } from 'react-hook-form';
 
 type TUser  = {
     username: string;
@@ -9,6 +8,15 @@ type TUser  = {
     avatar: string;
     token: string;
     likedRecipes: Meal[];
+    blogs: Blog[];
+}
+
+type Blog = {
+    id: string;
+    title: string;
+    content: string;
+    imageUrl: string;
+    createdAt: Date;
 }
 
 type Meal = {
