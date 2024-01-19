@@ -1,7 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
-import { RecipesHeader } from "@/components/RecipesHeader";
 import {
   Box,
   Circle,
@@ -41,7 +38,7 @@ export default function Categories() {
 
   return (
     <>
-      <Heading ml="24px" mt='24px'>List of the all countrys:</Heading>
+      <Heading ml="24px" mt='24px'>List of the all categories:</Heading>
       <Box p="24px">
         {loading ? (
           <Skeleton height="300px" borderRadius='24px' />
