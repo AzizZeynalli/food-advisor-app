@@ -39,7 +39,6 @@ export function CardContainer() {
   const truncateInstructions = (instructions: string): string => {
     const words = instructions.split(" ");
     const truncatedText = words.slice(0, 10).join(" ");
-
     return `${truncatedText}...`;
   };
 
