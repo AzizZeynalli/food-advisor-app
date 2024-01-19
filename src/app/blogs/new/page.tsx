@@ -49,6 +49,7 @@ export default function BlogForm() {
 
       if (response.status === 201) {
         toast({
+          position:"top",
           title: "Blog post created successfully",
           status: "success",
           isClosable: true,

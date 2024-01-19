@@ -18,7 +18,7 @@ import {
   MenuItem,
   Avatar,
   Spinner,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
@@ -32,9 +32,9 @@ export function Navigation() {
   const btnRef = useRef(null);
   const handleLinkClick = () => {
     if (!user) {
-      router.push('/login');
+      router.push("/login");
     } else {
-      router.push('/contact');
+      router.push("/contact");
     }
   };
 
@@ -116,7 +116,12 @@ export function Navigation() {
           <Spinner size="sm" thickness="3px" />
         </Box>
       ) : user ? (
-        <Flex fontWeight="bold" alignItems="center">
+        <Flex
+          fontWeight="bold"
+          alignItems="center"
+          onClick={() => router.push("/profile")}
+          cursor="pointer"
+        >
           {" "}
           <Avatar size="sm" name={user.username} mr={3} />
           <Text fontSize="md">{user.username}</Text>

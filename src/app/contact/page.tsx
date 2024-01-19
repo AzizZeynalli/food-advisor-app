@@ -81,6 +81,7 @@ const HelpPage = () => {
               isClosable: true,
               colorScheme: "blue",
             });
+            
           },
           (error) => {
             console.log(error.text);
@@ -93,9 +94,7 @@ const HelpPage = () => {
       console.error("Form ref is not defined.");
     }
   };
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+ 
  
   return (
     <VStack width="100%" height="100vh" padding="20px 70px">
