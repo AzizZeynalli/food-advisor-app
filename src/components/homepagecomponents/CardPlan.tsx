@@ -5,8 +5,9 @@ export default function CardPlan({  cardHeading, cardMain, imagePng }: any) {
 
     return (
         <Card 
+        m='auto'
         boxShadow='0'
-        w='350px'
+        w={{base:"300px", md:"350px"}}
         _hover={{
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             transform: "scale(1.1)",
