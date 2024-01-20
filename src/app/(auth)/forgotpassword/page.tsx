@@ -20,23 +20,14 @@ const ForgotPassword = () => {
       email: "",
     },
   });
-  const onSubmit = async (data: any) => {
-    //console.log("Form submitted:", data);
-    //const email = getValues();
-    try {
-      const response = await axios.post(
-        "https://fooderra-api.vercel.app/api/users",
-        { email: data.email },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
+
+  const onSubmit = async (data: string) => {
+    router.push({
+      pathname: '/resetpassword',
+      query: { email: data },
+    });
   };
+
   useEffect(()=>{
     const handleKeyPress = (e:any)=>{
       if(e.key === "Enter" && isValid){
@@ -47,7 +38,7 @@ const ForgotPassword = () => {
     return()=>{
       document.removeEventListener("keypress",handleKeyPress);
     };
-  },[isValid,handleSubmit,onSubmit]);
+  },[]);
   return (
     <VStack
       gap="0"
@@ -62,6 +53,7 @@ const ForgotPassword = () => {
       bgSize={{ base: "0", "2xl": "20%" }}
     >
       <Image
+        alt=""
         src="../images/Logo.svg"
         cursor="pointer"
         width={{ base: "40%", sm: "35%", md: "30%", lg: "20%" }}

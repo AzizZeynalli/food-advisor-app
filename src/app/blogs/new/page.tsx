@@ -17,9 +17,11 @@ import { useAuth } from "@/contexts/authContext";
 import { imageDb } from "@/firebase/config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image"
+import { useRouter } from "next/navigation";
 
 export default function BlogForm() {
   const { user } = useAuth();
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -61,6 +63,8 @@ export default function BlogForm() {
         setTitle("");
         setContent("");
         setImage(null);
+        setImageUrl("");
+        router.push("/blogs");
       } else {
         toast({
           title: "Could not create blog post. Please try again.",
@@ -80,7 +84,7 @@ export default function BlogForm() {
 
   return (
     <form onSubmit={handleSubmit} >
-      <Flex direction="column" px={56} py={20}>
+      <Flex direction="column" px={{base: 12, md: 56}} py={20}>
         <FormControl id="title" isRequired>
           <FormLabel>Title</FormLabel>
           <Input
@@ -127,11 +131,11 @@ export default function BlogForm() {
             {!imageUrl && <FormLabel htmlFor="file-upload" mx={4} mt={2} cursor="pointer">
               Upload Image
             </FormLabel>}
-            {imageUrl && <HStack>
+            {imageUrl && <Flex direction={{base: "column", md: "row"}} alignItems="center" justifyContent="center" gap={4}>
               <Text mx={4} mt={2}>{image?.name}</Text>
               <Image alt="" src={imageUrl} width={100} height={100} />
               <Button onClick={() => {setImageUrl(""); setImage(null)}} ml={4}>Remove</Button>
-              </HStack>}
+              </Flex>}
           </Flex>
         </FormControl>
         <Button type="submit" mt={10} colorScheme="green">
