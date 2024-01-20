@@ -8,13 +8,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  padding-left: 15px;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
 }
 
 .mySwiper .swiper-slide:hover {

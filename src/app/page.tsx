@@ -41,10 +41,10 @@ export default function Home() {
           flexDirection={{ base: "column", md: "row" }}
         >
           <VStack pb="36px" color="black" pl={{ base: "none", xl: "200px" }}>
-            <Heading pb="16px" fontSize="40px" fontWeight="500">
+            <Heading pb="16px" fontSize="40px" fontWeight="500" textAlign='center'>
               Cook, Share, Savor!
             </Heading>
-            <Text pb="40px" fontSize="20px" fontWeight="400">
+            <Text pb="40px" fontSize="20px" fontWeight="400" textAlign='center'>
               Kickstart Your Path to a Healthier, Happier You!.
             </Text>
             <Button
@@ -63,7 +63,7 @@ export default function Home() {
             </Button>
           </VStack>
           <Image
-            src="../images/iPhone14.png"
+            src="../images/apple14.png"
             pb="12px"
             pr="40px"
             display={{ base: "none", xl: "flex" }}
