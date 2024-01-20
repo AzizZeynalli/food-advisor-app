@@ -105,9 +105,9 @@ const BlogCard = ({ blog }: TBlogCard) => {
       </CardHeader>
       <CardBody>
         <Stack spacing="2">
-          <Heading size="md">{blog.title}</Heading>
+          <Heading noOfLines={1} size="md">{blog.title}</Heading>
           <Text noOfLines={[1, 2]}>{blog.content}</Text>
-          <Link color="blue.500" fontSize="md">
+          <Link color="blue.500" fontSize="sm">
             Read more
           </Link>
         </Stack>
@@ -117,7 +117,7 @@ const BlogCard = ({ blog }: TBlogCard) => {
           src={blog.imageUrl}
           alt="blog image"
           width="full"
-          height={{base: 200, md: 230, lg: 250}}
+          height={{base: 180, md: 220, lg: 240}}
           mx="auto"
           objectFit="cover"
           objectPosition="top"

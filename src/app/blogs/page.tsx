@@ -76,9 +76,9 @@ export default function Blog() {
           </Flex>
         )}
         <SimpleGrid justifyItems="center" spacing={10} p={{ base: 4, md: 8 }} templateColumns='repeat(auto-fill, minmax(350px, 1fr))'>
-          {blogs.map((blog) => (
-            <BlogCard key={blog.id} blog={blog} />
-          ))}
+        {blogs.sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()).map((blog) => (
+          <BlogCard key={blog.id} blog={blog} />
+        ))}
         </SimpleGrid>
       </VStack>
     </Layout>
