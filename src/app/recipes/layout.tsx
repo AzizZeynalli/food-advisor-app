@@ -8,7 +8,7 @@ export default function Layout({children}:any) {
             <Navigation />
             <RecipesHeader />
             {children}
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }
