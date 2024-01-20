@@ -1,6 +1,16 @@
 "use client";
 import axios from "axios";
-import { VStack, Image, Text, useToast } from "@chakra-ui/react";
+import {
+  VStack,
+  Image,
+  Text,
+  useToast,
+  HStack,
+  Flex,
+  Avatar,
+  Heading,
+  Box,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, RefObject } from "react";
@@ -12,7 +22,10 @@ import HelpTitle from "@/components/helpPage/HelpTitle";
 import HelpTextarea from "@/components/helpPage/HelpTextarea";
 import HelpButton from "@/components/helpPage/HelpButton";
 import emailjs from "@emailjs/browser";
+import { useAuth } from "@/contexts/authContext";
+import UsernameInput from "@/components/(formComponents)/UsernameInput";
 const HelpPage = () => {
+  const {user} = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
@@ -51,8 +64,8 @@ const HelpPage = () => {
     if (form.current) {
       emailjs
         .sendForm(
-          "service_h58rsde",
-          "template_bmikcsn",
+          "service_c8rv9pl",
+          "template_objj23j",
           form.current,
           "g7ff1YFVqqwiDDX1K"
         )
@@ -68,6 +81,7 @@ const HelpPage = () => {
               isClosable: true,
               colorScheme: "blue",
             });
+
           },
           (error) => {
             console.log(error.text);
@@ -80,50 +94,44 @@ const HelpPage = () => {
       console.error("Form ref is not defined.");
     }
   };
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+ 
+ 
   return (
-    <VStack
-      gap="0"
-      justifyContent="center"
-      alignItems="center"
-      height="100vh"
-      padding="50px"
-    >
-      <Image
-        src="../images/Logo.svg"
-        cursor="pointer"
-        width={{ base: "40%", sm: "35%", md: "30%", lg: "20%" }}
-        mb={{ base: "20px", lg: "40px" }}
-        alt=""
-        onClick={() => {
-          router.push("/");
-        }}
-      />
-
-      <VStack
-        width="80%"
-        shadow="sm"
-        borderWidth={3}
-        borderRadius="lg"
-        padding="20px"
-      >
-        <Text alignSelf="flex-start" pb="20px" fontSize="20px" fontWeight="700">
-          If you have any problem, please write us!
-        </Text>
-        <form ref={form} style={{ width: "100%" }} action="#">
-          <EmailInput errors={errors} control={control} />
-          <HelpTitle errors={errors} control={control} />
-          <HelpTextarea errors={errors} control={control} />
-          <HelpButton
-            handleSubmit={handleSubmit}
-            onSubmit={sendEmail}
-            isValid={isValid}
-            isloading={isloading}
-          />
-        </form>
-      </VStack>
+    <VStack width="100%" height="100vh" padding="20px 70px">
+      <HStack justifyContent="space-between" width="100%">
+        <Image src="../images/image 28.png" onClick={()=>router.push("/")} cursor="pointer"/>
+        <Flex fontWeight="bold" alignItems="center" onClick={()=> router.push("/profile")}>
+          {" "}
+          <Avatar size="sm" name={user?.username} mr={3} />
+          <Text fontSize="md">{user?.username}</Text>
+        </Flex>
+      </HStack>
+      <HStack width="100%" justifyContent="space-between">
+        <VStack alignItems="flex-start" width={{base: "100%",md:"50%"}} mt="20px">
+          <Heading fontWeight="600" >Contact us:</Heading>
+          <Text fontSize="16px" fontWeight="200" mb="20px">
+            We’re here to help! Send us your feedback via the form below or send
+            us an email at{" "}
+            <Link style={{color:"blue"}} href="mailto:fooderra.contact@gmail.com">
+              {" "}
+              fooderra.contact@gmail.com
+            </Link>{" "}
+            for any issue you’re facing
+          </Text>
+          <form style={{ width: "100%" }} ref={form}>
+            <EmailInput errors={errors} control={control} />
+            <HelpTitle errors={errors} control={control} />
+            <HelpTextarea errors={errors} control={control} />
+            <HelpButton
+              handleSubmit={handleSubmit}
+              onSubmit={sendEmail}
+              isValid={isValid}
+              isloading={isloading}
+            />
+          </form>
+        </VStack>
+        <Image src="../images/Page-1.png" width={{base:"0",md:"25%"}} mr="50px"/>
+      </HStack>
     </VStack>
   );
 };

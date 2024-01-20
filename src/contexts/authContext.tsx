@@ -1,15 +1,30 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { set } from 'react-hook-form';
 
 type TUser  = {
     username: string;
     email: string;
     avatar: string;
     token: string;
-    likedRecipes: string[];
+    likedRecipes: Meal[];
+    blogs: Blog[];
 }
+
+type Blog = {
+    id: string;
+    title: string;
+    content: string;
+    imageUrl: string;
+    createdAt: Date;
+}
+
+type Meal = {
+    idMeal: string;
+    strMeal: string;
+    strMealThumb: string;
+    strInstructions: string;
+};
 
 interface AuthContextType {
   user: null | TUser; 
@@ -18,7 +33,7 @@ interface AuthContextType {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   login: (user: TUser) => void;
   logout: () => void;
-  likeRecipe: (mealId: string) => void;
+  likeRecipe: (meal: Meal) => void;
   unlikeRecipe: (mealId: string) => void;
 }
 
@@ -35,7 +50,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     useEffect(() => {
         const token = Cookies.get('userToken');
         if (token) {
-            axios.get('http://localhost:3003/api/users/details', {
+            axios.get('https://fooderra-api.vercel.app/api/users/details', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -61,9 +76,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser(null);
     };
 
-    const likeRecipe = (mealId : string) => {
-        axios.patch('http://localhost:3003/api/users/like', {
-            mealId
+    const likeRecipe = (meal: Meal) => {
+        axios.patch('https://fooderra-api.vercel.app/api/users/like', {
+            meal
         }, {
             headers: {
                 Authorization: `Bearer ${user?.token}`
@@ -76,7 +91,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     const unlikeRecipe = (mealId : string) => {
-        axios.patch('http://localhost:3003/api/users/removelike', {
+        axios.patch('https://fooderra-api.vercel.app/api/users/removelike', {
             mealId
         }, {
             headers: {

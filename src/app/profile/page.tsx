@@ -33,7 +33,7 @@ import {
 } from "react-icons/bi";
 
 export default function Profile() {
-  const { user, logout } = useAuth();
+  const { user, unlikeRecipe, logout } = useAuth();
   const [isEditing, setIsEditing] = useBoolean();
   const router = useRouter();
   const [editedUsername, setEditedUsername] = useState("");
@@ -45,6 +45,12 @@ export default function Profile() {
       setEditedEmail(user.email);
     }
   }, [user]);
+
+  const handleUnlike = (mealId:string) => {
+    if(window.confirm('Are you sure you want to delete this recipe from liked?')) {
+      unlikeRecipe(mealId);
+    }
+  }
 
   const handleEditClick = () => {
     setIsEditing.toggle();
@@ -61,7 +67,7 @@ export default function Profile() {
         flexDirection={{ lg: "row", base: "column" }}
       >
         <Button
-          position="absolute"
+          position="fixed"
           top="32px"
           left="32px"
           zIndex="1"
@@ -203,10 +209,11 @@ export default function Profile() {
                 borderRadius="12px"
                 p={{ md: "32px", base: "16px" }}
                 alignItems="stretch"
+                spacing={10}
               >
-                {user?.likedRecipes.map((idMeal) => (
+                {user?.likedRecipes.map((meal) => (
                   <Card
-                    key={idMeal}
+                    key={meal.idMeal}
                     direction="row"
                     overflow="hidden"
                     variant="outline"
@@ -214,18 +221,22 @@ export default function Profile() {
                     <Image
                       objectFit="cover"
                       w="100px"
-                      h="100px"
-                      src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+                      src={meal.strMealThumb}
                       alt=""
                     />
                     <Flex
                       p="16px"
                       justifyContent="space-between"
-                      w="100%"
+                      w="90%"
                       flexDirection={{ sm: "row", base: "column" }}
                     >
-                      <Heading size="md">Latte</Heading>
-                      <Button color="red" leftIcon={<BiSolidHeart />}>
+                      <VStack alignItems="flex-start" px={3}>
+                        <Heading size="md">{meal.strMeal}</Heading>
+                        <Text noOfLines={2}>
+                          {meal.strInstructions}
+                        </Text>
+                      </VStack>
+                      <Button minW="100px" color="red" leftIcon={<BiSolidHeart />} onClick={()=>handleUnlike(meal.idMeal)}>
                         Liked
                       </Button>
                     </Flex>
@@ -234,7 +245,7 @@ export default function Profile() {
               </VStack>
             </TabPanel>
             <TabPanel h={{ lg: "100vh" }} p={{ lg: "48px", base: "16px" }}>
-              <Heading color="#3e5a7b">Liked blogs</Heading>
+              <Heading color="#3e5a7b">My blogs</Heading>
               <VStack
                 mt={{ lg: "48px", base: "16px" }}
                 bg="#ffffff"
@@ -244,26 +255,29 @@ export default function Profile() {
                 p={{ md: "32px", base: "16px" }}
                 alignItems="stretch"
               >
-                <Card direction="row" overflow="hidden" variant="outline">
-                  <Image
-                    objectFit="cover"
-                    w="100px"
-                    h="100px"
-                    src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-                    alt=""
-                  />
-                  <Flex
-                    p="16px"
-                    justifyContent="space-between"
-                    w="100%"
-                    flexDirection={{ sm: "row", base: "column" }}
-                  >
-                    <Heading size="md">Latte</Heading>
-                    <Button color="red" leftIcon={<BiSolidHeart />}>
-                      Liked
-                    </Button>
-                  </Flex>
-                </Card>
+                {user?.blogs.map((blog) => (
+                  <Card key={blog.id} direction="row" overflow="hidden" variant="outline">
+                    <Image
+                      objectFit="cover"
+                      w="100px"
+                      h="100px"
+                      src={blog.imageUrl}
+                      alt=""
+                    />
+                    <Flex
+                      p="16px"
+                      justifyContent="space-between"
+                      w="100%"
+                      flexDirection={{ sm: "row", base: "column" }}
+                    >
+                      <Heading size="md">{blog.title}</Heading>
+                      <Text>{blog.content}</Text>
+                      <Button color="red">
+                        Delete
+                      </Button>
+                    </Flex>
+                  </Card>
+                ))}
               </VStack>
             </TabPanel>
           </TabPanels>

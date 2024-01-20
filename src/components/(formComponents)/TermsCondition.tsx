@@ -117,11 +117,11 @@ const TermsCondition: React.FC<ITermsProps> = ({
               <span
               style={{cursor:"pointer", color:"blue"}}
                 onClick={(e) => {
-                  window.location.href = "contact@fooderra.com";
+                  window.location.href = "fooderra.contact@gmail.com";
                   e.preventDefault();
                 }}
               >
-                contact@fooderra.com{" "}
+                fooderra.contact@gmail.com{" "}
               </span>
               .
             </Text>

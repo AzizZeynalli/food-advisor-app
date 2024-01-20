@@ -44,7 +44,17 @@ const ResetPassword = () => {
       console.error('Password reset failed:', error);
     }
   };
-
+ useEffect(()=>{
+  const handleKeyPress = (e:any) =>{
+    if(e.key === "Enter" && isValid){
+      handleSubmit(onSubmit)();
+    }
+  }
+  document.addEventListener("keypress",handleKeyPress);
+  return ()=>{
+    document.removeEventListener("keypress", handleKeyPress);
+  }
+ },[isValid,handleSubmit,onSubmit])
   return (
     <VStack
       gap="0"

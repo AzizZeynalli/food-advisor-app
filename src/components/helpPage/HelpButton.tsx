@@ -16,7 +16,7 @@ const HelpButton: React.FC<IHelpButtonProps> = ({handleSubmit,onSubmit, isloadin
           mb="20px"
           mt="20px"
           width="100%"
-          colorScheme="blue"
+          bg="#233345"
           variant="solid"
           color="white"
           onClick={handleSubmit(onSubmit)}
@@ -24,17 +24,7 @@ const HelpButton: React.FC<IHelpButtonProps> = ({handleSubmit,onSubmit, isloadin
         >
           {isloading ? <Spinner /> : "Send"}
         </Button>
-        <Button
-          width="100%"
-          colorScheme="blue"
-          variant="solid"
-          color="white"
-          onClick={() => {
-            router.push("/");
-          }}
-        >
-          Back to Home page
-        </Button>
+       
     </VStack>
   )
 }

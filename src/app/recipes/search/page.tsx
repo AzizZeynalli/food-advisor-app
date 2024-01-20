@@ -1,9 +1,9 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 export default function Search() {
     return(
-        <>
-        <Text>hello</Text>
-        </>
+        <Flex justifyContent='center' p='32px'>
+        <Image src="/images/Earth.svg" alt="" />
+        </Flex>
     )
 }

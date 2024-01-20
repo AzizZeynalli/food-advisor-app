@@ -1,6 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
 import {
   Box,
   Heading,
@@ -9,7 +7,7 @@ import {
   UnorderedList,
   ListItem,
   Skeleton,
-  SkeletonText
+  SkeletonText,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -54,29 +52,63 @@ export default function Recipe({ params: { recipeId } }: any) {
       flexDirection="column"
       justifyContent="space-between"
     >
-      <Navigation />
       <Box p="32px" h="100%">
         {loading ? (
           <Box>
-            <Skeleton height="400px" float={{md:'right'}} width="400px" my="4" />
+            <Skeleton
+              height="400px"
+              borderRadius='8px'
+              my="4"
+            />
             <Skeleton height="45px" width="150px" my="4" />
-            <Skeleton height="24px" width="100px" my="4" />            
-            <SkeletonText mt='4' noOfLines={10} maxW={{md:"calc(100% - 450px)"}} spacing='2' skeletonHeight='4' />
-            <SkeletonText mt='4' noOfLines={5} w='300px' spacing='2' skeletonHeight='4' />
+            <Skeleton height="24px" width="100px" my="4" />
+            <SkeletonText
+              mt="4"
+              noOfLines={10}
+              spacing="2"
+              skeletonHeight="4"
+            />
+            <SkeletonText
+              mt="4"
+              noOfLines={5}
+              w="300px"
+              spacing="2"
+              skeletonHeight="4"
+            />
           </Box>
         ) : (
           meals.map((meal) => (
             <Box key={meal.idMeal}>
-              <Image
-                borderRadius="8px"
-                float={{ md: "right" }}
-                w={{ md: "400px" }}
-                src={meal.strMealThumb}
-                alt=""
-                ml={{md:'16px'}}
-                mb={{md:'16px'}}
-              />
-              <Heading mb="16px"> {meal.strMeal} </Heading>
+              <Box pos="relative">
+                <Image
+                  borderRadius="8px"
+                  float={{ md: "right" }}
+                  w="100%"
+                  h={{md:"500px", base:'400px'}}
+                  objectFit="cover"
+                  src={meal.strMealThumb}
+                  alt=""
+                />
+                
+                <Box
+                  pos="absolute"
+                  w="100%"
+                  h={{md:"500px", base:'400px'}}
+                  bg="linear-gradient(to top, white, rgba(255, 255, 255, 0.5) 50%, transparent)"
+                  top="0"
+                >
+                  <Heading
+                  mb="16px"
+                  pos="absolute"
+                  size={{ md: "3xl", sm: "2xl", base: "xl" }}
+                  bottom='0'
+                  p='16px'
+                >
+                  {" "}
+                  {meal.strMeal}{" "}
+                </Heading>
+                </Box>
+              </Box>
               <Text
                 color="#95A6BD"
                 fontSize="16px"
@@ -114,7 +146,6 @@ export default function Recipe({ params: { recipeId } }: any) {
           ))
         )}
       </Box>
-      <Footer openModal={()=>{}} />
     </Box>
   );
 }

@@ -23,7 +23,7 @@ const SignUp = () => {
     if (user) {
       logout();
     }
-  })
+  }, [])
 
   const toast = useToast();
   const router = useRouter();
@@ -58,7 +58,7 @@ const SignUp = () => {
     setisLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3003/api/users",
+        "https://fooderra-api.vercel.app/api/users",
         { username, email, password },
         {
           headers: {
@@ -87,7 +87,19 @@ const SignUp = () => {
       setisLoading(false);
     }
   }
-
+  useEffect(() => {
+    const handleKeyPress = (e:any) => {
+      if (e.key === 'Enter' && isValid && agreeTerms) {
+        handleSubmit(onSubmit)();
+      }
+    };
+  
+    document.addEventListener('keypress', handleKeyPress);
+  
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress);
+    };
+  }, [isValid, agreeTerms]);
   return (
     <VStack
       minWidth="400px"
