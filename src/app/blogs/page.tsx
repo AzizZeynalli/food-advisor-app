@@ -22,7 +22,7 @@ type TBlog = {
   title: string;
   content: string;
   likes: number;
-  image: string;
+  imageUrl: string;
   dateCreated: Date;
   user: {
     username: string;
