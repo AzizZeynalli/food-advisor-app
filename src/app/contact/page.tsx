@@ -81,7 +81,7 @@ const HelpPage = () => {
               isClosable: true,
               colorScheme: "blue",
             });
-            
+
           },
           (error) => {
             console.log(error.text);
@@ -107,14 +107,14 @@ const HelpPage = () => {
         </Flex>
       </HStack>
       <HStack width="100%" justifyContent="space-between">
-        <VStack alignItems="flex-start" width={{base: "100%",md:"50%"}}>
-          <Heading fontWeight="600">Contact us:</Heading>
+        <VStack alignItems="flex-start" width={{base: "100%",md:"50%"}} mt="20px">
+          <Heading fontWeight="600" >Contact us:</Heading>
           <Text fontSize="16px" fontWeight="200" mb="20px">
             We’re here to help! Send us your feedback via the form below or send
             us an email at{" "}
-            <Link style={{color:"blue"}} href="mailto:contact@fooderra.com">
+            <Link style={{color:"blue"}} href="mailto:fooderra.contact@gmail.com">
               {" "}
-              contact@fooderra.com
+              fooderra.contact@gmail.com
             </Link>{" "}
             for any issue you’re facing
           </Text>
