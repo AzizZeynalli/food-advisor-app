@@ -2,16 +2,10 @@
 import {
   Box,
   Button,
-  Drawer,
-  DrawerBody,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   Flex,
   Link,
   Image,
   useDisclosure,
-  VStack,
   Menu,
   MenuButton,
   MenuList,
@@ -23,12 +17,12 @@ import {
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { useAuth } from "@/contexts/authContext";
-// import Link from "next/link";
+import DrawerComponent from "./DrawerComponent";
 
 export function Navigation() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen, isOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
   const handleLinkClick = () => {
     if (!user) {
@@ -41,7 +35,7 @@ export function Navigation() {
   return (
     <Flex
       py="20px"
-      px="32px"
+      px={{sm:"32px", base:'16px'}}
       bg="#EEF8FD"
       alignItems="center"
       justifyContent="space-between"
@@ -98,170 +92,70 @@ export function Navigation() {
           </Link>
         </Box>
       </Box>
-      <Button
-        variant="ghost"
-        ref={btnRef}
-        onClick={onOpen}
-        display={{ lg: "none" }}
-      >
-        <Image src="/images/hamburger.svg" alt="" />
-      </Button>
-      {loading ? (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="100vh"
-        >
-          <Spinner size="sm" thickness="3px" />
-        </Box>
-      ) : user ? (
-        <Flex
-          fontWeight="bold"
-          alignItems="center"
-          onClick={() => router.push("/profile")}
-          cursor="pointer"
-        >
-          {" "}
-          <Avatar size="sm" name={user.username} mr={3} />
-          <Text fontSize="md">{user.username}</Text>
-        </Flex>
-      ) : (
-        <Box
-          display={{ lg: "flex", base: "none" }}
-          alignItems="center"
-          bg="#fff"
-        >
-          <Link
-            href="/login"
-            color="#95A6BD"
-            fontSize="16px"
-            fontWeight="500"
-            lineHeight="40px"
-            px="16px"
-            h="40px"
+      <Flex>
+        {loading ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="100vh"
           >
-            Already have an account? Log in
-          </Link>
-          <Button
-            bg="#233345"
-            color="#fff"
-            borderRadius="24px"
-            _hover={{ bg: "#3e5a7b" }}
-            fontSize="13.672px"
-            fontStyle="normal"
-            fontWeight="500"
-            lineHeight="normal"
-            onClick={() => router.push("/signup")}
+            <Spinner size="sm" thickness="3px" />
+          </Box>
+        ) : user ? (
+          <Flex
+            fontWeight="bold"
+            alignItems="center"
+            onClick={() => router.push("/profile")}
+            cursor="pointer"
           >
-            Sign Up
-          </Button>
-        </Box>
-      )}
-
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerBody mt="40px">
-            <VStack>
-              <Link
-                href="/blogs"
-                color="#95A6BD"
-                fontSize="16px"
-                fontWeight="500"
-                lineHeight="normal"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/recipes"
-                color="#95A6BD"
-                fontSize="16px"
-                fontWeight="500"
-                lineHeight="normal"
-              >
-                Recipes
-              </Link>
-              <Link
-                href="/recipes/areas"
-                color="#95A6BD"
-                fontSize="16px"
-                fontWeight="500"
-                lineHeight="normal"
-              >
-                Areas
-              </Link>
-              <Link
-                href="/recipes/categories"
-                color="#95A6BD"
-                fontSize="16px"
-                fontWeight="500"
-                lineHeight="normal"
-              >
-                Categories
-              </Link>
-              <Link
-                href="/recipes/search"
-                color="#95A6BD"
-                fontSize="16px"
-                fontWeight="500"
-                lineHeight="normal"
-              >
-                Search
-              </Link>
-              <Link
-                href="help"
-                color="#95A6BD"
-                fontSize="16px"
-                fontWeight="500"
-                lineHeight="normal"
-              >
-                Help
-              </Link>
-              {user ? (
-                <Box>Welcome, {user.username}</Box>
-              ) : (
-                <Box>
-                  <Button
-                    bg="#F5F8FC"
-                    color="#000"
-                    borderRadius="24px"
-                    _hover={{ bg: "#e4ecf7" }}
-                    fontSize="13.672px"
-                    fontStyle="normal"
-                    fontWeight="500"
-                    lineHeight="normal"
-                    onClick={() => router.push("/login")}
-                    px="40px"
-                  >
-                    Log in
-                  </Button>
-                  <Button
-                    bg="#233345"
-                    color="#fff"
-                    borderRadius="24px"
-                    _hover={{ bg: "#3e5a7b" }}
-                    fontSize="13.672px"
-                    fontStyle="normal"
-                    fontWeight="500"
-                    lineHeight="normal"
-                    px="40px"
-                    onClick={() => router.push("/signup")}
-                  >
-                    Sign Up
-                  </Button>
-                </Box>
-              )}
-            </VStack>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+            {" "}
+            <Avatar size="sm" name={user.username} mr={3} />
+            <Text fontSize="md" display={{lg:'block', base:'none'}}>{user.username}</Text>
+          </Flex>
+        ) : (
+          <Box
+            display={{ lg: "flex", base: "none" }}
+            alignItems="center"
+            bg="#fff"
+          >
+            <Link
+              href="/login"
+              color="#95A6BD"
+              fontSize="16px"
+              fontWeight="500"
+              lineHeight="40px"
+              px="16px"
+              h="40px"
+            >
+              Already have an account? Log in
+            </Link>
+            <Button
+              bg="#233345"
+              color="#fff"
+              borderRadius="24px"
+              _hover={{ bg: "#3e5a7b" }}
+              fontSize="13.672px"
+              fontStyle="normal"
+              fontWeight="500"
+              lineHeight="normal"
+              onClick={() => router.push("/signup")}
+            >
+              Sign Up
+            </Button>
+          </Box>
+        )}
+        <Button
+        p='0'
+          variant="ghost"
+          ref={btnRef}
+          onClick={onOpen}
+          display={{ lg: "none" }}
+        >
+          <Image src="/images/hamburger.svg" alt="" />
+        </Button>
+      </Flex>
+      <DrawerComponent isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 }
