@@ -2,7 +2,7 @@
 
 Users should be able to:
 
-- [View the optimal layout for the site depending on their device's screen size]
+- View the optimal layout for the site depending on their device's screen size
 - [See hover states for all interactive elements on the page]
 - [Register, Login and Log out]
 - [Filter and Sort products]
@@ -11,4 +11,4 @@ Users should be able to:
 
 ## Screenshot
 
-![homepage1](images/Homepage1.png)
+![homepage1](../food-advisor-app/public/images/Homepage1.png)
