@@ -31,16 +31,15 @@ export default function Home() {
         <HStack
           pt="62px"
           w="100vw"
-          h='100vh'
+          h='80vh'
           bgImage={{ base: "none", xl: "../images/backnew.png" }}
           bgColor={{ base: "#eef8fd", xl: "none" }}
           bgSize="cover"
           bgPosition="center"
           bgRepeat="no-repeat"
-          justifyContent={{ base: "center", xl: "space-between" }}
           alignItems="center"
         >
-          <VStack pb="36px" color="black" pl={{ base: "none", xl: "200px" }}>
+          <VStack pb="36px" color="black" pl={{ base: "none", xl: "200px" }} float={{base:"none", lg:"left"}}>
             <Heading pb="16px" fontSize="40px" fontWeight="500" textAlign='center'>
               Cook, Share, Savor!
             </Heading>

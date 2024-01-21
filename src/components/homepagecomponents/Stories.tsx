@@ -55,7 +55,7 @@ export function Stories() {
             alignItems="center"
             justifyContent="center"
             flexWrap="wrap"
-            maxW={{base:"100vw", md:"100vw"}}
+            maxW={{base:"90vw", md:"90vw"}}
             objectFit='cover'
           >
             <Swiper {...swiperOptions} className="mySwiper" >
