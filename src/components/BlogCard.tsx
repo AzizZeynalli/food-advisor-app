@@ -107,7 +107,7 @@ const BlogCard = ({ blog }: TBlogCard) => {
         <Stack spacing="2">
           <Heading noOfLines={1} size="md">{blog.title}</Heading>
           <Text noOfLines={[1, 2]}>{blog.content}</Text>
-          <Link color="blue.500" fontSize="sm">
+          <Link color="blue.500" fontSize="sm" href={`/blogs/${blog.id}`}>
             Read more
           </Link>
         </Stack>
