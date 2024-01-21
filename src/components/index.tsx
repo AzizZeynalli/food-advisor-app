@@ -7,7 +7,7 @@ export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <Box display="flex" flexDirection="column" minHeight="100vh">
         <Navigation />
         <Box flexGrow={1}>{children}</Box>
-        {/* <Footer/> */}
+        <Footer/>
       </Box>
     );
   };

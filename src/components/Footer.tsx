@@ -4,11 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import FooterTermsCondition from "./FooterTermsCondition";
- interface TermsAndConditionsButtonProps {
-  openModal: () => void;
-}
 
-const Footer: React.FC<TermsAndConditionsButtonProps>=({ openModal }) =>{ 
+
+const Footer=() =>{ 
 
     const router = useRouter();
     const mailto = "fooderra.contact@gmail.com";
@@ -71,9 +69,9 @@ const Footer: React.FC<TermsAndConditionsButtonProps>=({ openModal }) =>{
                     router.push("/categories");
                     }}
                     >Categories</Text>
-                    <Text cursor="pointer" onClick={openTermsModal}
-                    >Terms and Conditions</Text>
-                    <FooterTermsCondition isOpen={isTermsModalOpen} closeModal={closeTermsModal}/>
+                   {/* <Text cursor="pointer" onClick={openTermsModal}
+                    >Terms and Conditions</Text>*/}
+                    <FooterTermsCondition/>
                 </VStack>
                 <VStack 
                 gap='8px'

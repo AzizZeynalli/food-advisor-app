@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Box, Card, CardBody, Divider, Heading, Image, Text, VStack, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardBody,
+  Divider,
+  Heading,
+  Image,
+  Text,
+  VStack,
+  Link,
+} from "@chakra-ui/react";
 import LikeAndShareButtons from "./LikeAndShareButtons";
 import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
@@ -51,9 +61,17 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ meal }) => {
   }, [user]);
 
   return (
-    <Card key={meal.idMeal} variant="outline">
+    <Card key={meal.idMeal} variant="outline" _hover={{
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      transform: "scale(1.05)",
+      transition: "transform 0.3s ease",
+    }}>
       <CardBody>
-        <Image src={meal.strMealThumb} alt="" />
+        <Link
+          href={`/recipes/${encodeURIComponent(meal.strMeal)}`}
+        >
+          <Image src={meal.strMealThumb} alt="" />
+        </Link>
         <VStack alignItems="flex-start">
           <Heading mt="8px" fontSize="24px">
             {meal.strMeal}
@@ -92,7 +110,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ meal }) => {
             (likedRecipe) => likedRecipe.idMeal === meal.idMeal
           )}
           onLikeClick={() => handleLikeClick(meal)}
-          recipeUrl={`http://localhost:3000/recipes/${encodeURIComponent(
+          recipeUrl={`https://food-advisor-app.vercel.app/recipes/${encodeURIComponent(
             meal.strMeal
           )}`}
           recipeTitle={meal.strMeal}
