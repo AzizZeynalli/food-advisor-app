@@ -25,7 +25,7 @@ export function Stories() {
 
   const [swiperOptions, setSwiperOptions] = useState({
     slidesPerView: 1,
-    centeredSlides: true,
+    centeredSlides: false,
     grabCursor: true,
     navigation: true,
     keyboard: {
@@ -51,14 +51,14 @@ export function Stories() {
         </Heading>
         <Center>
           <Box
-            position="relative"
             display="flex"
             alignItems="center"
             justifyContent="center"
-            maxW={{ base: "400px", md: "1450px" }}
             flexWrap="wrap"
+            maxW={{base:"100vw", md:"100vw"}}
+            objectFit='cover'
           >
-            <Swiper {...swiperOptions} className="mySwiper">
+            <Swiper {...swiperOptions} className="mySwiper" >
               <SwiperSlide>
                 <Flex alignItems="center" justifyContent="center" height="100%">
                   <CardStory
@@ -110,8 +110,8 @@ export function Stories() {
                   ></CardStory>
                 </Flex>
               </SwiperSlide>
-              <SwiperSlide>
-                <Flex alignItems="center" justifyContent="center" height="100%">
+              <SwiperSlide  >
+                <Flex alignItems="center" justifyContent="center" height="100%" >
                   <CardStory
                     imageStory="../images/kanan.png"
                     cardName="Kanan 25"
