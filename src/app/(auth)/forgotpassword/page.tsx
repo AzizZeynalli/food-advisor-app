@@ -4,7 +4,7 @@ import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
 import { VStack, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const ForgotPassword = () => {
@@ -20,34 +20,26 @@ const ForgotPassword = () => {
       email: "",
     },
   });
-  const onSubmit = async (data: any) => {
-    //console.log("Form submitted:", data);
-    //const email = getValues();
-    try {
-      const response = await axios.post(
-        "https://fooderra-api.vercel.app/api/users",
-        { email: data.email },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(()=>{
-    const handleKeyPress = (e:any)=>{
-      if(e.key === "Enter" && isValid){
+
+;
+const onSubmit = useCallback(async (data: { email: string }) => {
+  const url = `/resetpassword?email=${encodeURIComponent(data.email)}`;
+  router.push(url);
+}, [router]);
+  
+  useEffect(() => {
+    const handleKeyPress = (e: any) => {
+      if (e.key === "Enter" && isValid) {
         handleSubmit(onSubmit)();
       }
-    }
-    document.addEventListener('keypress',handleKeyPress);
-    return()=>{
-      document.removeEventListener("keypress",handleKeyPress);
     };
-  },[isValid,handleSubmit,onSubmit]);
+  
+    document.addEventListener('keypress', handleKeyPress);
+  
+    return () => {
+      document.removeEventListener("keypress", handleKeyPress);
+    };
+  }, [onSubmit, isValid, handleSubmit]);
   return (
     <VStack
       gap="0"
@@ -62,6 +54,7 @@ const ForgotPassword = () => {
       bgSize={{ base: "0", "2xl": "20%" }}
     >
       <Image
+        alt=""
         src="../images/Logo.svg"
         cursor="pointer"
         width={{ base: "40%", sm: "35%", md: "30%", lg: "20%" }}

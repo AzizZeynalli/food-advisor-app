@@ -46,11 +46,13 @@ export default function Profile() {
     }
   }, [user]);
 
-  const handleUnlike = (mealId:string) => {
-    if(window.confirm('Are you sure you want to delete this recipe from liked?')) {
+  const handleUnlike = (mealId: string) => {
+    if (
+      window.confirm("Are you sure you want to delete this recipe from liked?")
+    ) {
       unlikeRecipe(mealId);
     }
-  }
+  };
 
   const handleEditClick = () => {
     setIsEditing.toggle();
@@ -103,7 +105,7 @@ export default function Profile() {
             </Tab>
             <Tab _selected={{ color: "white", bg: "#233345" }}>
               <BiHeart />
-              Liked blogs
+              My blogs
             </Tab>
           </TabList>
           <Button
@@ -232,11 +234,14 @@ export default function Profile() {
                     >
                       <VStack alignItems="flex-start" px={3}>
                         <Heading size="md">{meal.strMeal}</Heading>
-                        <Text noOfLines={2}>
-                          {meal.strInstructions}
-                        </Text>
+                        <Text noOfLines={2}>{meal.strInstructions}</Text>
                       </VStack>
-                      <Button minW="100px" color="red" leftIcon={<BiSolidHeart />} onClick={()=>handleUnlike(meal.idMeal)}>
+                      <Button
+                        minW="100px"
+                        color="red"
+                        leftIcon={<BiSolidHeart />}
+                        onClick={() => handleUnlike(meal.idMeal)}
+                      >
                         Liked
                       </Button>
                     </Flex>
@@ -256,25 +261,29 @@ export default function Profile() {
                 alignItems="stretch"
               >
                 {user?.blogs.map((blog) => (
-                  <Card key={blog.id} direction="row" overflow="hidden" variant="outline">
+                  <Card
+                    key={blog.id}
+                    direction="row"
+                    overflow="hidden"
+                    variant="outline"
+                  >
                     <Image
                       objectFit="cover"
-                      w="100px"
-                      h="100px"
+                      w="150px"
                       src={blog.imageUrl}
                       alt=""
                     />
                     <Flex
                       p="16px"
                       justifyContent="space-between"
-                      w="100%"
+                      w="90%"
                       flexDirection={{ sm: "row", base: "column" }}
                     >
-                      <Heading size="md">{blog.title}</Heading>
-                      <Text>{blog.content}</Text>
-                      <Button color="red">
-                        Delete
-                      </Button>
+                      <VStack alignItems="flex-start" px={3}>
+                        <Heading size="md">{blog.title}</Heading>
+                        <Text noOfLines={2}>{blog.content}</Text>
+                      </VStack>
+                      <Button minW="100px" color="red">Delete</Button>
                     </Flex>
                   </Card>
                 ))}

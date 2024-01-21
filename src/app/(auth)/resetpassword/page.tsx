@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-const ResetPassword = () => {
+const ResetPassword = ({params}:any) => {
   const router = useRouter();
   const methods = useForm({
     mode: "onChange",
@@ -22,29 +22,13 @@ const ResetPassword = () => {
 
   const { formState, handleSubmit, watch } = methods;
   const { isValid } = formState;
-
+  console.log(params);
   const onSubmit = async (data: any) => {
-    try {
-      const resetData = {
-        email: data.email,
-        newPassword: data.newPassword,
-      };
-      const response = await axios.put(
-        'https://fooderra-api.vercel.app/api/resetpassword',
-        resetData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      console.log('Password reset successful:', response.data);
-  
-    } catch (error) {
-      console.error('Password reset failed:', error);
-    }
+
   };
+
  useEffect(()=>{
+  
   const handleKeyPress = (e:any) =>{
     if(e.key === "Enter" && isValid){
       handleSubmit(onSubmit)();
@@ -69,6 +53,7 @@ const ResetPassword = () => {
       bgSize={{ base: "0", "2xl": "20%" }}
     >
       <Image
+        alt=""
         src="../images/Logo.svg"
         cursor="pointer"
         width={{ base: "40%", sm: "35%", md: "30%", lg: "20%" }}
