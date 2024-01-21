@@ -11,4 +11,4 @@ Users should be able to:
 
 ## Screenshot
 
-![homepage1](./public/images/MergedImages%20(1).png.png)
+![homepage1](./public/images/MergedImages(1).png)
