@@ -59,5 +59,4 @@ To run the project locally, follow these steps:
 4. Start the frontend and backend servers using "npm run dev" in their respective directories.
  
 And also can enter this link: 
-[https://food-advisor-app.vercel.app/][url]
-[url]: https://food-advisor-app.vercel.app/
+https://food-advisor-app.vercel.app/
