@@ -63,9 +63,9 @@ https://food-advisor-app.vercel.app/
 
 # Authors
 - [Tarana Aliyeva](https://www.linkedin.com/in/tarana-aliyeva/)
-- Sama Zeynalli
-- Aziz Zeynalli
-- Murad Israfilov
-- Kenan Guluzade
-- Eldar Asgerov
-- Fagan Majidzade
+- [Sama Zeynalli](https://www.linkedin.com/in/sama-zeynalli/)
+- [Aziz Zeynalli](https://github.com/AzizZeynalli)
+- [Murad Israfilov](https://github.com/Murad633)
+- [Kenan Guluzade](https://www.linkedin.com/in/kenan-guluzade/)
+- [Eldar Asgarov](https://www.linkedin.com/in/eldar-asgarov/)
+- [Fagan Majidzade](https://www.linkedin.com/in/fagan-majidzada-a690a0162/)
