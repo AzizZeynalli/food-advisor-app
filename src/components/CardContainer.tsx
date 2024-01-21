@@ -38,7 +38,7 @@ export function CardContainer() {
       {loading ? (
         <CardSkeleton />
       ) : (
-        <SimpleGrid spacing={4} templateColumns="repeat(auto-fill, minmax(280px, 1fr))">
+        <SimpleGrid spacing={4} templateColumns="repeat(auto-fill, minmax(285px, 1fr))">
           {meals.length > 0 &&
             meals.map((meal) => (
               <RecipeCard key={meal.idMeal} meal={meal} />
