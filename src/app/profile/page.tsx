@@ -269,7 +269,9 @@ export default function Profile() {
                   >
                     <Image
                       objectFit="cover"
-                      w="100px"
+
+                      w="150px"
+
                       src={blog.imageUrl}
                       alt=""
                     />

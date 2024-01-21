@@ -4,7 +4,7 @@ import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
 import { VStack, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const ForgotPassword = () => {
@@ -21,24 +21,25 @@ const ForgotPassword = () => {
     },
   });
 
-  const onSubmit = async (data: string) => {
-    router.push({
-      pathname: '/resetpassword',
-      query: { email: data },
-    });
-  };
-
-  useEffect(()=>{
-    const handleKeyPress = (e:any)=>{
-      if(e.key === "Enter" && isValid){
+;
+const onSubmit = useCallback(async (data: { email: string }) => {
+  const url = `/resetpassword?email=${encodeURIComponent(data.email)}`;
+  router.push(url);
+}, [router]);
+  
+  useEffect(() => {
+    const handleKeyPress = (e: any) => {
+      if (e.key === "Enter" && isValid) {
         handleSubmit(onSubmit)();
       }
-    }
-    document.addEventListener('keypress',handleKeyPress);
-    return()=>{
-      document.removeEventListener("keypress",handleKeyPress);
     };
-  },[]);
+  
+    document.addEventListener('keypress', handleKeyPress);
+  
+    return () => {
+      document.removeEventListener("keypress", handleKeyPress);
+    };
+  }, [onSubmit, isValid, handleSubmit]);
   return (
     <VStack
       gap="0"
