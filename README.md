@@ -6,17 +6,17 @@ Welcome to Fooderra, where you can quickly access the recipes for your favorite 
 
 ## Table of contents
 
--[Overview](#overview)
--[Figma](#figmma)
--[Screenshot](#screenshot)
--[Built with](#built-with)
--[Note for Better UnderStanding](#note-for-better-underStanding)
--[Frontend Technologies](#frontend-technologies)
--[Backend Technologies](#backend-bechnologies)
--[Build and deploy](#build-and-deploy)
--[Project Features](#project-features)
--[How to Run the project](#how-to-run-the-project)
--[Authors](#authors)
+- [Overview](#overview)
+- [Figma](#figmma)
+- [Screenshot](#screenshot)
+- [Built with](#built-with)
+- [Note for Better UnderStanding](#note-for-better-underStanding)
+- [Frontend Technologies](#frontend-technologies)
+- [Backend Technologies](#backend-bechnologies)
+- [Build and deploy](#build-and-deploy)
+- [Project Features](#project-features)
+- [How to Run the project](#how-to-run-the-project)
+- [Authors](#authors)
 
 ## Figma 
--[Link](https://www.figma.com/file/Wh8ksiPhbdWPdTlOYNPXKi/Foodvisor?type=design&node-id=0-1&mode=design&t=klOBaG32m9PoLwOw-0)
+- [Link](https://www.figma.com/file/Wh8ksiPhbdWPdTlOYNPXKi/Foodvisor?type=design&node-id=0-1&mode=design&t=klOBaG32m9PoLwOw-0)
