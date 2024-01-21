@@ -60,3 +60,12 @@ To run the project locally, follow these steps:
  
 And also can enter this link: 
 https://food-advisor-app.vercel.app/
+
+# Authors
+- [Tarana Aliyeva](#https://www.linkedin.com/in/tarana-aliyeva/)
+- Sama Zeynalli
+- Aziz Zeynalli
+- Murad Israfilov
+- Kenan Guluzade
+- Eldar Asgerov
+- Fagan Majidzade
