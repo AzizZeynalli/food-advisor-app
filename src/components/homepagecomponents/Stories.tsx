@@ -58,6 +58,7 @@ export function Stories() {
             flexWrap="wrap"
             maxW={{base:"90vw", md:"90vw"}}
             objectFit='cover'
+
           >
             <Swiper {...swiperOptions} className="mySwiper" >
               <SwiperSlide>

@@ -1,6 +1,7 @@
 "use client";
 import {
   Box,
+  Button,
   Heading,
   Text,
   Image,
@@ -10,10 +11,13 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BiArrowBack } from "react-icons/bi";
 
 export default function Recipe({ params: { recipeId } }: any) {
   const decodedWord = decodeURIComponent(recipeId);
+  const router = useRouter();
 
   type Meal = {
     idMeal: string;
@@ -55,11 +59,7 @@ export default function Recipe({ params: { recipeId } }: any) {
       <Box p="32px" h="100%">
         {loading ? (
           <Box>
-            <Skeleton
-              height="400px"
-              borderRadius='8px'
-              my="4"
-            />
+            <Skeleton height="400px" borderRadius="8px" my="4" />
             <Skeleton height="45px" width="150px" my="4" />
             <Skeleton height="24px" width="100px" my="4" />
             <SkeletonText
@@ -84,29 +84,45 @@ export default function Recipe({ params: { recipeId } }: any) {
                   borderRadius="8px"
                   float={{ md: "right" }}
                   w="100%"
-                  h={{md:"500px", base:'400px'}}
+                  h={{ md: "500px", base: "400px" }}
                   objectFit="cover"
                   src={meal.strMealThumb}
                   alt=""
                 />
-                
+
                 <Box
                   pos="absolute"
                   w="100%"
-                  h={{md:"500px", base:'400px'}}
+                  h={{ md: "500px", base: "400px" }}
                   bg="linear-gradient(to top, white, rgba(255, 255, 255, 0.5) 50%, transparent)"
                   top="0"
                 >
                   <Heading
-                  mb="16px"
-                  pos="absolute"
-                  size={{ md: "3xl", sm: "2xl", base: "xl" }}
-                  bottom='0'
-                  p='16px'
-                >
-                  {" "}
-                  {meal.strMeal}{" "}
-                </Heading>
+                    mb="16px"
+                    pos="absolute"
+                    size={{ md: "3xl", sm: "2xl", base: "xl" }}
+                    bottom="0"
+                    p="16px"
+                  >
+                    {meal.strMeal}{" "}
+                  </Heading>
+                  <Button
+                    position="absolute"
+                    top="16px"
+                    left="16px"
+                    zIndex="1"
+                    bg="#233345"
+                    color="#fff"
+                    borderRadius="24px"
+                    _hover={{ bg: "#3e5a7b" }}
+                    fontStyle="normal"
+                    fontWeight="500"
+                    lineHeight="normal"
+                    border='1px solid #fff'
+                    onClick={() => router.back()}
+                  >
+                    <BiArrowBack />
+                  </Button>
                 </Box>
               </Box>
               <Text
