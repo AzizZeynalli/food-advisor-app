@@ -1,3 +1,4 @@
+
 # Fooderra - ABB Tech Academy
 
 ## General description
@@ -99,3 +100,4 @@ https://food-advisor-app.vercel.app/
 - [Kenan Guluzade](https://www.linkedin.com/in/kenan-guluzade/)
 - [Eldar Asgarov](https://www.linkedin.com/in/eldar-asgarov/)
 - [Fagan Majidzade](https://www.linkedin.com/in/fagan-majidzada-a690a0162/)
+
