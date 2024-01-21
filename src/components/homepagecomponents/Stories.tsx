@@ -45,7 +45,8 @@ export function Stories() {
   });
   return (
     <>
-      <Box m="50px 0">
+      <Box m="50px 0"
+      w='90vw'>
         <Heading textAlign="center" fontSize="30px" fontWeight="500" mb="50px">
           Join millions of success stories
         </Heading>
