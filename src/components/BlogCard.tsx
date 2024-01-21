@@ -1,4 +1,5 @@
 "use client"
+import { useAuth } from "@/contexts/authContext";
 import {
   Icon,
   Card,
@@ -28,6 +29,10 @@ type TBlog = {
   likes: number;
   imageUrl: string;
   dateCreated: Date;
+  whoLiked: [{
+    username: string;
+    avatar: string;
+  }];
   user: {
     username: string;
     email: string;
@@ -40,20 +45,21 @@ type TBlogCard = {
 };
 
 const BlogCard = ({ blog }: TBlogCard) => {
-  useEffect(() => {
-    localStorage.setItem("token", "");
-  }, []);
+
+  const { user } = useAuth();
 
   const [likes, setLikes] = useState(blog.likes);
 
-  const updateLikes = async () => {
+  const updateLike = async (likeType: string) => {
+    console.log(likeType);
+    const url = `https://fooderra-api.vercel.app/api/blogs/${blog.id}/${likeType}`;
     try {
       const response = await axios.patch(
-        `http://localhost:3003/api/blogs/${blog.id}/like`,
+        url,
         {},
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${user?.token}`,
           },
         }
       );
@@ -65,8 +71,15 @@ const BlogCard = ({ blog }: TBlogCard) => {
 
   const handleLike = async () => {
     try {
-      await updateLikes();
-      setLikes((prev) => prev + 1);
+      console.log("test", user?.username);
+      console.log("test", blog.whoLiked);
+      if(blog.whoLiked.some((someuser) => someuser.username === user?.username)) {
+        await updateLike("removelike");
+        setLikes((prev) => prev - 1);
+      } else {
+        await updateLike("like");
+        setLikes((prev) => prev + 1);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -78,7 +91,7 @@ const BlogCard = ({ blog }: TBlogCard) => {
         <Flex justify="space-between">
           <Stack align={{ base: "start", md: "center" }}>
             <WrapItem>
-              <Avatar src={blog.user.avatar || ""} />
+              <Avatar src={blog.user.avatar || ""} name={blog.user.username} />
             </WrapItem>
             <Heading size="sm">
               @{blog.user.username}

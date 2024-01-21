@@ -25,6 +25,12 @@ type TBlog = {
   likes: number;
   imageUrl: string;
   dateCreated: Date;
+  whoLiked: [
+    {
+      username: string;
+      avatar: string;
+    }
+  ];
   user: {
     username: string;
     email: string;
@@ -41,9 +47,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch(
-          "https://fooderra-api.vercel.app/api/blogs"
-        );
+        const response = await fetch("https://fooderra-api.vercel.app/api/blogs");
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -76,7 +80,7 @@ export default function Blog() {
   };
 
   const switchSort = (sorting: string) => {
-    const updatedBlogs = [...sortedBlogs]; // Create a copy of the array
+    const updatedBlogs = [...sortedBlogs]; 
 
     if (sorting === "newest") {
       updatedBlogs.sort(
