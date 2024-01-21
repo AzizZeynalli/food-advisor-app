@@ -12,3 +12,4 @@ Users should be able to:
 ## Screenshot
 
 ![homepage1](./public/images/Homepage1.png)
+![homepage2](./public/images/Homepage2.png)
