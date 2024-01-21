@@ -12,9 +12,8 @@ export default function CardStory({
       <CardBody>
         <Box
           position="relative"
-          p="0 20px 20px 20px"
           bg="#F5F8FC"
-          w="400px"
+          w="300px"
           textAlign="center"
         >
           <Avatar name={cardName} src={imageStory} style={{ width: '100px', height: '100px' }}/>
