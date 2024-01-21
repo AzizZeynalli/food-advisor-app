@@ -1,4 +1,9 @@
-## The Content
+# Fooderra - ABB Tech Academy
+
+## General description
+
+Welcome to Fooderra, where you can quickly access the recipes for your favorite dishes, share your blogs with others, and explore theirs. This project marks the culmination of our journey at ABB Tech Academy. Our dedicated team, comprising Aziz Zeynalli, Tarana Aliyeva, Murad Israfilov, Sama Zeynalli, Eldar Asgarov, Kenan Guluzada, and Fagan Majidza, played a crucial role in bringing this project to life. The inspiration behind our project stems from [Foodvisor](https://www.foodvisor.io/en/). We initiated the process by creating our own Figma file, which served as a blueprint for our developers in crafting the user interface for our platform.
+### The Content
 
 Users should be able to:
 
@@ -9,13 +14,13 @@ Users should be able to:
 - Add blogs
 - Search and like recipes
 
-## Screenshot
+### Screenshot
 
 ![homepage](./public/images/MergedImages%20(1).png)
 
-# Profile
+## Profile
 
-## Built with
+### Built with
 - React
 - Chakra UI
 - TypeScript
@@ -27,41 +32,41 @@ Users should be able to:
 - EmailJS
 - Vercel
 
-## Note for Better UnderStanding
+### Note for Better UnderStanding
 This project is a Fooderra website developed using Next.js for the frontend and MangoDB, Express.js, Node.js, Firestore for the backend. The frontend is built with React, TypeScript, and Chakra UI to provide a dynamic and responsive user interface.
 
-## Frontend Technologies
-- React: The project leverages React for building the user interface, allowing for efficient component-based development.
-- TypeScript: TypeScript is used to bring static typing to the project, enhancing code quality and providing better developer tooling.
-- Chakra UI: Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
+### Frontend Technologies
+- **React:** The project leverages React for building the user interface, allowing for efficient component-based development.
+- **TypeScript:** TypeScript is used to bring static typing to the project, enhancing code quality and providing better developer tooling.
+- **Chakra UI:** Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
 
-## Backend Technologies
-- Node.js: The backend is powered by Node.js, providing a scalable and non-blocking server environment for handling requests and managing the application's logic.
-- MangoDB: MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need.
-- Firestore: Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.  
+### Backend Technologies
+- **Node.js:** The backend is powered by Node.js, providing a scalable and non-blocking server environment for handling requests and managing the application's logic.
+- **MangoDB:** MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need.
+- **Firestore:** Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.  
 
-## Build and deploy
-- Vercel: Vercel is the Frontend Cloud. Build, scale, and secure a faster, personalized web. · The Web's best · Git-connected Deploys · Collaborative pre-production.
+### Build and deploy
+- **Vercel:** Vercel is the Frontend Cloud. Build, scale, and secure a faster, personalized web. · The Web's best · Git-connected Deploys · Collaborative pre-production.
 
-## Project Features
-- Team information: Users can access detailed information about the Fooderra team, recipes, blogs.
-- Blogs: When user login our website, user can add any blogs what he wants, also can like other people`s blog.
-- Recipes: Users can explore and like recipes.
-- Contact us: If user has any problem or suggestion for our website, at that time can write us at contact us page, and then we reply it.
-- User Authentication: Users can register, log in, and log out, also user can see recipes what he likes and blogs what he write on profile page.
+### Project Features
+- **Team information:** Users can access detailed information about the Fooderra team, recipes, blogs.
+- **Blogs:** When user login our website, user can add any blogs what he wants, also can like other people`s blog.
+- **Recipes:** Users can explore and like recipes.
+- **Contact us:** If user has any problem or suggestion for our website, at that time can write us at contact us page, and then we reply it.
+- **User Authentication:** Users can register, log in, and log out, also user can see recipes what he likes and blogs what he write on profile page.
 
-## How to Run the project
+### How to Run the project
 
 To run the project locally, follow these steps:
 1. Clone the repository.
 2. Navigate to the project directory.
-3. Install dependencies using "npm install" in both the client and server directories.
-4. Start the frontend and backend servers using "npm run dev" in their respective directories.
+3. Install dependencies using `npm install` in both the `client` and `server` directories.
+4. Start the frontend and backend servers using `npm run dev` in their respective directories.
  
 And also can enter this link: 
 https://food-advisor-app.vercel.app/
 
-# Authors
+## Authors
 - [Tarana Aliyeva](https://www.linkedin.com/in/tarana-aliyeva/)
 - [Sama Zeynalli](https://www.linkedin.com/in/sama-zeynalli/)
 - [Aziz Zeynalli](https://github.com/AzizZeynalli)
