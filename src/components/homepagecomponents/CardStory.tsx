@@ -8,8 +8,8 @@ export default function CardStory({
   cardAbout,
 }: any) {
   return (
-    <Card>
-      <CardBody>
+    <Card >
+      <CardBody width="250px">
         <Box
           position="relative"
           bg="#F5F8FC"
