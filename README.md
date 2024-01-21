@@ -69,9 +69,7 @@ https://food-advisor-app.vercel.app/
 
 ## Our website QR code
 
-<div style="text-align:center">
-  <img src="./public/images/Untitled%201.png" alt="QR code" width="200" height="200">
-</div>
+<img src="./public/images/Untitled%201.png" alt="QR code" width="200" height="200">
 
 ## Authors
 - [Tarana Aliyeva](https://www.linkedin.com/in/tarana-aliyeva/)
