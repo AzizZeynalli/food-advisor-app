@@ -36,7 +36,7 @@ export default function DrawerComponent({ isOpen, onClose }: { isOpen: boolean; 
                 fontWeight="500"
                 lineHeight="normal"
               >
-                Blog
+                Blogs
               </Link>
               <Link
                 href="/recipes"
@@ -75,13 +75,13 @@ export default function DrawerComponent({ isOpen, onClose }: { isOpen: boolean; 
                 Search
               </Link>
               <Link
-                href="help"
+                href="/contact"
                 color="#95A6BD"
                 fontSize="16px"
                 fontWeight="500"
                 lineHeight="normal"
               >
-                Help
+                Contact us
               </Link>
               {user ? (
                 <Button
