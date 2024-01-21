@@ -62,7 +62,7 @@ And also can enter this link:
 https://food-advisor-app.vercel.app/
 
 # Authors
-- [Tarana Aliyeva](#https://www.linkedin.com/in/tarana-aliyeva/)
+- [Tarana Aliyeva](https://www.linkedin.com/in/tarana-aliyeva/)
 - Sama Zeynalli
 - Aziz Zeynalli
 - Murad Israfilov
