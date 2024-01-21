@@ -66,6 +66,10 @@ To run the project locally, follow these steps:
 And also can enter this link: 
 https://food-advisor-app.vercel.app/
 
+## Our website QR code
+
+![QRcode](./public/images/Untitled%201.png)
+
 ## Authors
 - [Tarana Aliyeva](https://www.linkedin.com/in/tarana-aliyeva/)
 - [Sama Zeynalli](https://www.linkedin.com/in/sama-zeynalli/)
