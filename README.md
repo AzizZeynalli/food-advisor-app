@@ -7,7 +7,7 @@ Welcome to Fooderra, where you can quickly access the recipes for your favorite 
 ## Table of contents
 
 - [Overview](#overview)
-- [Figma](#figmma)
+- [Figma](#figma)
 - [Screenshot](#screenshot)
 - [Built with](#built-with)
 - [Note for Better UnderStanding](#note-for-better-underStanding)
