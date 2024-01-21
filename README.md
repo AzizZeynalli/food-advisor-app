@@ -26,7 +26,7 @@ Users should be able to:
 - Chakra UI
 - TypeScript
 - Next.js
-- MangoDB
+- MongoDB
 - Express.js
 - Node.js
 - Firestore
@@ -43,7 +43,7 @@ This project is a Fooderra website developed using Next.js for the frontend and 
 
 ### Backend Technologies
 - **Node.js:** The backend is powered by Node.js, providing a scalable and non-blocking server environment for handling requests and managing the application's logic.
-- **MangoDB:** MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need.
+- **MongoDB:** MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need.
 - **Firestore:** Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.  
 
 ### Build and deploy
@@ -61,7 +61,7 @@ This project is a Fooderra website developed using Next.js for the frontend and 
 To run the project locally, follow these steps:
 1. Clone the repository.
 2. Navigate to the project directory.
-3. Install dependencies using `npm install` in both the `client` and `server` directories.
+3. Install dependencies using `npm install`.
 4. Start the frontend and backend servers using `npm run dev` in their respective directories.
  
 And also can enter this link: 
@@ -74,8 +74,8 @@ https://food-advisor-app.vercel.app/
 ## Authors
 - [Tarana Aliyeva](https://www.linkedin.com/in/tarana-aliyeva/)
 - [Sama Zeynalli](https://www.linkedin.com/in/sama-zeynalli/)
-- [Aziz Zeynalli](https://github.com/AzizZeynalli)
-- [Murad Israfilov](https://github.com/Murad633)
+- [Aziz Zeynalli](https://www.linkedin.com/in/aziz-zeynalli/)
+- [Murad Israfilov](https://www.linkedin.com/in/muradisrafilov/)
 - [Kenan Guluzade](https://www.linkedin.com/in/kenan-guluzade/)
 - [Eldar Asgarov](https://www.linkedin.com/in/eldar-asgarov/)
 - [Fagan Majidzade](https://www.linkedin.com/in/fagan-majidzada-a690a0162/)
