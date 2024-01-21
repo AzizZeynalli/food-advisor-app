@@ -38,8 +38,9 @@ export default function Home() {
           bgPosition="center"
           bgRepeat="no-repeat"
           alignItems="center"
+          justifyContent={{base:"center", xl:"flex-start"}}
         >
-          <VStack pb="36px" color="black" pl={{ base: "none", xl: "200px" }} float={{base:"none", lg:"left"}}>
+          <VStack pb="36px" color="black" pl={{ base: "none", xl: "200px" }}>
             <Heading pb="16px" fontSize="40px" fontWeight="500" textAlign='center'>
               Cook, Share, Savor!
             </Heading>

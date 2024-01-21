@@ -45,7 +45,8 @@ export function Stories() {
   });
   return (
     <>
-      <Box m="50px 0">
+      <Box m="50px 0"
+      w='90vw'>
         <Heading textAlign="center" fontSize="30px" fontWeight="500" mb="50px">
           Join millions of success stories
         </Heading>
@@ -57,9 +58,6 @@ export function Stories() {
             flexWrap="wrap"
             maxW={{base:"90vw", md:"90vw"}}
             objectFit='cover'
-
-            maxW="90vw"
-            objectFit='contain'
 
           >
             <Swiper {...swiperOptions} className="mySwiper" >
