@@ -1,8 +1,8 @@
+
 "use client";
 import EmailInput from "@/components/(formComponents)/EmailInput";
 import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
-import { VStack, Image, Text } from "@chakra-ui/react";
-import axios from "axios";
+import { Image, Text, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,6 @@ const ForgotPassword = () => {
     control,
     formState: { errors, isValid },
     handleSubmit,
-    getValues,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -21,25 +20,28 @@ const ForgotPassword = () => {
     },
   });
 
-;
-const onSubmit = useCallback(async (data: { email: string }) => {
-  const url = `/resetpassword?email=${encodeURIComponent(data.email)}`;
-  router.push(url);
-}, [router]);
-  
+  const onSubmit = useCallback(
+    handleSubmit(async (data: { email: string }) => {
+      const url = `/resetpassword?email=${data.email}`;
+      router.push(url);
+    }),
+    [router]
+  );
+
   useEffect(() => {
     const handleKeyPress = (e: any) => {
       if (e.key === "Enter" && isValid) {
-        handleSubmit(onSubmit)();
+        onSubmit();
       }
     };
-  
-    document.addEventListener('keypress', handleKeyPress);
-  
+
+    document.addEventListener("keypress", handleKeyPress);
+
     return () => {
       document.removeEventListener("keypress", handleKeyPress);
     };
   }, [onSubmit, isValid, handleSubmit]);
+
   return (
     <VStack
       gap="0"
@@ -81,11 +83,7 @@ const onSubmit = useCallback(async (data: { email: string }) => {
           Please enter the email you use to sign in
         </Text>
         <EmailInput errors={errors} control={control} />
-        <ForgotPassButton
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          isValid={isValid}
-        />
+        <ForgotPassButton onSubmit={onSubmit} isValid={isValid} />
       </VStack>
     </VStack>
   );
