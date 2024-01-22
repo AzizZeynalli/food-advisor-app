@@ -13,7 +13,7 @@ export default function CardStory({
         <Box
           position="relative"
           bg="#F5F8FC"
-          w="300px"
+          w="220px"
           textAlign="center"
         >
           <Avatar name={cardName} src={imageStory} style={{ width: '100px', height: '100px' }}/>

@@ -31,14 +31,14 @@ export default function Home() {
         <HStack
           pt="62px"
           w="100%"
-          bgImage={{ base: "none", md: "../images/bghime.png" }}
-          bgColor={{ base: "#eef8fd", md: "none" }}
+          h='80vh'
+          bgImage={{ base: "none", xl: "../images/backnew.png" }}
+          bgColor={{ base: "#eef8fd", xl: "none" }}
           bgSize="cover"
           bgPosition="center"
           bgRepeat="no-repeat"
-          justifyContent={{ base: "center", xl: "space-between" }}
           alignItems="center"
-          flexDirection={{ base: "column", md: "row" }}
+          justifyContent={{base:"center", xl:"flex-start"}}
         >
           <VStack pb="36px" color="black" pl={{ base: "none", xl: "200px" }}>
             <Heading pb="16px" fontSize="40px" fontWeight="500" textAlign='center'>
@@ -62,13 +62,6 @@ export default function Home() {
               Start now
             </Button>
           </VStack>
-          <Image
-            src="../images/apple14.png"
-            pb="12px"
-            pr="40px"
-            display={{ base: "none", xl: "flex" }}
-            alt=""
-          />
         </HStack>
         <BalancedRecipes />
         <DietPlan />

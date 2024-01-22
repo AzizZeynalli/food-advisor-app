@@ -17,9 +17,14 @@ const HelpButton: React.FC<IHelpButtonProps> = ({handleSubmit,onSubmit, isloadin
           mt="20px"
           width="100%"
           bg="#233345"
-          variant="solid"
+          variant="brand"
           color="white"
-          onClick={handleSubmit(onSubmit)}
+          onClick={()=>{
+            handleSubmit(onSubmit);
+            router.push("/")
+
+          }
+        }
           isDisabled={!isValid}
         >
           {isloading ? <Spinner /> : "Send"}
