@@ -21,6 +21,8 @@ export function RecipesHeader() {
   const handleAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     setSelectedArea(selectedValue);
+    setSelectedCategory("");
+    setSearchValue("");
     router.push(`/recipes/areas/${selectedValue}`);
   };
 
@@ -29,6 +31,8 @@ export function RecipesHeader() {
   ) => {
     const selectedValue = event.target.value;
     setSelectedCategory(selectedValue);
+    setSelectedArea("");
+    setSearchValue("");
     router.push(`/recipes/categories/${selectedValue}`);
   };
 
@@ -52,6 +56,8 @@ export function RecipesHeader() {
 
   const onSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    setSelectedArea("");
+    setSelectedCategory("");
     router.push(`/recipes/search/${searchValue}`);
   };
 
@@ -102,43 +108,52 @@ export function RecipesHeader() {
           ))}
         </Select>
       </Flex>
-      <Flex justifyContent='center'>
-        <Flex  w={{lg:"70%", base:'90%'}}  position="relative" py="24px" as="form" onSubmit={onSearch}>
-        <Input
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          w="100%"
-          placeholder="Search by recipe title"
-          bg="#fff"
-          border="gray.100"
-          pl='40px'
-          borderRadius="24px"
-          
-        />
-        {searchValue && ( 
-          <Button
-          variant='ghost'
-            position="absolute"
-            zIndex='500'
-            p="0"
-            borderRadius="24px"
-            onClick={() => setSearchValue("")}
-          >
-            <CloseIcon color="#3e5a7b" />
-          </Button>
-        )}
-        <Button
-          type="submit"
-          zIndex="1"
-          ml="-64px"
-          bg="#233345"
-          borderRadius="24px"
-          _hover={{ bg: "#3e5a7b" }}
-          px="24px"
+      <Flex justifyContent="center">
+        <Flex
+          w={{ lg: "70%", base: "90%" }}
+          position="relative"
+          py="24px"
+          as="form"
+          onSubmit={onSearch}
         >
-          <Icon as={Search2Icon} color="#fff" />
-        </Button>
-      </Flex>
+          <Input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            w="100%"
+            placeholder="Search by recipe title"
+            bg="#fff"
+            border="gray.100"
+            pl="40px"
+            borderRadius="24px"
+            onFocus={() => {
+              setSelectedArea("");
+              setSelectedCategory("");
+            }}
+          />
+          {searchValue && (
+            <Button
+              variant="ghost"
+              position="absolute"
+              zIndex="500"
+              p="0"
+              borderRadius="24px"
+              onClick={() => setSearchValue("")}
+            >
+              <CloseIcon color="#3e5a7b" />
+            </Button>
+          )}
+          <Button
+            type="submit"
+            zIndex="1"
+            ml="-64px"
+            bg="#233345"
+            borderRadius="24px"
+            _hover={{ bg: "#3e5a7b" }}
+            px="24px"
+          >
+            <Icon as={Search2Icon} color="#fff" />
+          </Button>
+        </Flex>
       </Flex>
     </Box>
   );
