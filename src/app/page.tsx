@@ -30,7 +30,7 @@ export default function Home() {
       <VStack>
         <HStack
           pt="62px"
-          w="100vw"
+          w="100%"
           h='80vh'
           bgImage={{ base: "none", xl: "../images/backnew.png" }}
           bgColor={{ base: "#eef8fd", xl: "none" }}
