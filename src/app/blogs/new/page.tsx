@@ -11,7 +11,7 @@ import {
   useToast,
   HStack
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "@/contexts/authContext";
 import { imageDb } from "@/firebase/config";
@@ -28,7 +28,12 @@ export default function BlogForm() {
   const [imageUrl, setImageUrl] = useState("");
 
   const toast = useToast();
-  console.log(user);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     let imageUrl = "";
