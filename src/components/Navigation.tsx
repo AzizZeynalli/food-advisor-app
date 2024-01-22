@@ -110,7 +110,7 @@ export function Navigation() {
             cursor="pointer"
           >
             {" "}
-            <Avatar size="sm" name={user.username} mr={3} />
+            <Avatar size="sm" name={user.username} src={user.avatarImage} mr={3} />
             <Text fontSize="md" display={{lg:'block', base:'none'}}>{user.username}</Text>
           </Flex>
         ) : (
