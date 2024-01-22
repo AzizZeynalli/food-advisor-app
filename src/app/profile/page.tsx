@@ -1,5 +1,6 @@
 "use client";
 
+import ProfileImageModal from "@/components/ProfileImageModal";
 import { useAuth } from "@/contexts/authContext";
 import {
   Avatar,
@@ -19,10 +20,14 @@ import {
   Image,
   useBoolean,
   Card,
+  HStack,
+  Link,
+  useDisclosure,
+  Spinner,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BiUser,
   BiHeart,
@@ -33,35 +38,65 @@ import {
   BiArrowBack,
 } from "react-icons/bi";
 
+type Meal = {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+  strInstructions: string;
+};
+
+type Blog = {
+  id: string;
+  title: string;
+  content: string;
+  imageUrl: string;
+  createdAt: Date;
+};
+
 export default function Profile() {
   const { user, unlikeRecipe, logout, loading } = useAuth();
   const [isEditing, setIsEditing] = useBoolean();
   const router = useRouter();
   const [editedUsername, setEditedUsername] = useState("");
   const [editedEmail, setEditedEmail] = useState("");
+  const [likedRecipes, setLikedRecipes] = useState<Meal[]>([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogsLoading, setBlogsLoading] = useState<boolean>(true);
+  const [recipesLoading, setRecipesLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
-    } else if (user) {
+    } else if (user && !loading) {
       setEditedUsername(user.username);
       setEditedEmail(user.email);
+      setLikedRecipes(user?.likedRecipes);
+      setBlogs(user?.blogs);
+      setBlogsLoading(false);
+      setRecipesLoading(false);
     }
   }, [loading, user]);
 
-  console.log(user);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
 
   const handleUnlike = (mealId: string) => {
     if (
       window.confirm("Are you sure you want to delete this recipe from liked?")
     ) {
       unlikeRecipe(mealId);
+      const updatedRecipes = likedRecipes.filter(
+        (meal) => meal.idMeal !== mealId
+      );
+      setLikedRecipes(updatedRecipes);
     }
   };
 
   const handleBlogDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
       try {
+        console.log("salamsalam", user);
         const token = user?.token;
         const response = await axios.delete(
           `https://fooderra-api.vercel.app/api/blogs/${id}`,
@@ -71,6 +106,10 @@ export default function Profile() {
             },
           }
         );
+        if (response.status === 204) {
+          const updatedBlogs = blogs?.filter((blog) => blog.id !== id);
+          setBlogs(updatedBlogs);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -87,8 +126,8 @@ export default function Profile() {
 
   return (
     <>
-      {loading && <div>Loading...</div>}
-      {user && (
+      {loading && <Flex direction="column" gap={4} justifyContent="center" alignItems="center" h="100vh"><Spinner thickness="3px" size="lg" /><Text fontSize="lg" color="blue.500">Loading your data :)</Text></Flex>}
+      {user && !loading && (
         <Box>
           <Tabs
             variant="soft-rounded"
@@ -120,7 +159,22 @@ export default function Profile() {
               pos={{ lg: "fixed" }}
             >
               <VStack>
-                <Avatar size="2xl" name={user?.username} />
+                <Box position="relative">
+                  <Avatar size="2xl" name={user?.username} src={user?.avatarImage}/>
+                  <Box position="absolute" bottom="0" right="0">
+                    <BiSolidEditAlt onClick={onOpen} size="24px" />
+                  </Box>
+                  <ProfileImageModal
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                    initialRef={initialRef}
+                    finalRef={finalRef}
+                    title="Create your account"
+                    saveButtonText="Create"
+                    cancelButtonText="Cancel"
+                  />
+                </Box>
                 <Heading>{user?.username}</Heading>
               </VStack>
               <TabList
@@ -174,13 +228,6 @@ export default function Profile() {
                       gap="16px"
                       w={{ lg: "400px", base: "100%" }}
                     >
-                      <Flex bg="#f8fafc" alignItems="center" borderRadius="6px">
-                        <BiHash fontSize="24px" />
-                        <Box ml="16px">
-                          <Text fontSize="12px">ID</Text>
-                          <Text fontSize="16px">465466</Text>
-                        </Box>
-                      </Flex>
                       <Flex alignItems="baseline">
                         <FormLabel fontSize="18px">Username:</FormLabel>
                         {isEditing ? (
@@ -207,28 +254,16 @@ export default function Profile() {
                       )}
                       <Flex alignItems="baseline">
                         <FormLabel fontSize="18px">Email:</FormLabel>
-                        {isEditing ? (
-                          <BiSave ml="4" onClick={handleSubmit} />
-                        ) : (
-                          <BiSolidEditAlt ml="4" onClick={handleEditClick} />
-                        )}
+                       
                       </Flex>
-                      {isEditing ? (
-                        <Input
-                          variant="filled"
-                          placeholder="Filled"
-                          type="email"
-                          value={editedEmail}
-                          onChange={(e) => setEditedEmail(e.target.value)}
-                        />
-                      ) : (
+            
                         <Input
                           disabled
                           variant="filled"
                           value={editedEmail}
                           fontSize="18px"
                         />
-                      )}
+                    
                     </Flex>
                   </VStack>
                 </TabPanel>
@@ -244,40 +279,55 @@ export default function Profile() {
                     alignItems="stretch"
                     spacing={10}
                   >
-                    {user.likedRecipes && user?.likedRecipes.map((meal) => (
-                      <Card
-                        key={meal.idMeal}
-                        direction="row"
-                        overflow="hidden"
-                        variant="outline"
-                      >
-                        <Image
-                          objectFit="cover"
-                          w="100px"
-                          src={meal.strMealThumb}
-                          alt=""
-                        />
-                        <Flex
-                          p="16px"
-                          justifyContent="space-between"
-                          w="90%"
-                          flexDirection={{ sm: "row", base: "column" }}
+                    {recipesLoading && <div>Loading...</div>}
+                    {!recipesLoading && likedRecipes.length === 0 && (
+                      <HStack>
+                        <Text>You have no liked recipes</Text>
+                        <Link
+                          href="/recipes"
+                          color="green.400"
+                          fontSize="md"
+                          textDecoration="underline"
                         >
-                          <VStack alignItems="flex-start" px={3}>
-                            <Heading size="md">{meal.strMeal}</Heading>
-                            <Text noOfLines={2}>{meal.strInstructions}</Text>
-                          </VStack>
-                          <Button
-                            minW="100px"
-                            color="red"
-                            leftIcon={<BiSolidHeart />}
-                            onClick={() => handleUnlike(meal.idMeal)}
+                          It&apos;s time to save
+                        </Link>
+                      </HStack>
+                    )}
+                    {!recipesLoading &&
+                      likedRecipes.map((meal) => (
+                        <Card
+                          key={meal.idMeal}
+                          direction="row"
+                          overflow="hidden"
+                          variant="outline"
+                        >
+                          <Image
+                            objectFit="cover"
+                            w="100px"
+                            src={meal.strMealThumb}
+                            alt=""
+                          />
+                          <Flex
+                            p="16px"
+                            justifyContent="space-between"
+                            w="90%"
+                            flexDirection={{ sm: "row", base: "column" }}
                           >
-                            Liked
-                          </Button>
-                        </Flex>
-                      </Card>
-                    ))}
+                            <VStack alignItems="flex-start" px={3}>
+                              <Heading size="md">{meal.strMeal}</Heading>
+                              <Text noOfLines={2}>{meal.strInstructions}</Text>
+                            </VStack>
+                            <Button
+                              minW="100px"
+                              color="red"
+                              leftIcon={<BiSolidHeart />}
+                              onClick={() => handleUnlike(meal.idMeal)}
+                            >
+                              Liked
+                            </Button>
+                          </Flex>
+                        </Card>
+                      ))}
                   </VStack>
                 </TabPanel>
                 <TabPanel h={{ lg: "100vh" }} p={{ lg: "48px", base: "16px" }}>
@@ -291,39 +341,55 @@ export default function Profile() {
                     p={{ md: "32px", base: "16px" }}
                     alignItems="stretch"
                   >
-                    {user?.blogs.map((blog) => (
-                      <Card
-                        key={blog.id}
-                        direction="row"
-                        overflow="hidden"
-                        variant="outline"
-                      >
-                        <Image
-                          objectFit="cover"
-                          w="150px"
-                          src={blog.imageUrl}
-                          alt=""
-                        />
-                        <Flex
-                          p="16px"
-                          justifyContent="space-between"
-                          w="90%"
-                          flexDirection={{ sm: "row", base: "column" }}
+                    {blogsLoading && <div>Loading...</div>}
+                    {!blogsLoading && (!blogs || blogs.length === 0) && (
+                      <HStack>
+                        <Text>You have no shared blogs</Text>
+                        <Link
+                          href="/blogs/new"
+                          color="green.400"
+                          fontSize="md"
+                          textDecoration="underline"
                         >
-                          <VStack alignItems="flex-start" px={3}>
-                            <Heading size="md">{blog.title}</Heading>
-                            <Text noOfLines={2}>{blog.content}</Text>
-                          </VStack>
-                          <Button
-                            minW="100px"
-                            color="red"
-                            onClick={() => handleBlogDelete(blog.id)}
+                          It&apos;s time to share
+                        </Link>
+                      </HStack>
+                    )}
+                    {!blogsLoading &&
+                      blogs &&
+                      blogs.map((blog) => (
+                        <Card
+                          key={blog.id}
+                          direction="row"
+                          overflow="hidden"
+                          variant="outline"
+                        >
+                          <Image
+                            objectFit="cover"
+                            w="150px"
+                            src={blog.imageUrl}
+                            alt=""
+                          />
+                          <Flex
+                            p="16px"
+                            justifyContent="space-between"
+                            w="90%"
+                            flexDirection={{ sm: "row", base: "column" }}
                           >
-                            Delete
-                          </Button>
-                        </Flex>
-                      </Card>
-                    ))}
+                            <VStack alignItems="flex-start" px={3}>
+                              <Heading size="md">{blog.title}</Heading>
+                              <Text noOfLines={2}>{blog.content}</Text>
+                            </VStack>
+                            <Button
+                              minW="100px"
+                              color="red"
+                              onClick={() => handleBlogDelete(blog.id)}
+                            >
+                              Delete
+                            </Button>
+                          </Flex>
+                        </Card>
+                      ))}
                   </VStack>
                 </TabPanel>
               </TabPanels>

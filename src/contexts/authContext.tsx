@@ -5,7 +5,7 @@ import axios from 'axios';
 type TUser  = {
     username: string;
     email: string;
-    avatar: string;
+    avatarImage: string;
     token: string;
     likedRecipes: Meal[];
     blogs: Blog[];
@@ -17,6 +17,7 @@ type Blog = {
     content: string;
     imageUrl: string;
     createdAt: Date;
+    likes: number;
 }
 
 type Meal = {
@@ -35,6 +36,7 @@ interface AuthContextType {
   logout: () => void;
   likeRecipe: (meal: Meal) => void;
   unlikeRecipe: (mealId: string) => void;
+  changeProfileImage: (imageUrl: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -48,22 +50,24 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const token = Cookies.get('userToken');
-        if (token) {
-            axios.get('https://fooderra-api.vercel.app/api/users/details', {
-                headers: {
-                    Authorization: `Bearer ${token}`
+        const fetchUserDetails = async () => {
+            const token = Cookies.get('userToken');
+            if (token) {
+                try {
+                    const response = await axios.get('https://fooderra-api.vercel.app/api/users/details', {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+                    setUser(response.data);
+                } catch (error) {
+                    console.error('Error fetching user details:', error);
                 }
-            }).then(response => {
-                setUser(response.data);
-                setLoading(false);
-            }).catch(error => {
-                console.error('Error fetching user details:', error);
-                setLoading(false);
-            });
-        } else {
+            }
             setLoading(false);
-        }
+        };
+    
+        fetchUserDetails();
     }, []);
 
     const login = (user: TUser) => {
@@ -76,36 +80,56 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser(null);
     };
 
-    const likeRecipe = (meal: Meal) => {
-        axios.patch('https://fooderra-api.vercel.app/api/users/like', {
-            meal
-        }, {
-            headers: {
-                Authorization: `Bearer ${user?.token}`
-            }
-        }).then(response => {
+    const likeRecipe = async (meal: Meal) => {
+
+        try {
+            const response = await axios.patch('https://fooderra-api.vercel.app/api/users/like', {
+                meal
+            }, {
+                headers: {
+                    Authorization: `Bearer ${user?.token}`
+                }
+            });
             setUser(response.data);
-        }).catch(error => {
+  
+        } catch (error) {
             console.error('Error liking recipe:', error);
-        });
+
+        }
     }
 
-    const unlikeRecipe = (mealId : string) => {
-        axios.patch('https://fooderra-api.vercel.app/api/users/removelike', {
-            mealId
-        }, {
-            headers: {
-                Authorization: `Bearer ${user?.token}`
-            }
-        }).then(response => {
+    const unlikeRecipe = async (mealId: string) => {
+        try {
+            const response = await axios.patch('https://fooderra-api.vercel.app/api/users/removelike', {
+                mealId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${user?.token}`
+                }
+            });
             setUser(response.data);
-        }).catch(error => {
+        } catch (error) {
             console.error('Error unliking recipe:', error);
-        });
+        }
+    }
+
+    const changeProfileImage = async (imageUrl: string) => {
+        try {
+            const response = await axios.patch('https://fooderra-api.vercel.app/api/users/updateProfileImage', {
+                imageUrl
+            }, {
+                headers: {
+                    Authorization: `Bearer ${user?.token}`
+                }
+            });
+            setUser(response.data);
+        } catch (error) {
+            console.error('Error changing profile image:', error);
+        }
     }
 
     return (
-        <AuthContext.Provider value={{ user, setUser, loading, setLoading, login, logout, likeRecipe, unlikeRecipe }}>
+        <AuthContext.Provider value={{ user, setUser, loading, setLoading, login, logout, likeRecipe, unlikeRecipe, changeProfileImage }}>
             {children}
         </AuthContext.Provider>
     );

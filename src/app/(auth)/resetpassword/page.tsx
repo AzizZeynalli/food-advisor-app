@@ -3,15 +3,39 @@ import EmailInput from "@/components/(formComponents)/EmailInput";
 import ForgotPassButton from "@/components/(formComponents)/ForgotPassButton";
 import ResetNew from "@/components/(formComponents)/ResetNew";
 import ResetRepeat from "@/components/(formComponents)/ResetRepeat";
-import { VStack, Image, Text, Button } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import {
+  VStack,
+  Image,
+  Text,
+  Button,
+  InputRightElement,
+  IconButton,
+  Input,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+  Controller,
+  FormProvider,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
 
-const ResetPassword = ({params}:any) => {
+const ResetPassword = () => {
   const router = useRouter();
-  const methods = useForm({
+  const searchParams = useSearchParams();
+  const {
+    control,
+    formState: { errors, isValid },
+    handleSubmit,
+    getValues,
+  } = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
@@ -19,26 +43,33 @@ const ResetPassword = ({params}:any) => {
       confirmPassword: "",
     },
   });
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { formState, handleSubmit, watch } = methods;
-  const { isValid } = formState;
-  console.log(params);
-  const onSubmit = async (data: any) => {
 
+  const handleToggleNewPassword = () => {
+    setShowNewPassword(!showNewPassword);
   };
 
- useEffect(()=>{
-  
-  const handleKeyPress = (e:any) =>{
-    if(e.key === "Enter" && isValid){
-      handleSubmit(onSubmit)();
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+  const onSubmit = async () => {
+    const { newPassword } = getValues();
+    setIsLoading(true)
+    const response = await axios.patch("https://fooderra-api.vercel.app/api/users/resetpassword", {
+      email: searchParams.get("email"),
+      password: newPassword,
+    });
+    if(response.status === 200) {
+      router.push("/login");
     }
+    setIsLoading(false);
   }
-  document.addEventListener("keypress",handleKeyPress);
-  return ()=>{
-    document.removeEventListener("keypress", handleKeyPress);
-  }
- },[isValid,handleSubmit,onSubmit])
+  
+
+
   return (
     <VStack
       gap="0"
@@ -79,39 +110,118 @@ const ResetPassword = ({params}:any) => {
         <Text mb="20px" fontSize={{ base: "14px", md: "16px" }}>
           Please choose a new password to finishing sign in
         </Text>
-        <FormProvider {...methods}>
-          <ResetNew />
-          <ResetRepeat />
-          <Button
-            mb="20px"
-            mt="20px"
-            width="100%"
-            colorScheme="blue"
-            variant="solid"
-            type="submit"
-            color="white"
-            onClick={() => {
-              handleSubmit(onSubmit);
-              router.push("/login");
-            }}
-            isDisabled={
-              !isValid || watch("newPassword") !== watch("confirmPassword")
-            }
-          >
-            Confirm
-          </Button>
-          <Button
-            width="100%"
-            colorScheme="blue"
-            variant="solid"
-            color="white"
-            onClick={() => {
-              router.push("/login");
-            }}
-          >
-            Back to Login
-          </Button>
-        </FormProvider>
+
+        <FormControl
+          isInvalid={!!errors?.newPassword}
+          mb={errors?.newPassword ? 0 : 6}
+        >
+          <FormLabel>New Password</FormLabel>
+          <InputGroup>
+            <Controller
+              name="newPassword"
+              control={control}
+              rules={{
+                required: "Password is required!",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/,
+                  message: "Password must include at least one lowercase letter, one uppercase letter, and one digit",
+                },
+                
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type={showNewPassword ? "text" : "password"}
+                  bg="white"
+                />
+              )}
+            />
+
+            <InputRightElement>
+              <IconButton
+                variant="gray"
+                backgroundColor="transparent"
+                outline="none"
+                aria-label={showNewPassword ? "Hide Password" : "Show Password"}
+                icon={showNewPassword ? <ViewIcon /> : <ViewOffIcon />}
+                onClick={handleToggleNewPassword}
+              />
+            </InputRightElement>
+          </InputGroup>
+          <FormErrorMessage fontSize="14px">
+            {errors?.newPassword?.message}
+          </FormErrorMessage>
+        </FormControl>
+        <FormControl
+          isInvalid={!!errors?.confirmPassword}
+          mb={errors?.confirmPassword ? 0 : 6}
+        >
+          <FormLabel>Confirm Password</FormLabel>
+          <InputGroup>
+            <Controller
+              name="confirmPassword"
+              control={control}
+              rules={{
+                required: "Confirm password is required!",
+                validate: (value) =>
+                  value === getValues().newPassword ||
+                  "The passwords do not match",
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type={showConfirmPassword ? "text" : "password"}
+                  bg="white"
+                />
+              )}
+            />
+
+            <InputRightElement>
+              <IconButton
+                variant="gray"
+                backgroundColor="transparent"
+                outline="none"
+                aria-label={
+                  showConfirmPassword ? "Hide Password" : "Show Password"
+                }
+                icon={showConfirmPassword ? <ViewIcon /> : <ViewOffIcon />}
+                onClick={handleToggleConfirmPassword}
+              />
+            </InputRightElement>
+          </InputGroup>
+          <FormErrorMessage fontSize="14px">
+            {errors?.confirmPassword?.message}
+          </FormErrorMessage>
+        </FormControl>
+        <Button
+          mb="20px"
+          mt="20px"
+          width="100%"
+          colorScheme="blue"
+          variant="solid"
+          type="submit"
+          color="white"
+          onClick={handleSubmit(onSubmit)}
+          isDisabled={!isValid}
+          isLoading={isLoading}
+        >
+          Confirm
+        </Button>
+        <Button
+          width="100%"
+          colorScheme="blue"
+          variant="solid"
+          color="white"
+          onClick={() => {
+            router.push("/login");
+          }}
+        >
+          Back to Login
+        </Button>
       </VStack>
     </VStack>
   );
