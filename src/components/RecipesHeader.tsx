@@ -33,29 +33,21 @@ export function RecipesHeader() {
   };
 
   useEffect(() => {
-    const fetchAreas = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
-        );
-        setAreas(response.data.meals || []);
+        const [areasResponse, categoriesResponse] = await Promise.all([
+          axios.get("https://www.themealdb.com/api/json/v1/1/list.php?a=list"),
+          axios.get("https://www.themealdb.com/api/json/v1/1/list.php?c=list"),
+        ]);
+
+        setAreas(areasResponse.data.meals || []);
+        setCategories(categoriesResponse.data.meals || []);
       } catch (error) {
         console.log(error);
       }
     };
 
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
-        );
-        setCategories(response.data.meals || []);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    Promise.all([fetchAreas(), fetchCategories()]);
+    fetchData();
   }, []);
 
   const onSearch = (e: React.FormEvent) => {
