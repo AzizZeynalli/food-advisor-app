@@ -65,7 +65,7 @@ export function Stories() {
                 <Flex alignItems="center" justifyContent="center" height="100%">
                   <CardStory
                     imageStory="../images/tarana1.png"
-                    cardName="Tarana 20"
+                    cardName="Tarana 22"
                     cardHistory="Lost 7 lbs in 1 month"
                     cardAbout="It was a delightful experience diving into a culinary adventure with the recipes from your site. Thank you!"
                   ></CardStory>
@@ -136,7 +136,7 @@ export function Stories() {
                 <Flex alignItems="center" justifyContent="center" height="100%">
                   <CardStory
                     imageStory="../images/fagan.png"
-                    cardName="Fagan"
+                    cardName="Fagan 27"
                     cardHistory="Lost 33 lbs in 2 months"
                     cardAbout="Your recipes are not only delicious but also very creative! I found many interesting ideas to try in the kitchen."
                   ></CardStory>
