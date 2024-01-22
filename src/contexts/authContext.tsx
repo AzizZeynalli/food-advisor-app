@@ -81,8 +81,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
 
     const likeRecipe = async (meal: Meal) => {
-
         try {
+            setLoading(true);
             const response = await axios.patch('https://fooderra-api.vercel.app/api/users/like', {
                 meal
             }, {
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 }
             });
             setUser(response.data);
-  
+            setLoading(false);
         } catch (error) {
             console.error('Error liking recipe:', error);
 
@@ -115,6 +115,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const changeProfileImage = async (imageUrl: string) => {
         try {
+            setLoading(true);
             const response = await axios.patch('https://fooderra-api.vercel.app/api/users/updateProfileImage', {
                 imageUrl
             }, {
@@ -123,6 +124,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 }
             });
             setUser(response.data);
+            setLoading(false);
         } catch (error) {
             console.error('Error changing profile image:', error);
         }
