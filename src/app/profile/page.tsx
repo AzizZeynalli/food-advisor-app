@@ -126,7 +126,20 @@ export default function Profile() {
 
   return (
     <>
-      {loading && <Flex direction="column" gap={4} justifyContent="center" alignItems="center" h="100vh"><Spinner thickness="3px" size="lg" /><Text fontSize="lg" color="blue.500">Loading your data :)</Text></Flex>}
+      {loading && (
+        <Flex
+          direction="column"
+          gap={4}
+          justifyContent="center"
+          alignItems="center"
+          h="100vh"
+        >
+          <Spinner thickness="3px" size="lg" />
+          <Text fontSize="lg" color="blue.500">
+            Loading your data :)
+          </Text>
+        </Flex>
+      )}
       {user && !loading && (
         <Box>
           <Tabs
@@ -160,7 +173,11 @@ export default function Profile() {
             >
               <VStack>
                 <Box position="relative">
-                  <Avatar size="2xl" name={user?.username} src={user?.avatarImage}/>
+                  <Avatar
+                    size="2xl"
+                    name={user?.username}
+                    src={user?.avatarImage}
+                  />
                   <Box position="absolute" bottom="0" right="0">
                     <BiSolidEditAlt onClick={onOpen} size="24px" />
                   </Box>
@@ -254,16 +271,13 @@ export default function Profile() {
                       )}
                       <Flex alignItems="baseline">
                         <FormLabel fontSize="18px">Email:</FormLabel>
-                       
                       </Flex>
-            
-                        <Input
-                          disabled
-                          variant="filled"
-                          value={editedEmail}
-                          fontSize="18px"
-                        />
-                    
+                      <Input
+                        disabled
+                        variant="filled"
+                        value={editedEmail}
+                        fontSize="18px"
+                      />
                     </Flex>
                   </VStack>
                 </TabPanel>
