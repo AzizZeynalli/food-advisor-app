@@ -20,7 +20,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation";
 
 export default function BlogForm() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -30,7 +30,7 @@ export default function BlogForm() {
   const toast = useToast();
 
   useEffect(() => {
-    if (!user) {
+    if (!loading && !user) {
       router.push("/login");
     }
   }, [user]);

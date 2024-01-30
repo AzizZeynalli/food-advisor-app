@@ -60,13 +60,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                         }
                     });
                     setUser(response.data);
+
                 } catch (error) {
                     console.error('Error fetching user details:', error);
                 }
             }
             setLoading(false);
         };
-    
         fetchUserDetails();
     }, []);
 
